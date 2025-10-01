@@ -1,0 +1,1 @@
+export type acao_judicial = string

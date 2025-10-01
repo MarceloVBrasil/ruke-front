@@ -1,0 +1,16 @@
+.basic_list {
+    container-type: inline-size;
+}
+
+@container (width <=200px) {
+    .basic_list_item_label {
+        visibility: hidden;
+    }
+}
+
+
+@container (width > 200px) {
+    .basic_list_item_label {
+        visibility: visible;
+    }
+}

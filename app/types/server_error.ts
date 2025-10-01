@@ -1,0 +1,1 @@
+export type server_error = { error: boolean, message: string, data?: any }

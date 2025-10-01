@@ -1,0 +1,51 @@
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: rgba(250, 250, 250);
+}
+
+.right_border,
+.left_border,
+.footer_border {
+    position: relative;
+}
+
+.left_border::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: -1px;
+    width: .1px;
+    height: calc(100% + 65px);
+    background-color: transparent;
+    border-left: 1px dashed #ccc;
+}
+
+.right_border::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: -1px;
+    width: .1px;
+    height: calc(100% + 65px);
+    background-color: transparent;
+    border-left: 1px dashed #ccc;
+}
+
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root:hover,
+.css-1rwt2y5-MuiButtonBase-root-MuiButton-root:hover {
+    background: transparent;
+}
+
+.MuiSvgIcon-root {
+    padding: 0;
+    margin: 0;
+    transform: scale(0.8);
+    border-radius: 50%;
+
+}

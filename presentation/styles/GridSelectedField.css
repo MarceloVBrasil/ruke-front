@@ -1,0 +1,11 @@
+.css-d9oaum-MuiSelect-select-MuiInputBase-input-MuiFilledInput-input:focus {
+    background: transparent
+}
+
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root:hover,
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root:active > * {
+    background: transparent;
+}
+.css-8je8zh-MuiTouchRipple-root:active {
+    background: transparent;
+}

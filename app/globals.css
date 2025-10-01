@@ -1,0 +1,123 @@
+
+
+@font-face {
+  font-family: 'Gilroy Bold';
+  src: url('../public/assets/fonts/Gilroy-Bold.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Gilroy Heavy';
+  src: url('../public/assets/fonts/Gilroy-Heavy.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Gilroy Light';
+  src: url('../public/assets/fonts/Gilroy-Light.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Gilroy Medium';
+  src: url('../public/assets/fonts/Gilroy-Medium.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Gilroy Regular';
+  src: url('../public/assets/fonts/Gilroy-Regular.ttf') format('opentype');
+}
+
+
+
+@keyframes blink {
+  0% {
+      opacity: 1;
+  }
+  
+  50% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+* {
+  font-family: 'Gilroy Bold', sans-serif !important;
+}
+
+.swal2-container{
+  z-index: 6000000 !important;
+}
+
+.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root{
+  border-radius: 10px !important;
+  margin: 8px;
+}
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root{
+  border-radius: 10px !important;
+}
+
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root{
+  color: #00204B !important;
+  font-size: 20px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:invalid{
+  color: #212121 !important;
+  font-weight: bold;
+}
+
+.css-mhc70k-MuiGrid-root>.MuiGrid-item{
+  color: #00204B !important;
+  font-size: 20px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+
+
+table th,tr{
+  background-color: white !important;
+  color:black !important;
+  font-weight: bold !important;
+  padding:25px !important;
+}
+
+table td{
+  padding-left: 25px !important;
+}
+
+::-webkit-scrollbar-track {
+  background-color: white;
+  border-radius: 8px;
+
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c5c4c4;
+  border-radius: 8px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.MuiInputBase-input::placeholder {
+  font-weight: 400;
+}
+
+.MuiInputBase-root {
+  border-radius: 10px;
+}

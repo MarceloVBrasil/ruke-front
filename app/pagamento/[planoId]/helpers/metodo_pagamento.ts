@@ -1,0 +1,5 @@
+export enum METODO_PAGAMENTO {
+    PIX = "PIX",
+    CREDIT_CARD = "CREDIT_CARD",
+    BOLETO = "BOLETO"
+}
