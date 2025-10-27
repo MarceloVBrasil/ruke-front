@@ -25,7 +25,7 @@ export const getPlanoById = async (plano_id: string) => {
         });
         return json.data;
     } catch (err: any) {
-        const error: server_error = { error: true, message: err.response.data.error }
+        const error: server_error = { error: true, message: err.response.data.message }
         return error;
     }
 }
@@ -34,7 +34,7 @@ export const getPlanosContratados = async () => {
     const token = cookies().get("ruke_token");
 
     try {
-        const json = await req.get(`/tenants/planos-contratados`, {
+        const json = await req.get(`/planos-contratados`, {
             headers: { Authorization: `Bearer ${token?.value}` }
         });
         return json.data;

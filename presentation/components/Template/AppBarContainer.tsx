@@ -127,7 +127,7 @@ export default function AppBarContainer() {
           color="primary"
           noWrap
           fontFamily={"Neue Kaine"}
-          sx={{ flexGrow: 1, color: "#fff", fontSize: "20px", fontWeight: 600 }}
+          sx={{ flexGrow: 1, color: "#fff", fontSize: "20px" }}
         >
           Dashboard
         </Typography>
@@ -136,7 +136,6 @@ export default function AppBarContainer() {
           style={{
             textDecoration: "none",
             fontSize: "18px",
-            fontWeight: 600,
             display: "flex",
             alignItems: "center",
             color: "#fff",

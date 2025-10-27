@@ -1,12 +1,16 @@
 import { updateTenant } from "@/app/api/client/tenants";
 import { assinaturaUsuario } from "@/app/api/client/users";
+import { Tenant } from "@/app/types/tenant";
 import { isFieldEmpty } from "@/app/utils/validators";
-import { converterMoneyToString } from "@/infra/utils/convert";
+import { converterMoneyToString, converterMoneyToNumber } from "@/infra/utils/convert";
 import Swal from "sweetalert2";
+import { zod_tenant_schema } from "./Zod";
+import { CADASTRAR_COM } from "../TenantUniquePage";
 
 export const handleFormSubmit = async (props: {
-    data: any,
-    tenantChoose: any,
+    data: zod_tenant_schema
+    tenantChoose: Tenant
+    cadastrarCom: CADASTRAR_COM.CNPJ | CADASTRAR_COM.CPF
     setTenantChoose: (value: any) => void
     setLoading: (value: boolean) => void
 
@@ -14,20 +18,19 @@ export const handleFormSubmit = async (props: {
     const {
         data,
         tenantChoose,
+        cadastrarCom,
         setTenantChoose,
         setLoading
     } = props
 
     try {
         setLoading(true);
-        const cpf = data.cpf || ''
-        const cnpj = data.cnpj || ''
-
-        if (!isFieldEmpty(cpf)) {
+        if (cadastrarCom === CADASTRAR_COM.CNPJ) {
+            data.cpf = ''
+        } else {
             data.cnpj = ''
             data.razao_social = ''
         }
-        if (!isFieldEmpty(cnpj)) data.cpf = ''
 
         const updatedTenant = await updateTenant(tenantChoose.id, {
             nome: data.nome,
@@ -42,20 +45,20 @@ export const handleFormSubmit = async (props: {
             complemento: data.complemento,
             bairro: data.bairro,
 
-            danos_morais_rmc: data.danos_morais_rmc.toString(),
+            danos_morais_rmc: converterMoneyToNumber(data.danos_morais_rmc as string),
             dados_ourtorgado_procuracao_rmc: data.dados_ourtorgado_procuracao_rmc,
             dados_contratado_contrato_honorarios_rmc: data.dados_contratado_contrato_honorarios_rmc,
             percentual_exito_rmc: Number(data.percentual_exito_rmc),
-            parcela_fixa_rmc: data.parcela_fixa_rmc,
+            parcela_fixa_rmc: converterMoneyToNumber(data.parcela_fixa_rmc as string),
             indice_correcao_monetaria_rmc: data.indice_correcao_monetaria_rmc,
             juros_de_mora_calculo_rmc: Number(data.juros_de_mora_calculo_rmc),
 
             percentual_exito_bpc: Number(data.percentual_exito_bpc),
-            parcela_fixa_bpc: data.parcela_fixa_bpc,
+            parcela_fixa_bpc: converterMoneyToNumber(data.parcela_fixa_bpc as string),
 
             percentual_exito_fraude_em_boletos: Number(data.percentual_exito_fraude_em_boletos),
-            parcela_fixa_fraude_em_boletos: data.parcela_fixa_fraude_em_boletos,
-            termo_uso_sistema: data.termo_uso_sistema
+            parcela_fixa_fraude_em_boletos: converterMoneyToNumber(data.parcela_fixa_fraude_em_boletos as string),
+            termo_uso_sistema: data.termo_uso_sistema,
         });
 
         Swal.fire({
@@ -139,10 +142,9 @@ export const handleCancelarAssinatura = async (
             if (result.isConfirmed) {
                 await onCancelarAssinatura(tenant_id);
                 Swal.fire("Cancelada!", "Sua assinatura foi cancelada com sucesso.", "success");
+                cb()
             }
-        }).then(() => {
-            cb()
-        });
+        })
     } catch (error: any) {
         Swal.fire({
             icon: "error",

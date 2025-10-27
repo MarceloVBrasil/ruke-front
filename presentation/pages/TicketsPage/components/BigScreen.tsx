@@ -6,6 +6,7 @@ import { processSteps } from './ProcessSteps'
 import { TicketProgress } from './TicketProgress'
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Btn } from '@/presentation/components/Button'
 
 interface IBigScreen {
     ticket: any
@@ -18,11 +19,11 @@ interface IBigScreen {
 export function BigScreenHeader() {
     return (
         <Grid item xs={12} container spacing={2} sx={{ padding: "10px", borderBottom: '1px solid #ddd' }}>
-            <Grid item xs={12} sm={6} sx={{ fontWeight: "bold", color: 'black' }}>
+            <Grid item xs={12} sm={6} sx={{ color: 'black' }}>
                 Nome do Cliente
             </Grid>
 
-            <Grid item xs={12} sm={6} sx={{ fontWeight: "bold", textAlign: "center", color: 'black' }}>
+            <Grid item xs={12} sm={6} sx={{ textAlign: "center", color: 'black' }}>
                 Ações
             </Grid>
         </Grid>
@@ -49,24 +50,22 @@ export default function BigScreen(props: IBigScreen) {
             <Grid item xs={12} sm={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}>
                 {regraDominio?.permissoes?.includes("getById") && (
                     <Link onClick={() => setLoading(true)} href={`tickets/${ticket.id}`}>
-                        <Button
+                        <Btn
                             variant="contained"
                             color="primary"
-                            startIcon={<VisibilityIcon />}
-                        >
-                            Ver
-                        </Button>
+                            text='Ver'
+                            width={'200px'}
+                        />
                     </Link>
                 )}
                 {regraDominio?.permissoes?.includes("delete") && (
-                    <Button
+                    <Btn
                         variant="contained"
                         color="primary"
-                        startIcon={<DeleteIcon />}
+                        text='Excluir'
                         onClick={() => handleDelete(ticket.id, onTicketDelete)}
-                    >
-                        Excluir
-                    </Button>
+                        width={'200px'}
+                    />
                 )}
             </Grid>
         </Grid>

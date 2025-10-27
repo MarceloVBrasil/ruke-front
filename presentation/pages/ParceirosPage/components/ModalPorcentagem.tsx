@@ -31,7 +31,7 @@ export default function ModalPorcentagem(props: IModalPorcentagemProps) {
                 onSubmit={(e) => handleSubmitPorcentagem(e, porcentagemChoose, formRefPorcent, setPorcentagemChoose, setModalPorcent)}
                 sx={{ mt: 3 }}>
                 <Grid item xs={12} sm={12}>
-                    <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
+                    <Typography sx={{ color: '#00479d', marginLeft: '10px' }}>
                         Porcentagem
                     </Typography>
                     <TextField

@@ -1,3 +1,4 @@
+import { Btn } from '@/presentation/components/Button'
 import { DragDropDocument } from '@/presentation/components/DragDropDocument'
 import ModalComponent from '@/presentation/components/Modal'
 import { Button, CircularProgress, Grid } from '@mui/material'
@@ -63,28 +64,11 @@ export default function DocumentosModal(props: IDocumentosModal) {
                     <Box
                         sx={{ display: "flex", justifyContent: "end", padding: "10px" }}
                     >
-                        <Button
+                        <Btn
+                            width={250}
                             type="submit"
-                            sx={{
-                                backgroundColor: "#006BED",
-                                color: "white",
-                                height: "40px",
-                                width: "250px",
-                                "&:hover": { backgroundColor: "#00479d" },
-                            }}
-                        >
-                            {isLoading ? (
-                                <>
-                                    <CircularProgress
-                                        size={20}
-                                        sx={{ color: "white", marginRight: "15px" }}
-                                    />
-                                    <span>Enviando documentos...</span>
-                                </>
-                            ) : (
-                                "Ler Documentos"
-                            )}
-                        </Button>
+                            text={isLoading ? 'Enviando Documentos' : 'Ler Documentos'}
+                        />
                     </Box>
                 </Box>
             </Box>

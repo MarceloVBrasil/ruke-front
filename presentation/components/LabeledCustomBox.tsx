@@ -1,6 +1,7 @@
 import { Typography, Button, FormControl, FormHelperText } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
+import { Btn } from './Button'
 
 interface ILabeledCustomBox {
     label: string
@@ -21,7 +22,7 @@ export default function LabeledCustomBox(props: ILabeledCustomBox) {
             </Typography>
 
             <Box sx={{ width: autoWidth ? 'auto' : '100%', px: 1, display: 'flex', flexWrap: 'wrap', gap: 4, boxShadow: 3, pl: 2, py: 4, borderRadius: 2, mx: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
-                <Button onClick={onAdicionarButtonClick} sx={{ height: '35px', width: '120px', textWrap: 'nowrap' }} variant="contained">+ Adicionar</Button>
+                <Btn onClick={onAdicionarButtonClick} sx={{ height: '35px', width: '120px', textWrap: 'nowrap' }} variant="contained" text='+ Adicionar' />
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
                     {children}
                 </Box>

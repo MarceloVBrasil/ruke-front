@@ -297,13 +297,11 @@ export default function Step2({ api_data, stepsError, setStepsError }: IStep) {
         const formChangedValues = getFormChangedValues(state)
         const data = { etapa, ...formChangedValues }
 
-        // console.log(data)
-
         try {
             const response = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

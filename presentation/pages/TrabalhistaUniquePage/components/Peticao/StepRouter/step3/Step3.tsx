@@ -87,7 +87,7 @@ export default function Step3({ api_data, stepsError, setStepsError }: IStep) {
                     name={FormField.ESTADO_ACAO}
                     value={state[FormField.ESTADO_ACAO].value}
                     onChange={handleChange}
-                    variant="outlined"
+                    variant="filled"
                     options={estados_brasileiros}
                 />
 
@@ -102,7 +102,7 @@ export default function Step3({ api_data, stepsError, setStepsError }: IStep) {
                     name={FormField.CIDADE_ACAO}
                     value={state[FormField.CIDADE_ACAO].value}
                     onChange={handleChange}
-                    variant="outlined"
+                    variant="filled"
                 />
 
                 <GridRadioGroup
@@ -174,7 +174,7 @@ export default function Step3({ api_data, stepsError, setStepsError }: IStep) {
             const response = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 
@@ -187,7 +187,7 @@ export default function Step3({ api_data, stepsError, setStepsError }: IStep) {
             return cities
 
         } catch (error) {
-            console.log(error)
+
         }
     }
 

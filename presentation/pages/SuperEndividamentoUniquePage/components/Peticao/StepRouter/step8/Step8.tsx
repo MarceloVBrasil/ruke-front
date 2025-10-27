@@ -184,13 +184,11 @@ export default function Step8({ api_data, stepsError, setStepsError }: IStep) {
         const formChangedValues = getFormChangedValues(state)
         const data = { etapa, ...formChangedValues }
 
-        // console.log(data)
-
         try {
             const response = await updateSuperendividamentoTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

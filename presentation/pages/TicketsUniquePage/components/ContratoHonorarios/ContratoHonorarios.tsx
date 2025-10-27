@@ -7,6 +7,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import ArticleIcon from "@mui/icons-material/Article";
 import { criarContrato } from '../../helpers/Swal';
+import GridTextField from '@/presentation/components/GridTextField';
+import { AutoComplete } from '@/presentation/components/AutoComplete';
+import { formatCpf, onlyNumber } from '@/app/utils/Formater';
+import { Btn } from '@/presentation/components/Button';
 
 interface IContratoHonorarios {
     ticket: any
@@ -68,7 +72,6 @@ export default function ContratoHonorarios(props: IContratoHonorarios) {
                             marginRight: 10,
                             width: "100%",
                             color: "#00479d",
-                            fontWeight: "bold",
                         }}
                     >
                         CONTRATO DE HONORÁRIOS{" "}
@@ -137,7 +140,6 @@ export default function ContratoHonorarios(props: IContratoHonorarios) {
                         sx={{
                             borderBottom: "2px solid #00479d",
                             color: "#00479d",
-                            fontWeight: "bold",
                             marginLeft: "10px",
                         }}
                     >
@@ -146,121 +148,69 @@ export default function ContratoHonorarios(props: IContratoHonorarios) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Nome do Cliente
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                onChange={(e) => setNameClient(e.target.value)}
-                                id="outlined-basic"
-                                value={nameClient}
-                                placeholder="Nome do Cliente"
-                                variant="outlined"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            value={nameClient}
+                            placeholder="Nome do Cliente"
+                            label='Nome'
+                            variant='filled'
+                            onChange={(e) => setNameClient(e.target.value)}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                CPF do cliente
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                id="outlined-basic"
-                                value={cpfClient}
-                                onChange={(e) => setCPFClient(e.target.value)}
-                                placeholder="CPF do cliente"
-                                variant="outlined"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            placeholder="CPF"
+                            label=' CPF'
+                            variant='filled'
+                            value={cpfClient}
+                            onChange={(e) => {
+                                const value = onlyNumber(e.target.value);
+                                setCPFClient(formatCpf(value));
+                            }}
+                        />
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            placeholder="Endereço"
+                            label=' Endereço'
+                            variant='filled'
+                            value={addressClient}
+                            onChange={(e) => setAddressClient(e.target.value)}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Endereço do cliente
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                id="outlined-basic"
-                                value={addressClient}
-                                onChange={(e) => setAddressClient(e.target.value)}
-                                placeholder="Endereço do cliente"
-                                variant="outlined"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
-
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Banco e Endereço
-                            </Typography>
-                            <Autocomplete
-                                id="free-solo-demo"
-                                freeSolo
-                                options={
-                                    banks
-                                        ? banks.map(
-                                            (bank: any) =>
-                                                `${bank.NOME_INSTITUICAO}, ${bank.CEP}, ${bank.UF}, ${bank.BAIRRO}, ${bank.ENDERECO} - ${bank.COMPLEMENTO} `
-                                        )
-                                        : []
+                        <AutoComplete
+                            name={''}
+                            label='Banco e Endereço'
+                            placeholder='Banco e Endereço'
+                            options={
+                                banks
+                                    ? banks.map(
+                                        (bank: any) =>
+                                            `${bank.NOME_INSTITUICAO}, ${bank.CEP}, ${bank.UF}, ${bank.BAIRRO}, ${bank.ENDERECO} - ${bank.COMPLEMENTO} `
+                                    )
+                                    : []
+                            }
+                            value={[]}
+                            onChange={(event, newValue) => {
+                                if (newValue) {
+                                    setBank(newValue as unknown as string);
                                 }
-                                renderInput={(params) => (
-                                    <TextField
-                                        required
-                                        variant="outlined"
-                                        {...params}
-                                        placeholder="Banco e Endereco"
-                                        InputLabelProps={{ shrink: true }}
-                                    />
-                                )}
-                                inputValue={inputBank}
-                                onInputChange={(event, newInputValue) => {
-                                    setInputBank(newInputValue);
-                                }}
-                                onChange={(event, newValue) => {
-                                    if (newValue) {
-                                        setBank(newValue);
-                                    }
-                                }}
-                            />
-                        </Grid>
+                            }}
+                        />
 
                     </Grid>
                 </AccordionDetails>
             </Accordion>
             <AccordionDetails>
-                {(regraDominio?.permissoes?.includes("create") ||
+                {(regraDominio?.permissoes?.includes("add") ||
                     regraDominio?.permissoes?.includes("update")) && (
-                        <Button
+                        <Btn
+                            text='Gerar Contrato'
                             onClick={() => criarContrato({
                                 ticket,
                                 id_do_ticket: ticket.id,
@@ -272,20 +222,10 @@ export default function ContratoHonorarios(props: IContratoHonorarios) {
                                 setLoadingContract,
                                 getTickets
                             })}
-                            color="success"
+                            width={250}
                             variant="contained"
                             disabled={loadingContract}
-                        >
-                            {loadingContract ? (
-                                <CircularProgress
-                                    size={20}
-                                    style={{ color: "white", marginRight: 10 }}
-                                />
-                            ) : (
-                                ""
-                            )}{" "}
-                            GERAR CONTRATO
-                        </Button>
+                        />
                     )}
             </AccordionDetails>
         </Accordion>

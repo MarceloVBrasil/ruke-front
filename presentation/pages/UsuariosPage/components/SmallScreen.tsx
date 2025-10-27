@@ -4,6 +4,7 @@ import React from 'react'
 import { Usuarios } from '../UsuariosPage'
 import { Delete, Edit } from '@mui/icons-material'
 import { handleDelete, vincularUsuarioAgenda } from '../helpers/Swal'
+import { CheckBox } from '@/presentation/components/Checkbox'
 
 interface ISmallScreen {
     usuario: Usuarios
@@ -28,7 +29,7 @@ export default function SmallScreen(props: ISmallScreen) {
         <Grid item xs={12} key={usuario.id}>
             <Paper sx={{ padding: "10px", marginBottom: "10px", display: 'flex', flexDirection: 'column', gap: 4 }}>
                 <Typography variant="h6" sx={{ textAlign: 'center', pt: 1 }}>
-                    <Checkbox
+                    <CheckBox
                         checked={usuario.agenda}
                         onChange={(e) => vincularUsuarioAgenda({
                             id: usuario.id,

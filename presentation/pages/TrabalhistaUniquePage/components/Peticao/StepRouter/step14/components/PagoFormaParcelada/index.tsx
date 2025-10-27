@@ -55,7 +55,7 @@ export default function PagoFormaParcelada(props: IPagoFormaParcelada) {
                 type='number'
                 name={PAGAS_FORMA_PARCELADA_PEDIDO.QUANTIDADE_PARCELAS}
                 value={pagamento?.[PAGAS_FORMA_PARCELADA_PEDIDO.QUANTIDADE_PARCELAS] as number}
-                variant='outlined'
+                variant='filled'
                 onChange={handleQuantidadeParcelasVerbaChange}
                 label='Em quantas parcelas as verbas rescisórias foram pagas?'
                 error={error.quantidade_parcelas}

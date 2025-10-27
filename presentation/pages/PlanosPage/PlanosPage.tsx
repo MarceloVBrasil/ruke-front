@@ -24,6 +24,10 @@ import { handleDelete, handleFormSubmit } from './helpers/Swal';
 import { planosInFormSchema } from './helpers/Zod';
 import ModalAtualizarCadastrarPlano from './components/ModalAtualizarCadastrarPlano';
 
+const FixedMaskedInput = MaskedInput as unknown as React.ComponentType<any>;
+
+import { Btn } from '@/presentation/components/Button';
+
 interface PlanoProps {
   listPlanos: Plano[];
   produtoId: string
@@ -43,7 +47,7 @@ export default function PlanosPage({ listPlanos, produtoId }: PlanoProps) {
       allowNegative: false,
     });
 
-    return <MaskedInput mask={currencyMask} {...props} />;
+    return <FixedMaskedInput mask={currencyMask} {...props} />;
   };
 
   const ContractValueMemo = useMemo(() => CurrencyInput, []);
@@ -68,23 +72,18 @@ export default function PlanosPage({ listPlanos, produtoId }: PlanoProps) {
   return (
     <Box sx={{ maxWidth: '100vw', padding: '5px', margin: '10px', borderRadius: '10px', }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography sx={{ fontSize: '30px', fontWeight: '600', width: '200px', marginBottom: '30px', color: '#00479D', borderBottom: '3px solid #006BED' }}>
+        <Typography sx={{ fontSize: '30px', width: '200px', marginBottom: '30px', color: '#00479D', borderBottom: '3px solid #006BED' }}>
           Planos
         </Typography>
-        <Button sx={{
-          backgroundColor: '#006BED',
-          color: 'white',
-          height: '40px',
-          width: '200px'
-        }}
+        <Btn
+          text='Cadastrar'
+          width='200px'
           onClick={() => {
             setPlanoChoose(null);
             handleOpen();
             setTipoCobranca("");
             reset()
-          }}>
-          Cadastrar
-        </Button>
+          }} />
       </Box>
 
       <ModalAtualizarCadastrarPlano
@@ -112,21 +111,21 @@ export default function PlanosPage({ listPlanos, produtoId }: PlanoProps) {
         <Table sx={{ minWidth: 1000 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell style={{ backgroundColor: 'white', color: 'black', fontWeight: 'bold', padding: '25px' }}>Nome</StyledTableCell>
-              <StyledTableCell style={{ backgroundColor: 'white', color: 'black', fontWeight: 'bold', padding: '25px' }}>Descrição</StyledTableCell>
-              <StyledTableCell style={{ minWidth: '150px', backgroundColor: 'white', color: 'black', fontWeight: 'bold', padding: '25px' }}>Limite Petições</StyledTableCell>
-              <StyledTableCell style={{ minWidth: '210px', backgroundColor: 'white', color: 'black', fontWeight: 'bold', padding: '25px' }}>Limite Hipossuficiência</StyledTableCell>
-              <StyledTableCell style={{ minWidth: '160px', backgroundColor: 'white', color: 'black', fontWeight: 'bold', padding: '25px' }}>Limite Contratos</StyledTableCell>
-              <StyledTableCell style={{ minWidth: '175px', backgroundColor: 'white', color: 'black', fontWeight: 'bold', padding: '25px' }}>Limite Procurações</StyledTableCell>
-              <StyledTableCell style={{ backgroundColor: 'white', color: 'black', fontWeight: 'bold', padding: '25px' }}>Preço</StyledTableCell>
-              <StyledTableCell style={{ minWidth: '170px', backgroundColor: 'white', color: 'black', fontWeight: 'bold', padding: '25px' }}>Tipo de Cobrança</StyledTableCell>
-              <StyledTableCell style={{ backgroundColor: 'white', color: 'black', fontWeight: 'bold', padding: '25px' }} align="center">Ações</StyledTableCell>
+              <StyledTableCell style={{ backgroundColor: 'white', color: 'black', padding: '25px' }}>Nome</StyledTableCell>
+              <StyledTableCell style={{ backgroundColor: 'white', color: 'black', padding: '25px' }}>Descrição</StyledTableCell>
+              <StyledTableCell style={{ minWidth: '150px', backgroundColor: 'white', color: 'black', padding: '25px' }}>Limite Petições</StyledTableCell>
+              <StyledTableCell style={{ minWidth: '210px', backgroundColor: 'white', color: 'black', padding: '25px' }}>Limite Hipossuficiência</StyledTableCell>
+              <StyledTableCell style={{ minWidth: '160px', backgroundColor: 'white', color: 'black', padding: '25px' }}>Limite Contratos</StyledTableCell>
+              <StyledTableCell style={{ minWidth: '175px', backgroundColor: 'white', color: 'black', padding: '25px' }}>Limite Procurações</StyledTableCell>
+              <StyledTableCell style={{ backgroundColor: 'white', color: 'black', padding: '25px' }}>Preço</StyledTableCell>
+              <StyledTableCell style={{ minWidth: '170px', backgroundColor: 'white', color: 'black', padding: '25px' }}>Tipo de Cobrança</StyledTableCell>
+              <StyledTableCell style={{ backgroundColor: 'white', color: 'black', padding: '25px' }} align="center">Ações</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {planos.map((plano) => (
               <StyledTableRow key={plano.id}>
-                <StyledTableCell style={{ backgroundColor: 'white', fontWeight: '600', padding: '20px' }} component="th" scope="row">
+                <StyledTableCell style={{ backgroundColor: 'white', padding: '20px' }} component="th" scope="row">
                   {plano.nome}
                 </StyledTableCell>
                 <StyledTableCell style={{ backgroundColor: 'white', padding: '20px', maxHeight: '30px', maxWidth: '180px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} align="left">{plano.descricao}</StyledTableCell>
@@ -135,29 +134,21 @@ export default function PlanosPage({ listPlanos, produtoId }: PlanoProps) {
                 <StyledTableCell style={{ backgroundColor: 'white', padding: '20px' }} align="left">{plano.limite_contratos}</StyledTableCell>
                 <StyledTableCell style={{ backgroundColor: 'white', padding: '20px' }} align="left">{plano.limite_procuracoes}</StyledTableCell>
                 <StyledTableCell style={{ backgroundColor: 'white', padding: '20px' }} align="left">{formatarValorParaMoedaBrasileira(plano.preco)}</StyledTableCell>
-                <StyledTableCell style={{ backgroundColor: 'white', padding: '20px' }} align="left">{traducaoTipoCobranca[plano.tipo_cobranca].value}</StyledTableCell>
+                <StyledTableCell style={{ backgroundColor: 'white', padding: '20px' }} align="left">{plano.tipo_cobranca}</StyledTableCell>
                 <StyledTableCell style={{ backgroundColor: 'white', padding: '20px', display: 'flex', justifyContent: 'space-between', gap: '10px' }}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={<EditIcon />}
+                  <Btn
+                    text='Editar'
                     onClick={() => {
                       setPlanoChoose(plano);
                       setTipoCobranca(plano.tipo_cobranca);
                       setOpen(true);
                       reset();
                     }}
-                  >
-                    Editar
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={<DeleteIcon />}
+                  />
+                  <Btn
+                    text='Excluir'
                     onClick={() => handleDelete(plano.id, planos, setPlanos, setLoading)}
-                  >
-                    Excluir
-                  </Button>
+                  />
                 </StyledTableCell>
               </StyledTableRow>
             ))}

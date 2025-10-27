@@ -6,6 +6,7 @@ import { handleDelete } from '../helpers/Swal'
 import { TicketProgress } from './TicketProgress'
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Btn } from '@/presentation/components/Button'
 
 interface IBigScreen {
     ticket: any
@@ -18,13 +19,10 @@ interface IBigScreen {
 export function BigScreenHeader() {
     return (
         <Grid item xs={12} container spacing={2} sx={{ padding: "10px", borderBottom: '1px solid #ddd' }}>
-            <Grid item xs={12} sm={4} sx={{ fontWeight: "bold", color: 'black' }}>
+            <Grid item xs={12} sm={6} sx={{ color: 'black' }}>
                 Nome do Cliente
             </Grid>
-            <Grid item xs={12} sm={4} sx={{ fontWeight: "bold", color: 'black' }}>
-                Documentos Gerados
-            </Grid>
-            <Grid item xs={12} sm={4} sx={{ fontWeight: "bold", textAlign: "center", color: 'black' }}>
+            <Grid item xs={12} sm={6} sx={{ textAlign: "center", color: 'black' }}>
                 Ações
             </Grid>
         </Grid>
@@ -42,37 +40,26 @@ export default function BigScreen(props: IBigScreen) {
     return (
         <Grid item xs={12} container spacing={0} key={ticket.id} sx={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
             {/* Nome do Cliente */}
-            <Grid item xs={12} sm={4} sx={{ display: "flex", alignItems: "center" }}>
+            <Grid item xs={12} sm={6} sx={{ display: "flex", alignItems: "center" }}>
                 {ticket.nome_cliente}
             </Grid>
 
-            <Grid item xs={12} sm={4} sx={{ display: "flex", alignItems: "center" }}>
-                <TicketProgress
-                    currentStep={processSteps(ticket).pontuacao}
-                    texto={processSteps(ticket).texto}
-                    totalSteps={4}
-                />
-            </Grid>
-
-            <Grid item xs={12} sm={4} sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}>
+            <Grid item xs={12} sm={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}>
                 <Link onClick={() => setLoading(true)} href={`/bpc/${ticket.id}`}>
-                    <Button
-                        fullWidth
+                    <Btn
+                        text='Ver'
                         variant="contained"
                         color="primary"
-                        startIcon={<VisibilityIcon />}
-                    >
-                        Ver
-                    </Button>
+                        width={'200px'}
+                    />
                 </Link>
-                <Button
+                <Btn
+                    text='Excluir'
                     variant="contained"
                     color="primary"
-                    startIcon={<DeleteIcon />}
                     onClick={() => handleDelete(ticket.id, onTicketDelete)}
-                >
-                    Excluir
-                </Button>
+                    width={'200px'}
+                />
             </Grid>
         </Grid>
     )

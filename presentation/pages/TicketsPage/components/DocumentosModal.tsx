@@ -4,6 +4,7 @@ import { Button, CircularProgress, Grid } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 import { handleSubmit } from '../helpers/Swal'
+import { Btn } from '@/presentation/components/Button'
 
 interface IDocumentosModal {
     handleClose: () => void
@@ -69,28 +70,12 @@ export default function DocumentosModal(props: IDocumentosModal) {
                     <Box
                         sx={{ display: "flex", justifyContent: "end", padding: "10px" }}
                     >
-                        <Button
+                        <Btn
                             type="submit"
-                            sx={{
-                                backgroundColor: "#006BED",
-                                color: "white",
-                                height: "40px",
-                                width: "250px",
-                                "&:hover": { backgroundColor: "#00479d" },
-                            }}
-                        >
-                            {isLoading ? (
-                                <>
-                                    <CircularProgress
-                                        size={20}
-                                        sx={{ color: "white", marginRight: "15px" }}
-                                    />
-                                    <span>Enviando documentos...</span>
-                                </>
-                            ) : (
-                                "Ler Documentos"
-                            )}
-                        </Button>
+                            loading={isLoading}
+                            text={isLoading ? 'Enviando Documentos...' : 'Ler Documentos '}
+                            width={250}
+                        />
                     </Box>
                 </Box>
             </Box>

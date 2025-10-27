@@ -2,6 +2,8 @@ import { FormField } from '@/presentation/pages/SuperEndividamentoUniquePage/com
 import { Grid, IconButton, InputAdornment, InputBaseComponentProps, InputLabelProps, SelectChangeEvent, TextField, Tooltip, Typography } from '@mui/material'
 import React, { CSSProperties, useState } from 'react'
 import Visibility from '@mui/icons-material/Visibility';
+import LockOutlineIcon from '@mui/icons-material/LockOutlined';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import '../styles/App.css'
 
@@ -15,6 +17,7 @@ interface IGridTextField {
     defaultValue?: string | number | undefined
     onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement> | SelectChangeEvent<string>) => void
     onBlur?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined
+    onClick?: React.MouseEventHandler<HTMLDivElement> | undefined
     register?: (v: any) => any
     name?: string
     label?: string
@@ -22,14 +25,14 @@ interface IGridTextField {
     error?: boolean
     helperText?: string
     fullWidth?: boolean
-    variant: 'standard' | 'outlined' | 'filled'
+    variant: 'standard' | 'filled'
     inputProps?: InputBaseComponentProps
     style?: CSSProperties
     placeholder?: string
     disabled?: boolean
     required?: boolean
     InputLabelProps?: InputLabelProps
-    startAdornment?: string
+    startAdornment?: string | React.JSX.Element
     endAdornment?: string
     multiline?: boolean
     containerStyle?: CSSProperties
@@ -39,6 +42,7 @@ interface IGridTextField {
     labelMarginLeft?: string | { xs?: string | number, sm?: string | number, md: string | number }
     id?: string
     password?: boolean
+    email?: boolean
     visibilityIconBig?: boolean
     inputElement?: JSX.Element
 }
@@ -54,6 +58,7 @@ export default function GridTextField(props: IGridTextField) {
         defaultValue,
         onChange,
         onBlur,
+        onClick,
         register,
         name,
         label,
@@ -78,61 +83,13 @@ export default function GridTextField(props: IGridTextField) {
         labelMarginLeft,
         id,
         password = false,
+        email = false,
         visibilityIconBig,
         inputElement
     } = props
     const [showPassword, setShowPassword] = useState(false)
-    if (variant == 'outlined') {
-        return (
-            <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} style={containerStyle} position={'relative'}>
-                <Typography
-                    sx={{
-                        color: disabled ? "#ccc" : "#00479d",
-                        fontWeight: "bold",
-                        marginLeft: fixLabel ? '20px' : labelMarginLeft ? labelMarginLeft : '10px',
-                        whiteSpace: sm ? 'nowrap' : 'wrap',
-                        marginBottom: multiline ? 0.8 : 0,
-                        position: 'relative',
-                        right: multiline ? 10 : 0
-                    }}
-                >
-                    {label}
-                    <Tooltip sx={{ display: tooltip ? 'flex' : 'none', position: 'absolute', left: 0, top: 0 }} title={tooltip}>
-                        <Typography>?</Typography>
-                    </Tooltip>
-                </Typography>
-                <TextField
-                    id={id}
-                    autoComplete={name}
-                    className={className}
-                    multiline={multiline}
-                    error={error}
-                    helperText={helperText}
-                    name={name}
-                    value={value}
-                    defaultValue={defaultValue}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    {...(register ? register(name ?? id) : {})}
-                    required={required}
-                    fullWidth={fullWidth}
-                    placeholder={placeholder}
-                    variant={'outlined'}
-                    type={type}
-                    style={style}
-                    disabled={disabled}
-                    InputLabelProps={InputLabelProps}
-                    InputProps={{
-                        startAdornment: startAdornment ? <InputAdornment position='start'>{startAdornment}</InputAdornment> : null,
-                        endAdornment: endAdornment ? <InputAdornment position='end'>{endAdornment}</InputAdornment> : null,
-                        className: type == 'date' && !value && !defaultValue ? `date-textfield-placeholder ${className}` : className,
-                        inputComponent: inputElement
-                    }}
-                />
-            </Grid>
-        )
-    }
-    else if (variant == 'standard') {
+
+    if (variant == 'standard') {
         return (
             <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} style={containerStyle} position={'relative'}>
                 <Tooltip sx={{ display: tooltip ? 'flex' : 'none', position: 'absolute', left: -5, top: 5 }} title={tooltip}>
@@ -153,6 +110,7 @@ export default function GridTextField(props: IGridTextField) {
                     defaultValue={defaultValue}
                     onBlur={onBlur}
                     onChange={onChange}
+                    onClick={onClick}
                     name={name}
                     {...(register ? register(name ?? id) : {})}
                     label={label}
@@ -198,17 +156,22 @@ export default function GridTextField(props: IGridTextField) {
                     {...(register ? register(name ?? id) : {})}
                     onBlur={onBlur}
                     onChange={onChange}
+                    onClick={onClick}
                     sx={{
                         '& input:-webkit-autofill': {
                             transition: 'background-color 5000s ease-in-out 0s',
                         },
                         ...(multiline && {
                             '& .MuiInputBase-inputMultiline': {
-                                minHeight: '120px',
+                                minHeight: '100px',
                                 lineHeight: '1.5',
                                 boxSizing: 'border-box',
                             }
                         }),
+
+                        '& .MuiInputBase-input::placeholder': {
+                            color: '#222'
+                        }
                     }}
                     InputProps={{
                         inputComponent: inputElement,
@@ -216,9 +179,36 @@ export default function GridTextField(props: IGridTextField) {
                             type == 'date' && !value && !defaultValue
                                 ? `date-textfield-placeholder ${className}`
                                 : className,
-                        startAdornment: startAdornment ? (
+                        startAdornment: password ? <IconButton
+                            className='input-icon'
+                            disableFocusRipple
+                            disableRipple
+                            disableTouchRipple
+                        >
+                            <LockOutlineIcon
+                                onMouseDown={(e) => e.preventDefault()}
+                                style={{
+                                    position: 'relative',
+                                    top: 8,
+                                    cursor: 'default'
+                                }}
+                            />
+                        </IconButton> : startAdornment ? (
                             <InputAdornment position="start">{startAdornment}</InputAdornment>
-                        ) : null,
+                        ) : email ? <IconButton
+                            onMouseDown={(e) => e.preventDefault()}
+                            className='input-icon'
+                            disableFocusRipple
+                            disableRipple
+                            disableTouchRipple
+                        > <MailOutlineIcon
+                                className='input-icon'
+                                style={{
+                                    position: 'relative',
+                                    top: 10,
+                                    cursor: 'default'
+                                }}
+                            /></IconButton> : null,
                         endAdornment: password ? (
                             showPassword ? (
                                 <IconButton
@@ -274,6 +264,14 @@ export default function GridTextField(props: IGridTextField) {
                             },
                             '&.Mui-focused': {
                                 background: '#f9fafb',
+                                outline: '2px solid #0067e3'
+                            },
+
+                            '&:focus-within .input-icon': {
+                                color: '#0067e3',
+                            },
+                            '&:not(:focus-within) .input-icon': {
+                                color: '#aaa'
                             },
                         },
                     }}

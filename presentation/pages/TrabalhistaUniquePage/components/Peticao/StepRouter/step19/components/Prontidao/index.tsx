@@ -33,7 +33,7 @@ export default function Prontidao(props: IProntidao) {
                 label='Quantas vezes por semana o reclamante ficou de prontidão'
                 name={PRONTIDAO.QUANTIDADE_VEZES_SEMANA}
                 defaultValue={prontidao?.[PRONTIDAO.QUANTIDADE_VEZES_SEMANA] as number}
-                variant='outlined'
+                variant='filled'
                 onBlur={handleQuantidadeVezesSemanaChange}
                 error={error.quantidade_vezes_semana}
                 helperText={error.quantidade_vezes_semana ? 'Campo obrigatório' : ' '}
@@ -43,7 +43,7 @@ export default function Prontidao(props: IProntidao) {
                 xs={12}
                 ref={valorEstimadoPedidoRef}
                 name={HORAS_EXTRAS_NAO_PAGAS.VALOR_ESTIMADO_PEDIDO}
-                variant='outlined'
+                variant='filled'
                 defaultValue={prontidao?.[PRONTIDAO.VALOR_ESTIMADO_PEDIDO] ?? 0}
                 onBlur={handleValorEstimadoPedidoChange}
                 label='Qual o valor pedido?'

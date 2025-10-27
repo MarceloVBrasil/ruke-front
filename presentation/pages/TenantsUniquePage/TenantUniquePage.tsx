@@ -37,6 +37,8 @@ import { cancelarTodasAssinaturas } from "@/app/api/server/tenant";
 import { cep } from "@/app/types/cep";
 import { cnpj } from "@/app/types/cnpj";
 import { formatCurrency, formatMoney } from "@/app/utils/Formater";
+import { CheckBox } from "@/presentation/components/Checkbox";
+import { Btn } from "@/presentation/components/Button";
 
 
 
@@ -83,17 +85,17 @@ export default function TenantUniquePage({ tenant, listUsers }: TenantProps) {
 
     percentual_exito_rmc: tenant.percentual_exito_rmc || 35,
     danos_morais_rmc: Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(tenant.danos_morais_rmc || 10_000),
-    parcela_fixa_rmc: tenant.parcela_fixa_rmc || "",
-    indice_correcao_monetaria_rmc: "correção com IPCA",
+    parcela_fixa_rmc: Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(tenant.parcela_fixa_rmc || 1_000),
+    indice_correcao_monetaria_rmc: "ipca",
     juros_de_mora_calculo_rmc: tenant.juros_de_mora_calculo_rmc || 1,
 
     percentual_exito_bpc: tenant.percentual_exito_bpc || 0,
-    parcela_fixa_bpc: tenant.parcela_fixa_bpc || "",
+    parcela_fixa_bpc: Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(tenant.parcela_fixa_bpc || 1_375),
 
     percentual_exito_fraude_em_boletos: tenant.parcela_fixa_fraude_em_boletos as unknown as number || 0,
-    parcela_fixa_fraude_em_boletos: tenant.parcela_fixa_fraude_em_boletos || "",
+    parcela_fixa_fraude_em_boletos: Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(tenant.parcela_fixa_fraude_em_boletos || 250),
 
-    termo_uso_sistema: false,
+    termo_uso_sistema: tenant.termo_uso_sistema || false,
   }
 
   const {
@@ -181,7 +183,6 @@ export default function TenantUniquePage({ tenant, listUsers }: TenantProps) {
         <Typography
           sx={{
             fontSize: "30px",
-            fontWeight: "600",
             width: { xs: '100%', sm: '360px' },
             marginBottom: "30px",
             color: "#00479D",
@@ -203,7 +204,7 @@ export default function TenantUniquePage({ tenant, listUsers }: TenantProps) {
           value={cadastrarCom}
           onChange={handleCadastrarComChange}
           sectionTitle="Cadastrar com"
-          sectionTitleStyles={{ textTransform: 'uppercase', color: '#00479d', fontWeight: 'bold' }}
+          sectionTitleStyles={{ textTransform: 'uppercase', color: '#00479d' }}
           style={{ borderBottom: '1px solid #ccc' }}
           row
           width={{ xs: '100%', sm: 'auto' }}
@@ -228,6 +229,7 @@ export default function TenantUniquePage({ tenant, listUsers }: TenantProps) {
           handleSubmit((data) =>
             handleFormSubmit({
               data,
+              cadastrarCom,
               tenantChoose,
               setLoading,
               setTenantChoose
@@ -289,7 +291,8 @@ export default function TenantUniquePage({ tenant, listUsers }: TenantProps) {
 
               >
 
-                <Checkbox
+                <CheckBox
+                  register={register}
                   {...register('termo_uso_sistema')}
                   checked={termosUsoSistema}
                   onChange={() => setTermosUsoSitema(prev => !prev)}
@@ -299,7 +302,7 @@ export default function TenantUniquePage({ tenant, listUsers }: TenantProps) {
                 <Button
                   onClick={() => window.open("/docs/termousopeticao.pdf")}
                   sx={{
-                    position: 'relative', right: 10, color: "#00479d", fontWeight: "bold", marginLeft: "", height: 22,
+                    position: 'relative', right: 10, top: 2, color: "#00479d", height: 22,
                     "&:hover": { cursor: 'pointer' }
                   }}>
                   Li e concordo com os termos de uso do sistema</Button>
@@ -316,7 +319,7 @@ export default function TenantUniquePage({ tenant, listUsers }: TenantProps) {
               sx={{ display: "flex", flexDirection: "column", marginRight: 2, marginLeft: { xs: 3, md: 0 } }}
             >
               <Typography
-                sx={{ color: "#00479d", fontWeight: "bold" }}
+                sx={{ color: "#00479d" }}
               >
                 Quem assinará a petição:
               </Typography>
@@ -332,7 +335,7 @@ export default function TenantUniquePage({ tenant, listUsers }: TenantProps) {
                     onChange={(e) => {
                       handleCheckboxChange({ event: e, idUser: user.id, users, setUsers });
                     }}
-                    control={<Checkbox />}
+                    control={<CheckBox />}
                     label={user.nome}
                     checked={converterStringBoolean(
                       user?.aparecer_em_assinaturas_rmc as unknown as string
@@ -344,36 +347,23 @@ export default function TenantUniquePage({ tenant, listUsers }: TenantProps) {
           </Grid>
         </Grid>
 
-        <Button
+        <Btn
           type="submit"
-
+          text="Atualizar Informações"
           variant="contained"
-          sx={{
-            mt: 3,
-            mb: 2,
-            padding: "15px",
-            width: { xs: '100%', sm: "250px" },
-          }}
-        >
-          Atualizar Informações
-        </Button>
+          sxWidth={{ xs: '100%', sm: "250px" }}
+          marginTop={5}
+          marginRight={2}
+        />
 
-        <Button
+        <Btn
+          sxWidth={{ xs: '100%', sm: "250px" }}
+          text="Cancelar Assinatura"
           variant="contained"
           color="primary"
-          sx={{
-            background: '#f22222', '&:hover': { background: '#ff0000' },
-            mt: { sm: 3 },
-            mb: 2,
-            ml: { sm: 1 },
-            padding: "15px",
-            width: { xs: '100%', sm: "250px" },
-          }}
-          startIcon={<DeleteIcon />}
           onClick={() => handleCancelarAssinatura(tenant.id, onCancelarAssinatura, () => router.push('/logout'))}
-        >
-          Cancelar Assinatura
-        </Button>
+          marginTop={5}
+        />
       </Box>
     </Box>
   );

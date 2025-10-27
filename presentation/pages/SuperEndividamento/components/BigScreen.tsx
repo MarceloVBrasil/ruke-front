@@ -18,11 +18,11 @@ interface IBigScreen {
 export function BigScreenHeader() {
     return (
         <Grid item xs={12} container spacing={2} sx={{ padding: "10px", borderBottom: '1px solid #ddd' }}>
-            <Grid item xs={12} sm={6} sx={{ fontWeight: "bold", color: 'black' }}>
+            <Grid item xs={12} sm={6} sx={{ color: 'black' }}>
                 Nome do Cliente
             </Grid>
 
-            <Grid item xs={12} sm={6} sx={{ fontWeight: "bold", textAlign: "center", color: 'black' }}>
+            <Grid item xs={12} sm={6} sx={{ textAlign: "center", color: 'black' }}>
                 Ações
             </Grid>
         </Grid>

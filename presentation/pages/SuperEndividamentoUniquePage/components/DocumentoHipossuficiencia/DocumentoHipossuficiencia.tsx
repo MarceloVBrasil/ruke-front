@@ -152,7 +152,6 @@ export default function DocumentoHipossuficiencia({ ticketUnique: api_data, regr
                             marginRight: 10,
                             width: "100%",
                             color: "#00479d",
-                            fontWeight: "bold",
                         }}
                     >
                         DOCUMENTO DE HIPOSSUFICIENCIA{" "}
@@ -309,7 +308,7 @@ export default function DocumentoHipossuficiencia({ ticketUnique: api_data, regr
                 </AccordionDetails>
             </Accordion>
             <AccordionDetails>
-                {(regraDominio?.permissoes?.includes("create") ||
+                {(regraDominio?.permissoes?.includes("add") ||
                     regraDominio?.permissoes?.includes("update")) && (
                         <Button
                             onClick={() => criarHipossuficiencia(ticketUnique.id)}

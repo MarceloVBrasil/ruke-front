@@ -43,7 +43,7 @@ export default function PedidoInterrupcaoAtividades(props: IPedidoInterrupcaoAti
                 name={INTERRUPCAO_ATIVIDADES_PEDIDO.DATA_INTERRUPCAO}
                 value={pedido?.[INTERRUPCAO_ATIVIDADES_PEDIDO.DATA_INTERRUPCAO] as string}
                 onChange={handleDataInterrupcaoChange}
-                variant='outlined'
+                variant='filled'
                 error={error.data_interrupcao}
                 helperText={error.data_interrupcao ? 'Campo obrigatório' : ' '}
                 style={{ paddingRight: 20 }}
@@ -135,7 +135,7 @@ export default function PedidoInterrupcaoAtividades(props: IPedidoInterrupcaoAti
                 xs={12}
                 fullWidth
                 label='Qual foi a falta grave cometida pela parte reclamada que fundamenta a rescisão indireta?'
-                variant='outlined'
+                variant='filled'
                 name={INTERRUPCAO_ATIVIDADES_PEDIDO.FALTA_GRAVE}
                 defaultValue={pedido?.[INTERRUPCAO_ATIVIDADES_PEDIDO.FALTA_GRAVE] as string}
                 onBlur={handleFaltaGraveChange}
@@ -156,7 +156,7 @@ export default function PedidoInterrupcaoAtividades(props: IPedidoInterrupcaoAti
                 name={INTERRUPCAO_ATIVIDADES_PEDIDO.DATA_INTERRUPCAO}
                 value={pedido?.[INTERRUPCAO_ATIVIDADES_PEDIDO.ULTIMO_DIA_TRABALHANDO] as string}
                 onChange={handleUltimoDiaTrabalhandoChange}
-                variant='outlined'
+                variant='filled'
                 containerStyle={{ marginTop: 10, marginBottom: 10, paddingRight: 10 }}
             />
 
@@ -169,7 +169,7 @@ export default function PedidoInterrupcaoAtividades(props: IPedidoInterrupcaoAti
                 name={INTERRUPCAO_ATIVIDADES_PEDIDO.DATA_INTERRUPCAO}
                 value={pedido?.[INTERRUPCAO_ATIVIDADES_PEDIDO.PROJECAO_AVISO_PREVIO] as string}
                 onChange={handleProjecaoAvisoPrevio}
-                variant='outlined'
+                variant='filled'
                 containerStyle={{ marginTop: 10, marginBottom: 10, paddingRight: 10 }}
                 error={error.data_projecao_aviso_previo}
                 helperText={error.data_projecao_aviso_previo ? 'Campo obrigatório' : ' '}

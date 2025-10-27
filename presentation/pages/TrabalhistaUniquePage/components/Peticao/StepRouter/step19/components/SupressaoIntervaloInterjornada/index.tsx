@@ -29,7 +29,7 @@ export default function SupressaoIntervaloInterjornada(props: ISupressaoInterval
 
             <GridTextField
                 xs={12}
-                variant='outlined'
+                variant='filled'
                 type='number'
                 fullWidth
                 name={SUPRESSAO_INTERVALO_INTRAJORNADA.DURACAO_INTERVALO}
@@ -42,7 +42,7 @@ export default function SupressaoIntervaloInterjornada(props: ISupressaoInterval
 
             <GridTextField
                 xs={12}
-                variant='outlined'
+                variant='filled'
                 type='number'
                 fullWidth
                 name={SUPRESSAO_INTERVALO_INTERJORNADA.QUANTIDADE_HORAS_INTERVALO_ATE_FIM}
@@ -69,7 +69,7 @@ export default function SupressaoIntervaloInterjornada(props: ISupressaoInterval
 
             <GridTextField
                 xs={12}
-                variant='outlined'
+                variant='filled'
                 type='number'
                 fullWidth
                 name={SUPRESSAO_INTERVALO_INTERJORNADA.QUANTIDADE_POR_SEMANA_INTERVALO_SUPRIMIDO}
@@ -82,7 +82,7 @@ export default function SupressaoIntervaloInterjornada(props: ISupressaoInterval
 
             <GridTextField
                 xs={12}
-                variant='outlined'
+                variant='filled'
                 type='number'
                 fullWidth
                 name={SUPRESSAO_INTERVALO_INTERJORNADA.QUANTIDADE_HORAS_DURANTE_SEMANA}
@@ -97,7 +97,7 @@ export default function SupressaoIntervaloInterjornada(props: ISupressaoInterval
                 xs={12}
                 ref={valorEstimadoPedidoRef}
                 name={SUPRESSAO_INTERVALO_INTRAJORNADA.VALOR_ESTIMADO_PEDIDO}
-                variant='outlined'
+                variant='filled'
                 defaultValue={supressao_interjornada?.[SUPRESSAO_INTERVALO_INTRAJORNADA.VALOR_ESTIMADO_PEDIDO] ?? 0}
                 onBlur={handleValorEstimadoHorasExtras}
                 label='Qual valor estimado do pedido de horas interjornada?'

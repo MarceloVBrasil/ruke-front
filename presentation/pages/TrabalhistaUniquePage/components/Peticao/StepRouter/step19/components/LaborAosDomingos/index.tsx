@@ -27,7 +27,7 @@ export default function LaborAosDomingos(props: ILaborAosDomingos) {
 
             <GridTextField
                 xs={12}
-                variant='outlined'
+                variant='filled'
                 type='number'
                 fullWidth
                 name={LABOR_AOS_DOMINGOS_SEM_CONTRAPRESTACAO.QUANTIDADE_DOMINGOS_POR_MES}
@@ -42,7 +42,7 @@ export default function LaborAosDomingos(props: ILaborAosDomingos) {
                 xs={12}
                 ref={valorEstimadoPedidoRef}
                 name={LABOR_AOS_DOMINGOS_SEM_CONTRAPRESTACAO.VALOR_PAGO_POR_FORA}
-                variant='outlined'
+                variant='filled'
                 defaultValue={labor_domingos?.[LABOR_AOS_DOMINGOS_SEM_CONTRAPRESTACAO.VALOR_PAGO_POR_FORA] ?? 0}
                 onBlur={handleValorEstimadoPedidoChange}
                 label='Qual é o valor estimado das horas trabalhadas aos domingos?'

@@ -87,7 +87,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
                     required
                     fullWidth
                     placeholder="Nome do Cliente"
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -102,7 +102,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
                     name={FormField.CPF_CLIENTE}
                     value={formatCpf(state[FormField.CPF_CLIENTE].value)}
                     onChange={handleChange}
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -116,7 +116,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
                     name={FormField.RG_CLIENTE}
                     value={(state[FormField.RG_CLIENTE].value)}
                     onChange={handleChange}
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -130,7 +130,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
                     name={FormField.EMAIL_CLIENTE}
                     value={state[FormField.EMAIL_CLIENTE].value}
                     onChange={handleChange}
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -143,7 +143,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
                     fullWidth
                     type="date"
                     placeholder="Digite a data Requerimento"
-                    variant="outlined"
+                    variant="filled"
                     value={state[FormField.DATA_NASCIMENTO_CLIENTE].value}
                     onChange={handleChange}
                     InputLabelProps={{ shrink: true }}
@@ -159,7 +159,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
                     value={state[FormField.ESTADO_CIVIL_CLIENTE].value}
                     onChange={handleChange}
                     fullWidth
-                    variant="outlined"
+                    variant="filled"
                     options={estado_civil}
                 />
 
@@ -174,7 +174,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
                     required
                     fullWidth
                     placeholder="Profissão"
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -188,7 +188,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
                     name={FormField.CEP_CLIENTE}
                     value={formatCepInput(state[FormField.CEP_CLIENTE].value)}
                     onChange={handleChange}
-                    variant={'outlined'}
+                    variant={'filled'}
                 />
 
                 <GridTextField
@@ -202,7 +202,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
                     required
                     fullWidth
                     placeholder="Rua"
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -218,7 +218,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
                     required
                     fullWidth
                     placeholder="Número"
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -231,7 +231,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
                     required
                     fullWidth
                     placeholder="Complemento"
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -246,7 +246,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
                     required
                     fullWidth
                     placeholder="Bairro"
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -261,7 +261,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
                     required
                     fullWidth
                     placeholder="Cidade"
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -275,7 +275,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
                     name={FormField.ESTADO}
                     value={state[FormField.ESTADO].value}
                     onChange={handleChange}
-                    variant="outlined"
+                    variant="filled"
                     options={estados_brasileiros}
                 />
             </Grid>
@@ -310,7 +310,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
             const response = await updateSuperendividamentoTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 
@@ -353,7 +353,7 @@ export default function Step1({ api_data, setStepsError, stepsError }: IStep) {
             setFormHasChanged(true)
 
         } catch (error) {
-            console.log(error)
+
         }
     }
 

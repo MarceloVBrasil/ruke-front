@@ -17,11 +17,12 @@ import { isCepValid, isCpfValid, isFieldEmpty, isStringNumberNegative } from '@/
 import GridTextField from '@/presentation/components/GridTextField';
 import GridSelectField from '@/presentation/components/GridSelectField';
 import { estados_brasileiros } from '@/app/utils/EstadosBrasileiros';
-import { estado_civil } from '../helper/EstadoCivil';
 import FormButtons from '@/presentation/components/FormButtons';
 import { getAddressByCep } from '@/app/api/client/outros';
 import { IStep } from '../StepRouter';
 import { DOENCAS } from './helper/Doencas';
+import { AutoComplete } from '@/presentation/components/AutoComplete';
+import { estado_civil } from '@/domain/data/estado_civil';
 
 export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
     const router = useRouter();
@@ -30,6 +31,7 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
 
     const [state, dispatch] = useReducer(formReducer, getFormStateFromApi(api_data));
     const [formHasChanged, setFormHasChanged] = useState(false)
+    const hasValue = state[FormField.DOENCA_RECLAMANTE].value.length > 0
 
     interface ErrorStep1 {
         nome_reclamante: boolean
@@ -90,7 +92,7 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
                     required
                     fullWidth
                     placeholder="Nome do Reclamante"
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -105,7 +107,7 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
                     required
                     fullWidth
                     placeholder="Nacionalidade do Reclamante"
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -120,7 +122,7 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
                     name={FormField.CPF_RECLAMANTE}
                     value={formatCpf(state[FormField.CPF_RECLAMANTE].value)}
                     onChange={handleChange}
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -133,7 +135,7 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
                     fullWidth
                     type="date"
                     placeholder="Digite a data Requerimento"
-                    variant="outlined"
+                    variant="filled"
                     value={state[FormField.DATA_NASCIMENTO_RECLAMANTE].value}
                     onChange={handleChange}
                     InputLabelProps={{ shrink: true }}
@@ -149,7 +151,7 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
                     value={state[FormField.ESTADO_CIVIL_RECLAMANTE].value}
                     onChange={handleChange}
                     fullWidth
-                    variant="outlined"
+                    variant="filled"
                     options={estado_civil}
                 />
 
@@ -164,7 +166,7 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
                     required
                     fullWidth
                     placeholder="Profissão"
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -178,7 +180,7 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
                     name={FormField.CEP_RECLAMANTE}
                     value={formatCepInput(state[FormField.CEP_RECLAMANTE].value)}
                     onChange={handleChange}
-                    variant={'outlined'}
+                    variant={'filled'}
                 />
 
                 <GridTextField
@@ -192,7 +194,7 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
                     required
                     fullWidth
                     placeholder="Rua"
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -208,7 +210,7 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
                     required
                     fullWidth
                     placeholder="Número"
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -221,7 +223,7 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
                     required
                     fullWidth
                     placeholder="Complemento"
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -236,7 +238,7 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
                     required
                     fullWidth
                     placeholder="Bairro"
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -251,7 +253,7 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
                     required
                     fullWidth
                     placeholder="Cidade"
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                 />
 
@@ -265,44 +267,20 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
                     name={FormField.ESTADO}
                     value={state[FormField.ESTADO].value}
                     onChange={handleChange}
-                    variant="outlined"
+                    variant="filled"
                     options={estados_brasileiros}
                 />
             </Grid>
 
-            <FormControl fullWidth error={false}>
-                <Autocomplete
-                    clearText='limpar'
-                    sx={{ pr: 1.5, pl: 1 }}
-                    multiple
-                    id="tags-standard"
-                    options={DOENCAS}
-                    getOptionLabel={(option) => option}
-                    disableCloseOnSelect
-                    onChange={handleDoencasReclamanteChange}
-                    value={state[FormField.DOENCA_RECLAMANTE].value}
-                    renderOption={(props, option, { selected }) => (
-                        <MenuItem
-                            value={option}
-                            sx={{ justifyContent: "space-between" }}
-                            {...props}
-                        >
-                            {selected ? <CheckIcon color="info" /> : null}
-                            {option}
-                        </MenuItem>
-                    )}
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            variant="outlined"
-                            fullWidth
-                            name={FormField.DOENCA_RECLAMANTE}
-                            placeholder={isFieldEmpty(state[FormField.DOENCA_RECLAMANTE].value) ? 'Doença do Reclamante' : ''}
-                        />
-                    )}
-                />
-                <FormHelperText>{error.doenca_reclamante ? 'Campo doença do reclamante é obrigatório' : ' '}</FormHelperText>
-            </FormControl>
+            <AutoComplete
+                label='Doença do Reclamante'
+                placeholder='Selecione Doença'
+                name={FormField.DOENCA_RECLAMANTE}
+                options={DOENCAS}
+                value={state[FormField.DOENCA_RECLAMANTE].value}
+                onChange={handleDoencasReclamanteChange}
+            />
+
 
             <FormButtons
                 type='next'
@@ -344,7 +322,7 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
             const response = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 
@@ -385,7 +363,7 @@ export default function Step1({ api_data, stepsError, setStepsError }: IStep) {
             })
 
         } catch (error) {
-            console.log(error)
+
         }
     }
 

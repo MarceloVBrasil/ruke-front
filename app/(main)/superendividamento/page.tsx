@@ -7,7 +7,7 @@ export default async function Page() {
     const ticketsResponse = await getSuperendividamentoTickets();
     const tickets = ticketsResponse.reverse();
     const regras = JSON.parse(cookies().get("regras")?.value as string);
-    const regraDominio = regras.find((regra: any) => regra.dominio === "ticketRMC");
+    const regraDominio = regras.find((regra: any) => regra.dominio === "superendividamento");
     return (
         <SuperEndividamentoPage listTickets={tickets} regraDominio={regraDominio} />
     )

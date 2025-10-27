@@ -23,7 +23,7 @@ export const loginComCodigo = async (email: string, codigo: string) => {
 
 export const refreshTokenAPI = async (refreshToken: string) => {
     try {
-        const response = await req.post("/auth/refresh_token", { refreshToken });
+        const response = await req.post("/auth/refresh_token", { token: `Bearer ${refreshToken}` });
         return response.data;
     } catch (error: any) {
         return { error: error.response?.data?.error };
@@ -46,15 +46,6 @@ export const resetPassword = async (codigo: string, senha: string) => {
         return response.data;
     } catch (error: any) {
         return { error: error.response?.data?.error };
-    }
-};
-
-export const changePassword = async (codigo: string, senha: string) => {
-    try {
-        const json = await req.post("/auth/trocar-minha-senha", { codigo, senha });
-        return json.data.token ?? false;
-    } catch (error: any) {
-        return false;
     }
 };
 
@@ -90,7 +81,7 @@ export const inscrever = async (
     try {
         const json = await req.post(
             `/auth/inscrever-se/${id_plano}?type=${tipo}&coupon=${cupom}&partner=${partner}`,
-            { nome, oab, oab_estado, cpf: cpf_cnpj, email, telefone, cupom, senha }
+            { nome, oab, oab_estado, numero_documento: cpf_cnpj, email, telefone, cupom, senha }
         );
         return json.data;
     } catch (error: any) {

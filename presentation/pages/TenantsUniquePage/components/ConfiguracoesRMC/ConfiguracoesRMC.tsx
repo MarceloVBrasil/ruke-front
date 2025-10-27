@@ -1,6 +1,5 @@
 import { Tenant } from '@/app/types/tenant';
 import { formatarPercentualNumber, formatCurrency } from '@/app/utils/Formater';
-import { indicesCorrecaoMonetaria } from '@/domain/data/indicesCorrecaoMonetaria';
 import { converterMoneyToString } from '@/infra/utils/convert';
 import GridCurrencyInput from '@/presentation/components/GridCurrencyInput';
 import GridTextField from '@/presentation/components/GridTextField';
@@ -9,6 +8,8 @@ import { Accordion, AccordionSummary, Typography, AccordionDetails, Grid, TextFi
 import React from 'react'
 import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { zod_tenant_schema } from '../../helpers/Zod';
+import GridSelectField from '@/presentation/components/GridSelectField';
+import { indicesCorrecaoMonetaria } from '@/app/utils/indicesCorrecaoMonetaria';
 
 interface IConfiguracoesRMC {
     errors: FieldErrors<zod_tenant_schema>
@@ -39,7 +40,6 @@ export default function ConfiguracoesRMC(props: IConfiguracoesRMC) {
                 <Typography
                     sx={{
                         color: "#00479d",
-                        fontWeight: "bold",
                         marginLeft: "10px",
                     }}
                 >
@@ -51,9 +51,10 @@ export default function ConfiguracoesRMC(props: IConfiguracoesRMC) {
 
                     <GridCurrencyInput
                         xs={12} sm={6}
+                        variant='filled'
                         label={`Valor Danos Morais`}
                         placeholder='Digite o valor de Danos Morais'
-                        defaultValue={tenantChoose ? tenantChoose.danos_morais_rmc : '2000'}
+                        defaultValue={tenantChoose ? tenantChoose.danos_morais_rmc : 2000}
                         {...register('danos_morais_rmc')}
                         error={errors.danos_morais_rmc ? true : false}
                         helperText={errors.danos_morais_rmc?.message?.toString()}
@@ -75,8 +76,7 @@ export default function ConfiguracoesRMC(props: IConfiguracoesRMC) {
                     <GridTextField
                         xs={12}
                         sm={6}
-                        zodRegister={register('percentual_exito_rmc')}
-                        variant="outlined"
+                        variant="filled"
                         label="Percentual de Êxito"
                         error={!!errors.percentual_exito_rmc}
                         helperText={errors.percentual_exito_rmc?.message?.toString()}
@@ -86,49 +86,39 @@ export default function ConfiguracoesRMC(props: IConfiguracoesRMC) {
                         defaultValue={tenantChoose ? tenantChoose.percentual_exito_rmc : 35}
                         name="percentual_exito_rmc"
                         endAdornment="%"
+                        onChange={(e) => {
+                            const percentual_exito_rmc = formatarPercentualNumber(e.target.value)
+                            setValue('percentual_exito_rmc', percentual_exito_rmc, { shouldValidate: true })
+                            setTenantChoose({
+                                ...tenantChoose,
+                                percentual_exito_rmc
+                            })
+                        }}
                     />
 
-
-                    <Grid item xs={12} sm={6}>
-                        <Typography
-                            sx={{
-                                color: "#00479d",
-                                fontWeight: "bold",
-                                marginLeft: "10px",
-                            }}
-                        >
-                            Índice de Correção Monetária
-                        </Typography>
-                        <TextField
-                            select
-                            fullWidth
-                            error={errors.indice_correcao_monetaria_rmc ? true : false}
-                            helperText={errors.parcela_fixa_rmc?.message?.toString()}
-                            {...register("indice_correcao_monetaria_rmc")}
-                            value={
-                                tenantChoose
-                                    ? tenantChoose.indice_correcao_monetaria_rmc
-                                    : "correção com IPCA"
-                            }
-                            onChange={(e) => {
-                                setTenantChoose({
-                                    ...tenantChoose,
-                                    indice_correcao_monetaria_rmc: e.target.value,
-                                });
-                            }}
-                        >
-                            {indicesCorrecaoMonetaria.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                    </Grid>
+                    <GridSelectField
+                        xs={12}
+                        sm={6}
+                        label=' Índice de Correção Monetária'
+                        error={errors.indice_correcao_monetaria_rmc ? true : false}
+                        helperText={errors.parcela_fixa_rmc?.message?.toString()}
+                        fullWidth
+                        name='estado'
+                        value={tenantChoose ? tenantChoose.indice_correcao_monetaria_rmc : "ipca"}
+                        onChange={(e) => {
+                            setTenantChoose({
+                                ...tenantChoose,
+                                indice_correcao_monetaria_rmc: e.target.value,
+                            });
+                        }}
+                        variant="filled"
+                        options={indicesCorrecaoMonetaria}
+                    />
 
                     <GridTextField
                         xs={12} sm={6}
                         type='number'
-                        variant={'outlined'}
+                        variant={'filled'}
                         label='Juros de Mora'
                         error={errors.juros_de_mora_calculo_rmc ? true : false}
                         helperText={errors.juros_de_mora_calculo_rmc?.message?.toString()}
@@ -149,13 +139,13 @@ export default function ConfiguracoesRMC(props: IConfiguracoesRMC) {
 
                     <GridCurrencyInput
                         xs={12}
+                        variant='filled'
                         label={`Parcela Fixa`}
                         placeholder='Digite a parcela fixa rmc'
-                        defaultValue={tenantChoose ? formatCurrency(tenantChoose.parcela_fixa_rmc || '') : 0}
+                        defaultValue={tenantChoose.parcela_fixa_rmc}
                         {...register("parcela_fixa_rmc")}
                         error={errors.parcela_fixa_rmc ? true : false}
-                        helperText={errors.parcela_fixa_rmc?.message?.toString()}
-                    />
+                        helperText={errors.parcela_fixa_rmc?.message?.toString()} />
                 </Grid>
             </AccordionDetails>
         </Accordion>

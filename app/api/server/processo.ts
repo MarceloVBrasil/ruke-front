@@ -34,7 +34,7 @@ export const salvarProcessoAPI = async (dados: any) => {
 
     try {
         const json = await req.post("/processos", dados, {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${token?.value}` },
         });
         return json.data;
     } catch (err: any) {
@@ -47,7 +47,7 @@ export const filtrarProcessosAPI = async (dados: any) => {
 
     try {
         const json = await req.post("/processos/filtrar", dados, {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${token?.value}` },
         });
         return json.data;
     } catch (err: any) {

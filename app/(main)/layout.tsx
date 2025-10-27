@@ -26,13 +26,16 @@ export default function RootLayout({
   if (!cookies().get("regras") || !cookies().get("regras")?.value) {
     redirect("/login")
   }
+
   const regras = JSON.parse(cookies().get("regras")?.value as string);
   const permissoesProduto = regras.find((regra: any) => regra.dominio === "produtos")?.permissoes || []
   const permissoesTenants = regras.find((regra: any) => regra.dominio === "tenants")?.permissoes || []
   const permissoesUsuarios = regras.find((regra: any) => regra.dominio === "usuarios")?.permissoes || []
-  const permissoesRMC = regras.find((regra: any) => regra.dominio === "ticketRMC")?.permissoes || []
+  const permissoesRMC = regras.find((regra: any) => regra.dominio === "RMC")?.permissoes || []
+
   const menusCookies = JSON.parse(cookies().get("menusPermitidos")?.value as string)
   const menusPermitidos = menusCookies.map((menu: any) => menu.nome)
+
   return (
     <html lang="pt-BR">
       <body>

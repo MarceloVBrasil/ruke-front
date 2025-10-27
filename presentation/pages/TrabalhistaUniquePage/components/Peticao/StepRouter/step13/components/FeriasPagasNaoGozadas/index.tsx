@@ -69,6 +69,7 @@ export default function FeriasPagasNaoGozadas(props: IFeriasPagasNaoGozadas) {
                 sx={{ marginTop: 3 }}
                 error={error.valor_estimado_pagamento_em_dobro}
                 helperText={error.valor_estimado_pagamento_em_dobro ? 'Campo obrigatório' : ' '}
+                variant='filled'
             />
         </Grid>
     )

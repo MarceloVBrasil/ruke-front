@@ -1,90 +1,94 @@
 import { LoadingButton } from "@mui/lab";
-import { Button } from "@mui/material"
+import { SxProps, Theme } from "@mui/material";
 
 export type ButtonProps = {
     onClick?: (e?: any) => any;
-    text: string,
-    fontSize?: number
-    height?: number
-    marginTop?: string
-    marginBottom?: string
-    marginLeft?: string
-    marginRight?: string
-    width?: string
-    variant?: 'contained' | 'outlined'
-    color?: "primary" | "secondary" | "inherit" | "success" | "error" | "info" | "warning"
-    textColor?: string
-    fontWeight?: number
-    paddingTop?: string
-    paddingBottom?: string
-    paddingLeft?: string
-    paddingRight?: string
-    type?: "button" | "submit" | "reset"
-    style?: any
-    backgroundTransparent?: boolean
-    loading?: boolean
-    disabled?: boolean
-}
+    text: string;
+    fontSize?: number;
+    height?: number;
+    marginTop?: string | number;
+    marginBottom?: string | number;
+    marginLeft?: string | number;
+    marginRight?: string | number;
+    width?: string | number;
+    sxWidth?: { xs?: string | number; sm?: string | number; md?: string | number; lg?: string | number };
+    variant?: 'contained' | 'outlined';
+    color?: "primary" | "secondary" | "inherit" | "success" | "error" | "info" | "warning";
+    textColor?: string;
+    fontWeight?: number;
+    paddingTop?: string | number;
+    paddingBottom?: string | number;
+    paddingLeft?: string | number;
+    paddingRight?: string | number;
+    type?: "button" | "submit" | "reset";
+    style?: any;
+    backgroundTransparent?: boolean;
+    loading?: boolean;
+    disabled?: boolean;
+    sx?: SxProps<Theme>; // Allow passing custom sx like in MUI Button
+};
 
-
-
-export const Btn = (
-    {
-        text,
-        fontSize = 14,
-        height = 42,
-        marginTop,
-        marginBottom,
-        marginLeft,
-        marginRight,
-        width = '100%',
-        variant = 'contained',
-        color = 'primary',
-        textColor,
-        fontWeight = 400,
-        paddingTop = '15px',
-        paddingBottom = '15px',
-        paddingLeft = '15px',
-        paddingRight = '15px',
-        type = "button",
-        style,
-        backgroundTransparent = false,
-        loading = false,
-        disabled = false,
-        onClick
-    }: ButtonProps
-) => {
+export const Btn = ({
+    text,
+    fontSize = 14,
+    height = 42,
+    marginTop,
+    marginBottom,
+    marginLeft,
+    marginRight,
+    width = '100%',
+    sxWidth,
+    variant = 'contained',
+    color = 'primary',
+    textColor,
+    fontWeight = 400,
+    paddingTop = '10px',
+    paddingBottom = '10px',
+    paddingLeft = '15px',
+    paddingRight = '15px',
+    type = "button",
+    style,
+    backgroundTransparent = false,
+    loading = false,
+    disabled = false,
+    onClick,
+    sx = {},
+}: ButtonProps) => {
     return (
         <LoadingButton
             disabled={disabled}
             loading={loading}
             disableRipple={backgroundTransparent}
-            sx={{
-                borderRadius: 2,
-                '&:hover': backgroundTransparent ? { background: 'transparent' } : {},
-            }}
             onClick={onClick}
-            style={style || {
-                width,
-                height,
-                marginTop,
-                marginBottom,
-                marginRight,
-                marginLeft,
-                fontWeight,
-                paddingTop,
-                paddingBottom,
-                paddingLeft,
-                paddingRight,
-                fontSize,
-                textTransform: 'none',
-                color: textColor
-            }}
             type={type}
             variant={variant}
             color={color}
+            style={style}
+            sx={{
+                width: sxWidth ?? width,
+                height,
+                mt: marginTop,
+                mb: marginBottom,
+                ml: marginLeft,
+                mr: marginRight,
+                borderRadius: 2,
+                fontSize,
+                fontWeight,
+                textTransform: 'none',
+                color: textColor,
+                p: 0,
+                pt: paddingTop,
+                pb: paddingBottom,
+                pl: paddingLeft,
+                pr: paddingRight,
+
+                '&:hover': backgroundTransparent ? { background: 'transparent' } : {},
+                ...sx
+            }}
+
+
         >
             {text}
         </LoadingButton>
-    )
-}
+    );
+};

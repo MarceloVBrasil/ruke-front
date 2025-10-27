@@ -119,7 +119,7 @@ export default function Step6({ api_data, stepsError, setStepsError, pedidos }: 
                             containerStyle={{ visibility: state[FormField.RECONHECIMENTO_VINCULO_EMPREGATICIO].value?.[RECONHECIMENTO_VINCULO_EMPREGATICIO.PERIODO_VINCULO] == 'parte_contrato' ? 'visible' : 'hidden' }}
                             value={state[FormField.RECONHECIMENTO_VINCULO_EMPREGATICIO].value?.[RECONHECIMENTO_VINCULO_EMPREGATICIO.DATA_INICIO] as string}
                             name={RECONHECIMENTO_VINCULO_EMPREGATICIO.DATA_INICIO}
-                            variant={'outlined'}
+                            variant={'filled'}
                             onChange={handleDataInicioChange}
                         />
 
@@ -131,7 +131,7 @@ export default function Step6({ api_data, stepsError, setStepsError, pedidos }: 
                             containerStyle={{ visibility: state[FormField.RECONHECIMENTO_VINCULO_EMPREGATICIO].value?.[RECONHECIMENTO_VINCULO_EMPREGATICIO.PERIODO_VINCULO] == 'parte_contrato' ? 'visible' : 'hidden' }}
                             value={state[FormField.RECONHECIMENTO_VINCULO_EMPREGATICIO].value?.[RECONHECIMENTO_VINCULO_EMPREGATICIO.DATA_FIM] as string}
                             name={RECONHECIMENTO_VINCULO_EMPREGATICIO.DATA_FIM}
-                            variant={'outlined'}
+                            variant={'filled'}
                             onChange={handleDataFimChange}
                         />
                     </Grid>
@@ -270,7 +270,7 @@ export default function Step6({ api_data, stepsError, setStepsError, pedidos }: 
                     label='Qual o valor estimado do pedido?'
                     onBlur={handleValorEstimadoPedidoChange}
                     name={RECONHECIMENTO_VINCULO_EMPREGATICIO.VALOR_ESTIMADO_PEDIDO}
-                    variant={'outlined'}
+                    variant={'filled'}
                     error={error.demais_campos.valor_estimado_pedido}
                     helperText={error.demais_campos.valor_estimado_pedido ? 'Campo obrigatório' : ' '}
                 />

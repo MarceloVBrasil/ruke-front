@@ -72,7 +72,7 @@ export class SalarioPorFora implements ISalarioPorFora {
     }
     setFormaPagamento(state: FormState, action: SalarioPorForaActions): FormState {
         if (action.type !== 'SET_FORMA_PAGAMENTO') return state
-        console.log(action.value)
+
         return {
             ...state,
             [FormField.PEDIDO_INTEGRACAO_SALARIAL]: {

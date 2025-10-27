@@ -29,7 +29,7 @@ export default function AdicionalNoturno(props: IAdicionalNoturno) {
                 xs={12}
                 ref={valorEstimadoPedidoRef}
                 name={HORAS_EXTRAS_NAO_PAGAS.VALOR_ESTIMADO_PEDIDO}
-                variant='outlined'
+                variant='filled'
                 defaultValue={adicionalNoturno?.[HORAS_EXTRAS_NAO_PAGAS.VALOR_ESTIMADO_PEDIDO] ?? 0}
                 onBlur={handleValorEstimadoPedidoChange}
                 label='Qual o valor do pedido de adicional noturno?'

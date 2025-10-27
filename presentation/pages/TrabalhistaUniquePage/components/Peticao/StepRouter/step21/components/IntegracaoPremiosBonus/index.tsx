@@ -34,11 +34,10 @@ export default function IntegracaoPremiosBonus(props: IIntegracaoPremios) {
                 defaultValue={integracao_premios?.[INTEGRACAO_PREMIOS.DATA_INICIO] as string}
                 onBlur={handleDataInicioChange}
                 label='Data Início'
-                variant='outlined'
+                variant='filled'
                 type='date'
                 error={error.data_inicio}
                 helperText={error.data_inicio ? 'Campo obrigatório' : ' '}
-                fixLabel
 
             />
 
@@ -50,11 +49,10 @@ export default function IntegracaoPremiosBonus(props: IIntegracaoPremios) {
                 defaultValue={integracao_premios?.[INTEGRACAO_PREMIOS.DATA_FIM] as string}
                 onBlur={handleDataFimChange}
                 label='Data Fim'
-                variant='outlined'
+                variant='filled'
                 type='date'
                 error={error.data_fim}
                 helperText={error.data_fim ? 'Campo obrigatório' : ' '}
-                fixLabel
             />
 
 
@@ -67,7 +65,7 @@ export default function IntegracaoPremiosBonus(props: IIntegracaoPremios) {
                 label='Qual era o valor mensal médio pago a título de prêmio?'
                 error={error.valor_mensal_medio}
                 helperText={error.valor_mensal_medio ? 'Campo obrigatório' : ' '}
-                fixLabel
+                variant='filled'
             />
 
             <GridCurrencyInput
@@ -79,7 +77,7 @@ export default function IntegracaoPremiosBonus(props: IIntegracaoPremios) {
                 label='Valor estimado pedido'
                 error={error.valor_estimado_pedido}
                 helperText={error.valor_estimado_pedido ? 'Campo obrigatório' : ' '}
-                fixLabel
+                variant='filled'
             />
 
         </Grid>

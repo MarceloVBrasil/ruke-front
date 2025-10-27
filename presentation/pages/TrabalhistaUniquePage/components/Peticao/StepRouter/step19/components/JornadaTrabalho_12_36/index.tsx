@@ -39,7 +39,7 @@ export default function JornadaTrabalho_12_36(props: IJornadaTrabalho_12_36) {
 
             <GridTextField
                 xs={12}
-                variant='outlined'
+                variant='filled'
                 type='number'
                 fullWidth
                 name={JORNADA_TRABALHO_12_36.QUANTIDADE_HORAS_EXTRAS_POR_DIA}
@@ -52,7 +52,7 @@ export default function JornadaTrabalho_12_36(props: IJornadaTrabalho_12_36) {
 
             <GridTextField
                 xs={12}
-                variant='outlined'
+                variant='filled'
                 type='number'
                 fullWidth
                 name={JORNADA_TRABALHO_12_36.QUANTIDADE_HORAS_EXTRAS_POR_SEMANA}
@@ -65,7 +65,7 @@ export default function JornadaTrabalho_12_36(props: IJornadaTrabalho_12_36) {
 
             <GridTextField
                 xs={12}
-                variant='outlined'
+                variant='filled'
                 type='number'
                 fullWidth
                 name={JORNADA_TRABALHO_12_36.TOTAL_HORAS_EXTRAS}
@@ -80,7 +80,7 @@ export default function JornadaTrabalho_12_36(props: IJornadaTrabalho_12_36) {
                 xs={12}
                 ref={valorEstimadoPedidoRef}
                 name={JORNADA_TRABALHO_12_36.VALOR_ESTIMADO_HORAS_EXTRAS}
-                variant='outlined'
+                variant='filled'
                 defaultValue={jornada_trabalho_12_36?.[JORNADA_TRABALHO_12_36.VALOR_ESTIMADO_HORAS_EXTRAS] ?? 0}
                 onBlur={handleValorEstimadoHorasExtras}
                 label='Qual é o valor estimado de horas extras?'

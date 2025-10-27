@@ -31,23 +31,23 @@ export default function Left(props: ILeft) {
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, marginTop: 14.7, maxWidth: 390 }}>
                 <div style={{ marginTop: 10 }}>
-                    <Typography borderLeft={'2px solid #0078ED'} paddingInlineStart={1} fontSize={15} fontWeight={500}>Gestão Jurídica Inteligente</Typography>
-                    <Typography fontWeight={'light'} fontSize={14} paddingInlineStart={1}>Automatize tarefas jurídicas e ganhe mais tempo pra focar nos seus clientes.</Typography>
+                    <Typography borderLeft={'1px solid #0078ED'} paddingInlineStart={1} fontSize={16} fontWeight={500}>Gestão Jurídica Inteligente</Typography>
+                    <Typography fontWeight={'light'} fontSize={16} paddingInlineStart={1}>Automatize tarefas jurídicas e ganhe mais tempo pra focar nos seus clientes.</Typography>
                 </div>
 
                 <div style={{ marginTop: 10 }}>
-                    <Typography borderLeft={'2px solid #0078ED'} paddingInlineStart={1} fontSize={15} fontWeight={500}>Equipes Produtivas</Typography>
-                    <Typography fontWeight={'light'} fontSize={14} paddingInlineStart={1}>Organize prazos, tarefas e processos com sua equipe em um só lugar.</Typography>
+                    <Typography borderLeft={'1px solid #0078ED'} paddingInlineStart={1} fontSize={16} fontWeight={500}>Equipes Produtivas</Typography>
+                    <Typography fontWeight={'light'} fontSize={16} paddingInlineStart={1}>Organize prazos, tarefas e processos com sua equipe em um só lugar.</Typography>
                 </div>
 
                 <div style={{ marginTop: 10 }}>
-                    <Typography borderLeft={'2px solid #0078ED'} paddingInlineStart={1} fontSize={15} fontWeight={500}>Relatórios Jurídicos</Typography>
-                    <Typography fontWeight={'light'} fontSize={14} paddingInlineStart={1}>Tenha uma visão clara da performance do seu escritório com dados e insights</Typography>
+                    <Typography borderLeft={'1px solid #0078ED'} paddingInlineStart={1} fontSize={16} fontWeight={500}>Relatórios Jurídicos</Typography>
+                    <Typography fontWeight={'light'} fontSize={16} paddingInlineStart={1}>Tenha uma visão clara da performance do seu escritório com dados e insights</Typography>
                 </div>
 
                 <div style={{ marginTop: 10 }}>
-                    <Typography borderLeft={'2px solid #0078ED'} paddingInlineStart={1} fontSize={15} fontWeight={500}>Peticionamento Automático e Inteligente</Typography>
-                    <Typography fontWeight={'light'} fontSize={14} paddingInlineStart={1}>Transforme entrevistas com o cliente em petições completas, com fundamentação jurídica, pedidos e estrutura prontas para protocolar. Reduza em até 90% o tempo de produção da inicial.</Typography>
+                    <Typography borderLeft={'1px solid #0078ED'} paddingInlineStart={1} fontSize={16} fontWeight={500}>Peticionamento Automático e Inteligente</Typography>
+                    <Typography fontWeight={'light'} fontSize={16} paddingInlineStart={1}>Transforme entrevistas com o cliente em petições completas, com fundamentação jurídica, pedidos e estrutura prontas para protocolar. Reduza em até 90% o tempo de produção da inicial.</Typography>
                 </div>
             </Box>
 

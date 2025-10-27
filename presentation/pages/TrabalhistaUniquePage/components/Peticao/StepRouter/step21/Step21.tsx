@@ -106,9 +106,10 @@ export default function Step21({ api_data, stepsError, setStepsError, pedidos }:
 
 
                 {
-                    razoes.map(r => {
+                    razoes.map((r, i) => {
                         if (r === RAZOES_VALUES.SALARIO_POR_FORA) return (
                             <SalarioPorFora
+                                key={i}
                                 error={error.salario_por_fora}
                                 dispatch={dispatch}
                                 salario_por_fora={state[FormField.PEDIDO_INTEGRACAO_SALARIAL].value?.[PEDIDO_INTEGRACAO_SALARIAL.SALARIO_POR_FORA]}
@@ -118,6 +119,7 @@ export default function Step21({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (r === RAZOES_VALUES.INTEGRACAO_PREMIOS) return (
                             <IntegracaoPremiosBonus
+                                key={i}
                                 error={error.integracao_premios}
                                 dispatch={dispatch}
                                 integracao_premios={state[FormField.PEDIDO_INTEGRACAO_SALARIAL].value?.[PEDIDO_INTEGRACAO_SALARIAL.INTEGRACAO_PREMIOS]}
@@ -127,6 +129,7 @@ export default function Step21({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (r === RAZOES_VALUES.AUXILIO_ALIMENTACAO) return (
                             <AuxilioAlimentacao
+                                key={i}
                                 error={error.auxilio_alimentacao}
                                 dispatch={dispatch}
                                 auxilio_alimentacao={state[FormField.PEDIDO_INTEGRACAO_SALARIAL].value?.[PEDIDO_INTEGRACAO_SALARIAL.AUXILIO_ALIMENTACAO]}
@@ -195,7 +198,7 @@ export default function Step21({ api_data, stepsError, setStepsError, pedidos }:
             const updateResponse = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

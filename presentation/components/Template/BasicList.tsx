@@ -114,7 +114,7 @@ export default function BasicList({
           }}
         >
           {(permissoesTenants.includes("getAll") ||
-            permissoesTenants.includes("create") ||
+            permissoesTenants.includes("add") ||
             permissoesTenants.includes("update") ||
             permissoesTenants.includes("delete")) && (
               <Link
@@ -131,7 +131,7 @@ export default function BasicList({
                     <ListItemIcon style={{ minWidth: "40px" }}>
                       <Dashboard style={{ color: '#0067e3' }} />
                     </ListItemIcon>
-                    <Typography style={{ fontWeight: 600 }} className="basic_list_item_label">
+                    <Typography className="basic_list_item_label">
                       ÁREA DO CLIENTE
                     </Typography>
                   </ListItemButton>
@@ -140,7 +140,7 @@ export default function BasicList({
             )}
 
           {(permissoesProduto.includes("getAll") ||
-            permissoesProduto.includes("create") ||
+            permissoesProduto.includes("add") ||
             permissoesProduto.includes("update") ||
             permissoesProduto.includes("delete")) && (
               <Link
@@ -157,7 +157,7 @@ export default function BasicList({
                     <ListItemIcon style={{ minWidth: "40px" }}>
                       <ProductionQuantityLimitsOutlined style={{ color: '#0067e3' }} />
                     </ListItemIcon>
-                    <Typography style={{ fontWeight: 600 }} className="basic_list_item_label">PRODUTOS</Typography>
+                    <Typography className="basic_list_item_label">PRODUTOS</Typography>
                   </ListItemButton>
                 </ListItem>
               </Link>
@@ -168,7 +168,7 @@ export default function BasicList({
               <ListItemIcon style={{ minWidth: "40px" }}>
                 <ElderlyWomanIcon style={{ color: '#0067e3' }} />
               </ListItemIcon>
-              <Typography style={{ fontWeight: 600 }} className="basic_list_item_label">
+              <Typography className="basic_list_item_label">
                 PREVIDENCIÁRIAS
               </Typography>
               {open ? <ExpandLess /> : <ExpandMore />}
@@ -195,7 +195,7 @@ export default function BasicList({
                     <ListItemIcon style={{ minWidth: "30px", marginLeft: 15 }}>
                       <AccountBalanceWallet style={{ color: '#0067e3' }} />
                     </ListItemIcon>
-                    <Typography className="basic_list_item_label" style={{ fontWeight: 600 }}>BPC</Typography>
+                    <Typography className="basic_list_item_label">BPC</Typography>
                   </ListItemButton>
                 </ListItem>
               </Link>
@@ -207,7 +207,7 @@ export default function BasicList({
               <ListItemIcon style={{ minWidth: "40px" }}>
                 <AccountBalanceIcon style={{ color: '#0067e3' }} />
               </ListItemIcon>
-              <Typography style={{ fontWeight: 600 }} className="basic_list_item_label">BANCÁRIAS</Typography>
+              <Typography className="basic_list_item_label">BANCÁRIAS</Typography>
               {openBancario ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
           </ListItem>
@@ -219,7 +219,7 @@ export default function BasicList({
           >
             {menusPermitidos.includes("RMC") &&
               (permissoesRMC.includes("getAll") ||
-                permissoesRMC.includes("create") ||
+                permissoesRMC.includes("add") ||
                 permissoesRMC.includes("update") ||
                 permissoesRMC.includes("delete")) && (
                 <Link
@@ -243,7 +243,7 @@ export default function BasicList({
                       >
                         <CreditCardIcon style={{ color: '#0067e3' }} />
                       </ListItemIcon>
-                      <Typography className="basic_list_item_label" style={{ fontWeight: 600, width: "100%" }}>
+                      <Typography className="basic_list_item_label" style={{ width: "100%" }}>
                         RMC
                       </Typography>
                     </ListItemButton>
@@ -252,7 +252,7 @@ export default function BasicList({
               )}
             {menusPermitidos.includes("RMC") &&
               (permissoesRMC.includes("getAll") ||
-                permissoesRMC.includes("create") ||
+                permissoesRMC.includes("add") ||
                 permissoesRMC.includes("update") ||
                 permissoesRMC.includes("delete")) && (
                 <Link
@@ -276,7 +276,7 @@ export default function BasicList({
                       >
                         <CreditCardOffOutlinedIcon style={{ color: '#0067e3' }} />
                       </ListItemIcon>
-                      <Typography className="basic_list_item_label" style={{ fontWeight: 600, width: "100%" }}>
+                      <Typography className="basic_list_item_label" style={{ width: "100%" }}>
                         SUPERENDIVIDAMENTO
                       </Typography>
                     </ListItemButton>
@@ -312,7 +312,7 @@ export default function BasicList({
                 <ListItemIcon style={{ minWidth: "40px" }}>
                   <CalendarMonthIcon style={{ color: '#0067e3' }} />
                 </ListItemIcon>
-                <Typography className="basic_list_item_label" style={{ fontWeight: 600 }}>AGENDA JURÍDICA</Typography>
+                <Typography className="basic_list_item_label">AGENDA JURÍDICA</Typography>
               </ListItemButton>
             </ListItem>
           </Link>
@@ -332,32 +332,13 @@ export default function BasicList({
                 <ListItemIcon style={{ minWidth: "40px" }}>
                   <GavelIcon style={{ color: '#0067e3' }} />
                 </ListItemIcon>
-                <Typography className="basic_list_item_label" style={{ fontWeight: 600 }}>PROCESSOS</Typography>
+                <Typography className="basic_list_item_label">PROCESSOS</Typography>
               </ListItemButton>
             </ListItem>
           </Link>
 
-          {/* <Link
-            href={menusPermitidos.includes("rukeLeads") ? "/rukeleads" : "/tenants"}
-            style={{
-              width: "100%",
-              marginBottom: "15px",
-              textDecoration: "none",
-              color: "#000",
-            }}
-          >
-            <ListItem disabled={menusPermitidos.includes("rukeLeads") ? false : true} disablePadding className="">
-              <ListItemButton>
-                <ListItemIcon style={{ minWidth: "40px" }}>
-                  <Leaderboard style={{ color: '#0067e3' }} />
-                </ListItemIcon>
-                <Typography className="basic_list_item_label" style={{ fontWeight: 600 }}>RUKE LEADS</Typography>
-              </ListItemButton>
-            </ListItem>
-          </Link> */}
-
           <Link
-            href={menusPermitidos.includes("rukeLeads") ? "/trabalhista" : "/tenants"}
+            href={menusPermitidos.includes("trabalhista") ? '/trabalhista' : '#'}
             style={{
               width: "100%",
               marginBottom: "15px",
@@ -365,12 +346,12 @@ export default function BasicList({
               color: "#000",
             }}
           >
-            <ListItem disabled={menusPermitidos.includes("rukeLeads") ? false : true} disablePadding className="">
+            <ListItem disabled={menusPermitidos.includes("trabalhista") ? false : true} disablePadding className="">
               <ListItemButton>
                 <ListItemIcon style={{ minWidth: "40px" }}>
                   <HardwareIcon color="primary" />
                 </ListItemIcon>
-                <Typography className="basic_list_item_label" style={{ fontWeight: 600 }}>TRABALHISTA</Typography>
+                <Typography className="basic_list_item_label">TRABALHISTA</Typography>
               </ListItemButton>
             </ListItem>
           </Link>

@@ -27,7 +27,7 @@ export default function LaborEmFeriados(props: ILaborEmFeriados) {
 
             <GridTextField
                 xs={12}
-                variant='outlined'
+                variant='filled'
                 type='number'
                 fullWidth
                 name={LABOR_EM_FERIADOS.QUANTIDADE_FERIADOS_POR_ANO}
@@ -40,7 +40,7 @@ export default function LaborEmFeriados(props: ILaborEmFeriados) {
 
             <GridTextField
                 xs={12}
-                variant='outlined'
+                variant='filled'
                 fullWidth
                 name={LABOR_EM_FERIADOS.FERIADOS_TRABALHADOS}
                 defaultValue={labor_feriados?.[LABOR_EM_FERIADOS.FERIADOS_TRABALHADOS] as string}
@@ -54,7 +54,7 @@ export default function LaborEmFeriados(props: ILaborEmFeriados) {
                 xs={12}
                 ref={valorEstimadoPedidoRef}
                 name={LABOR_EM_FERIADOS.VALOR_ESTIMADO_HORAS_TRABALHADAS}
-                variant='outlined'
+                variant='filled'
                 defaultValue={labor_feriados?.[LABOR_EM_FERIADOS.VALOR_ESTIMADO_HORAS_TRABALHADAS] ?? 0}
                 onBlur={handleValorEstimadoHorasTrabalhadasEmFeriados}
                 label='Qual é o valor estimado das horas trabalhadas em feriados?'

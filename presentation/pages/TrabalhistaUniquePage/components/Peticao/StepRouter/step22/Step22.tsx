@@ -18,9 +18,6 @@ import { getGridCurrencyInputValue } from '@/app/utils/getSetGridCurrencyInputVa
 import { getTrabalhistaTicketFromTheURL } from '../helper/getTrabalhistaTicketFromTheURL';
 import { getLastPedidoStep, getPedidosStep } from '../helper/pedidos';
 import { advogado_assinante } from '@/app/types/advogados_assinantes';
-import AddAssinanteModal from './components/modals/assinantes/AddAssinanteModal';
-import EditAssinanteModal from './components/modals/assinantes/EditAssinanteModal';
-import DeleteAssinanteModal from './components/modals/assinantes/DeleteAssinanteModal';
 import { showError } from './helper/Swal';
 
 export default function Step22({ api_data, stepsError, setStepsError, pedidos }: IStep & IPedidos) {
@@ -32,12 +29,6 @@ export default function Step22({ api_data, stepsError, setStepsError, pedidos }:
     const [gerandoPeticao, setGerandoPeticao] = useState(false)
     const [formHasChanged, setFormHasChanged] = useState(false)
     const [valorTotalCausaRetrieved, setValorTotalCausaRetrieved] = useState(false)
-
-    const [isAddAssinanteModalOpened, setIsAddAssinanteModalOpened] = useState(false)
-    const [isEditAssinanteModalOpened, setIsEditAssinanteModalOpened] = useState(false)
-    const [isDeleteAssinanteModalOpened, setIsDeleteAssinanteModalOpened] = useState(false)
-
-    const [selectedAssinante, setSelectedAssinante] = useState<advogado_assinante | null>(null)
 
     const [error, setError] = useState(getErrorInitialState())
 
@@ -84,30 +75,6 @@ export default function Step22({ api_data, stepsError, setStepsError, pedidos }:
     const goToPreviousStep = () => {
         router.push(`${pathname}?step=${getLastPedidoStep(getPedidosStep(pedidos))}`);
     };
-
-    const toogleAddAssinanteModal = () => {
-        setIsAddAssinanteModalOpened(prev => !prev)
-    }
-
-    const openEditAssinanteModal = (assinante: any) => {
-        setIsEditAssinanteModalOpened(true)
-        setSelectedAssinante(assinante)
-    }
-
-    const closeEditAssinanteModal = () => {
-        setIsEditAssinanteModalOpened(false)
-        setSelectedAssinante(null)
-    }
-
-    const openDeleteAssinanteModal = (assinante: any) => {
-        setIsDeleteAssinanteModalOpened(true)
-        setSelectedAssinante(assinante)
-    }
-
-    const closeDeleteAssinanteModal = () => {
-        setIsDeleteAssinanteModalOpened(false)
-        setSelectedAssinante(null)
-    }
 
     return (
         <React.Fragment>
@@ -168,28 +135,6 @@ export default function Step22({ api_data, stepsError, setStepsError, pedidos }:
                     onChange={handleChange}
                 />
 
-                {/* <Grid item xs={12}>
-                    <LabeledCustomBox
-                        label='Advogados que assinarão a pettição'
-                        onAdicionarButtonClick={toogleAddAssinanteModal}
-                        error={error.assinantes}
-                        helperText='Por favor, adicione ao menos um assinante'
-                        autoWidth
-                    >
-                        {
-                            state[FormField.ASSINANTES].value.map(assinante => (
-                                <CustomBox
-                                    key={assinante.id}
-                                    titulo={assinante.nome}
-                                    subtitulo={`OAB: ${assinante.oab} - ${assinante.estado_oab}`}
-                                    onEditButtonClick={() => openEditAssinanteModal(assinante)}
-                                    onDeleteButtonClick={() => openDeleteAssinanteModal(assinante)}
-                                />
-                            ))
-                        }
-                    </LabeledCustomBox>
-                </Grid> */}
-
                 <GridTextField
                     xs={12} sm={6}
                     label='Local que aparecerá na petição*'
@@ -225,17 +170,6 @@ export default function Step22({ api_data, stepsError, setStepsError, pedidos }:
                 disabled={gerandoPeticao}
             />
 
-            <AddAssinanteModal open={isAddAssinanteModalOpened} onClose={toogleAddAssinanteModal} onAdicionarClick={handleAdicionarAssinante} />
-
-            {
-                isEditAssinanteModalOpened &&
-                <EditAssinanteModal open={isEditAssinanteModalOpened} onClose={closeEditAssinanteModal} onEditarClick={handleEditarAssinante} advogado_assinante={selectedAssinante as advogado_assinante} />
-            }
-
-            {
-                isDeleteAssinanteModalOpened &&
-                <DeleteAssinanteModal open={isDeleteAssinanteModalOpened} onClose={closeDeleteAssinanteModal} onDeleteClick={handleDeleteAssinante} assinante={selectedAssinante as advogado_assinante} />
-            }
         </React.Fragment>
     );
 
@@ -279,29 +213,6 @@ export default function Step22({ api_data, stepsError, setStepsError, pedidos }:
         })
     }
 
-    function handleEditarAssinante(id: string, assinante: advogado_assinante) {
-        // const assinantes = [...state[FormField.ASSINANTES].value]
-        // const assinante_a_editar_index = assinantes.findIndex(v => v.id == id)
-        // assinantes[assinante_a_editar_index] = { ...assinante, id }
-        // setFormHasChanged(true)
-        // dispatch({
-        //     type: 'EDIT_ASSINANTE',
-        //     field: FormField.ASSINANTES,
-        //     value: assinantes
-        // })
-    }
-
-    function handleDeleteAssinante(assinante_id: string) {
-        // const assinantes = [...state[FormField.ASSINANTES].value]
-        // const novos_assinantes = assinantes.filter(v => v.id !== assinante_id)
-        // setFormHasChanged(true)
-        // dispatch({
-        //     type: 'DELETE_ASSINANTE',
-        //     field: FormField.ASSINANTES,
-        //     value: novos_assinantes
-        // })
-    }
-
     async function salvarForm() {
         const etapa = PASSOS.step22.etapa;
         const formChangedValues = getFormChangedValues(state);
@@ -311,7 +222,7 @@ export default function Step22({ api_data, stepsError, setStepsError, pedidos }:
             const updateResponse = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 
@@ -328,7 +239,7 @@ export default function Step22({ api_data, stepsError, setStepsError, pedidos }:
             if (!postResponse.error) router.push(`/trabalhista/${ticketId}?step=1`)
             else showError({ message: postResponse.message, cb: () => router.push(`/tenants/${api_data.tenant_id}`) })
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 
@@ -338,7 +249,6 @@ export default function Step22({ api_data, stepsError, setStepsError, pedidos }:
             isFieldEmpty(state[FormField.VALOR_TOTAL_CAUSA].value)
             || !isPositive(state[FormField.VALOR_TOTAL_CAUSA].value)
             || isFieldEmpty(state[FormField.ADVOGADO].value)
-            // || isFieldEmpty(state[FormField.ASSINANTES].value)
             || isFieldEmpty(state[FormField.LOCAL_PETICAO].value)
             || isFieldEmpty(state[FormField.DATA_PETICAO].value)
         )
@@ -350,9 +260,6 @@ export default function Step22({ api_data, stepsError, setStepsError, pedidos }:
 
         if (isFieldEmpty(state[FormField.ADVOGADO].value)) setError(prev => { return { ...prev, advogado: true } })
         else setError(prev => { return { ...prev, advogado: false } })
-
-        // if (isFieldEmpty(state[FormField.ASSINANTES].value)) setError(prev => { return { ...prev, assinantes: true } })
-        // else setError(prev => { return { ...prev, assinantes: false } })
 
         if (isFieldEmpty(state[FormField.LOCAL_PETICAO].value)) setError(prev => { return { ...prev, local_peticao: true } })
         else setError(prev => { return { ...prev, local_peticao: false } })

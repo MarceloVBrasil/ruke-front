@@ -5,7 +5,7 @@ export const addTicket = async () => {
     const token = getCookie("ruke_token");
     try {
         const json = await req.post(
-            "/tickets",
+            "/rmc",
             {},
             {
                 headers: { Authorization: `Bearer ${token}` },
@@ -20,7 +20,7 @@ export const addTicket = async () => {
 export const deleteTicket = async (id: string) => {
     const token = getCookie("ruke_token");
     try {
-        await req.delete(`/tickets/${id}`, {
+        await req.delete(`/rmc/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

@@ -20,6 +20,7 @@ import DocumentosModal from "./components/DocumentosModal";
 import SmallScreen from "./components/SmallScreen";
 import BigScreen, { BigScreenHeader } from "./components/BigScreen";
 import Loading from "@/app/(main)/loading";
+import { Btn } from "@/presentation/components/Button";
 
 interface Ticket {
   id: string;
@@ -91,7 +92,6 @@ export default function TicketsPage({
         <Typography
           sx={{
             fontSize: "30px",
-            fontWeight: "600",
             width: { xs: '100%', md: '200px' },
             paddingBottom: "10px",
             marginBottom: "30px",
@@ -102,43 +102,26 @@ export default function TicketsPage({
           Tickets
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row', gap: 10 } }}>
-          {regraDominio?.permissoes?.includes("create") && (
-            <Button
-              sx={{
-                backgroundColor: "#006BED",
-                color: "white",
-                height: "40px",
-                width: { xs: '100%', md: '250px' },
-                marginRight: "10px",
-                "&:hover": { backgroundColor: "#00479d" },
-              }}
+          {regraDominio?.permissoes?.includes("add") && (
+            <Btn
+              text="Cadastrar com IA"
+              sxWidth={{ xs: '100%', md: '250px' }}
               onClick={() => {
                 handleOpen();
               }}
-            >
-              <Face5Icon sx={{ mr: "2px" }} />
-              CADASTRAR COM IA
-            </Button>
+            />
           )}
-          <Button
-            sx={{
-              backgroundColor: "#006BED",
-              color: "white",
-              height: "40px",
-              width: { xs: '100%', md: '250px' },
-              "&:hover": { backgroundColor: "#00479d" },
-            }}
+          <Btn
+            text="Cadastrar sem IA"
+            sxWidth={{ xs: '100%', md: '250px' }}
             onClick={() => {
               handleAddTicket(setIsUniquePageLoading, onAddTicket);
             }}
-          >
-            <EditNoteIcon sx={{ mr: "2px" }} />
-            CADASTRAR SEM IA
-          </Button>
+          />
         </Box>
       </Box>
 
-      {regraDominio?.permissoes?.includes("create") && (
+      {regraDominio?.permissoes?.includes("add") && (
         <DocumentosModal
           handleClose={handleClose}
           handleOpen={handleOpen}
@@ -157,7 +140,7 @@ export default function TicketsPage({
             type="text"
             value={nameClient}
             onChange={(e) => setNameClient(e.target.value)}
-            variant="outlined"
+            variant="filled"
             name={""}
             placeholder="Nome do Cliente"
             style={{ marginLeft: '10px' }}

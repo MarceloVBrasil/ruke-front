@@ -14,6 +14,8 @@ import ContratoHonorarios from "./components/ContratoHonorarios/ContratoHonorari
 import Hipossuficiencia from "./components/Hipossuficiencia/Hipossuficiencia";
 import { criarProxy, saveAndCreatePetition } from "./helpers/Swal";
 
+const FixedMaskedInput = MaskedInput as unknown as React.ComponentType<any>;
+
 // ==============================|| SAMPLE PAGE ||============================== //
 
 type TicketProps = {
@@ -112,7 +114,7 @@ const Ticket = ({ ticketUnique, regraDominio }: TicketProps) => {
       allowNegative: false,
     });
 
-    return <MaskedInput mask={currencyMask} {...props} />;
+    return <FixedMaskedInput mask={currencyMask} {...props} />;
   };
 
   const ContractValueMemo = useMemo(() => CurrencyInput, []);
@@ -135,7 +137,6 @@ const Ticket = ({ ticketUnique, regraDominio }: TicketProps) => {
         <Typography
           sx={{
             fontSize: "30px",
-            fontWeight: "600",
             marginBottom: "30px",
             color: "#00479D",
             borderBottom: "3px solid #006BED",
@@ -176,7 +177,7 @@ const Ticket = ({ ticketUnique, regraDominio }: TicketProps) => {
         setAddressClient={setAddressClient}
         setCityClient={setCityClient}
         setTypeProcess={setTypeProcess}
-        saveAndCreatePetition={() => saveAndCreatePetition({
+        saveAndaddPetition={() => saveAndCreatePetition({
           ticket,
           nameClient,
           calculationBase,

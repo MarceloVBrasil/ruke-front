@@ -15,6 +15,7 @@ import BigScreen from './components/BigScreen';
 import CadastroEdicaoModal from './components/CadastroEdicaoModal';
 import { getUser } from '@/app/api/client/users';
 import { updateUserAgenda } from '@/app/api/client/agenda';
+import { Btn } from '@/presentation/components/Button';
 
 export interface Usuarios {
   id: string,
@@ -37,16 +38,14 @@ const userFormSchema = z.object({
   nome: z.string().min(1, { message: "O nome tem que ser informado." }),
   email: z.string().min(1, { message: "O email deve ser informado" }).email({ message: "O email deve ser válido" }),
   telefone: z.string().min(1, { message: "O telefone deve ser informado" }),
-  nivel: z.string().min(1, { message: "O nível dever ser informado" }),
   cpf: z.string().min(1, { message: "O CPF deve ser informado" })
     .refine((value) => isCPF(value), { message: "O cpf deve ser válido" }),
   oab: z.string().min(1, { message: "O número da OAB  deve ser informado." }),
-  oab_estado: z.string().min(1, { message: "O estado da OAB  deve ser informado." })
 });
 
 export default function UsuariosPage({ usuariosList, regraDominio }: UsuariosProps) {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
-    resolver: zodResolver(userFormSchema)
+  const { register, handleSubmit, formState: { errors }, reset, getValues, setValue } = useForm({
+    resolver: zodResolver(userFormSchema),
   });
   const { setLoading } = useLoading();
   const [open, setOpen] = useState(false);
@@ -85,34 +84,27 @@ export default function UsuariosPage({ usuariosList, regraDominio }: UsuariosPro
     setNivelUsuario(user.nivel);
     setEstadoOab(user.oab_estado);
     setAcessoAgenda(user.acesso_agenda);
-    reset();
     setLoading(false);
   }
 
   return (
     <Box sx={{ borderRadius: '10px', padding: '5px', margin: '10px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: { xs: 'column', sm: 'row' }, mb: { xs: 2, sm: 0 } }}>
-        <Typography sx={{ fontSize: '30px', fontWeight: '600', width: { xs: 'full', sm: '200px' }, paddingBottom: '10px', marginBottom: '30px', color: '#00479D', borderBottom: '3px solid #006BED' }}>
+        <Typography sx={{ fontSize: '30px', width: { xs: 'full', sm: '200px' }, paddingBottom: '10px', marginBottom: '30px', color: '#00479D', borderBottom: '3px solid #006BED' }}>
           Usuários
         </Typography>
 
-        {regraDominio?.permissoes?.includes('create') && (
-          <Button sx={{
-            backgroundColor: '#006BED',
-            color: 'white',
-            height: '40px',
-            width: { xs: 'full', sm: '200px' },
-            '&:hover': { backgroundColor: '#00479d' }
-          }}
-            onClick={handleResetForm}>
-            <Save sx={{ mr: '2px' }} />
-            Cadastrar
-          </Button>
+        {regraDominio?.permissoes?.includes('add') && (
+          <Btn
+            text='Cadastrar'
+            sxWidth={{ xs: '100%', sm: '200px' }}
+            onClick={handleResetForm}
+          />
         )}
       </Box>
 
-      {(regraDominio?.permissoes?.includes('create') || regraDominio?.permissoes?.includes('update')) && (
-        <CadastroEdicaoModal
+      {(regraDominio?.permissoes?.includes('add') || regraDominio?.permissoes?.includes('update')) && (
+        open && <CadastroEdicaoModal
           formRef={formRef}
           userChoose={userChoose}
           open={open}
@@ -135,6 +127,7 @@ export default function UsuariosPage({ usuariosList, regraDominio }: UsuariosPro
           handleSubmit={handleSubmit}
           handleClose={handleClose}
           handleOpen={handleOpen}
+          getValues={getValues}
         />
       )}
       {

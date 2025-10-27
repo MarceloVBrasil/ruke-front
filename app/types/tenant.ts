@@ -16,15 +16,15 @@ export interface Tenant {
 
   danos_morais_rmc?: number;
   percentual_exito_rmc?: number;
-  parcela_fixa_rmc?: string;
+  parcela_fixa_rmc?: number;
   indice_correcao_monetaria_rmc?: string;
   juros_de_mora_calculo_rmc?: number;
 
   percentual_exito_bpc?: number;
-  parcela_fixa_bpc?: string;
+  parcela_fixa_bpc?: number;
 
   percentual_exito_fraude_em_boletos?: number;
-  parcela_fixa_fraude_em_boletos?: string;
+  parcela_fixa_fraude_em_boletos?: number;
 
   termo_uso_sistema: boolean
 

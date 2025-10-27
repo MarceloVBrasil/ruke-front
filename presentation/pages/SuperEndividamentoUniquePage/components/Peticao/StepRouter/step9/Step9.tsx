@@ -198,12 +198,12 @@ export default function Step9({ api_data, stepsError, setStepsError }: IStep) {
         const etapa = PASSOS.step9.etapa;
         const formChangedValues = getFormChangedValues(state);
         const data = { etapa, ...formChangedValues };
-        // console.log(data)
+
         try {
             const response = await updateSuperendividamentoTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

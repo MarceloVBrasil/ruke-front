@@ -201,7 +201,7 @@ export function AddImovelModal(props: IModal) {
             })
 
         } catch (error) {
-            console.log(error)
+
         }
     }
 

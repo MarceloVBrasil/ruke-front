@@ -105,7 +105,7 @@ export default function CCTACT(props: ICCTACT) {
                     label='Qual o valor estimado do pedido? (CCT/ACT)'
                     onBlur={handleActCctValorEstimadoPedidoChange}
                     name={PEDIDO_ACT_CCT.VALOR_ESTIMADO_PEDIDO}
-                    variant={'outlined'}
+                    variant={'filled'}
                     xs={12}
                     error={error.valor_estimado}
                     helperText={error.valor_estimado ? 'Campo obrigatório' : ' '}

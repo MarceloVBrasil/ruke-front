@@ -281,7 +281,6 @@ export const saveAndCreatePetition = async (props: {
             setLoading(false);
         }
     } catch (error: any) {
-        console.log(error);
         Swal.fire({
             icon: "error",
             title: "Erro",

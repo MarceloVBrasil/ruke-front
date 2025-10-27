@@ -42,7 +42,6 @@ export const updateTrabalhistaTicket = async (ticket_id: string, data: any) => {
 
         return json.data;
     } catch (error: any) {
-        console.log(error.response)
         throw error;
     }
 };

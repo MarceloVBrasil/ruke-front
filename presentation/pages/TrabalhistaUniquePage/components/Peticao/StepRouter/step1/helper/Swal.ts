@@ -24,7 +24,7 @@ export const handleSubmit = async (
                 allowOutsideClick: false,
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    console.log(result)
+
                 }
             });
         }

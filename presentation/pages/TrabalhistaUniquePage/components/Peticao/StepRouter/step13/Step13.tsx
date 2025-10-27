@@ -223,7 +223,7 @@ export default function Step13({ api_data, stepsError, setStepsError, pedidos }:
     }
 
     function getSalarioProporcional(api_data: any) {
-        if (isFieldEmpty(api_data.remunarecao)) return 0
+        if (isFieldEmpty(api_data.remuneracao)) return 0
         return api_data.remuneracao * differenceInMonths(api_data.data_fim_contrato, api_data.data_inicio_contrato)
     }
 
@@ -273,7 +273,7 @@ export default function Step13({ api_data, stepsError, setStepsError, pedidos }:
             const response = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

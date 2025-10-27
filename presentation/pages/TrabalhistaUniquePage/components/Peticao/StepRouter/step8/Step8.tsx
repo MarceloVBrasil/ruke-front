@@ -197,7 +197,7 @@ export default function Step8({ api_data, stepsError, setStepsError, pedidos }: 
                     label='Qual o valor estimado do pedido?'
                     onBlur={handleValorEstimadoPedidoChange}
                     name={ADICIONAL_PERICULOSIDADE.VALOR_ESTIMADO_PEDIDO}
-                    variant={'outlined'}
+                    variant={'filled'}
                     xs={12}
                     error={error.demais_campos.valor_estimado_pedido}
                     helperText={error.demais_campos.valor_estimado_pedido ? 'Campo obrigatório' : ' '}
@@ -281,7 +281,7 @@ export default function Step8({ api_data, stepsError, setStepsError, pedidos }: 
             const response = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

@@ -28,7 +28,7 @@ export default function DrawerMovimentacoesProcesso(props: IDrawerMovimentacoesP
             }}
         >
             <div style={{ width: 400, padding: 20, backgroundColor: 'white', color: '#000', height: '100%', position: 'relative' }}>
-                <br /><br /><br /><Box display="flex" justifyContent="space-between" alignItems="center">
+                <Box display="flex" justifyContent="space-between" alignItems="center" mt={10}>
                     <Typography variant="h5" style={{ color: '#1976D2' }}>
                         Movimentacoes do processo
                     </Typography>
@@ -39,13 +39,13 @@ export default function DrawerMovimentacoesProcesso(props: IDrawerMovimentacoesP
 
                 <Grid container>
                     <Grid item xs={12} container spacing={2} sx={{ padding: "10px", borderBottom: '1px solid #ddd' }}>
-                        <Grid item xs={3} sm={3} sx={{ fontWeight: "bold", color: 'black' }}>
+                        <Grid item xs={3} sm={3} sx={{ color: 'black' }}>
                             Código
                         </Grid>
-                        <Grid item xs={5} sm={5} sx={{ fontWeight: "bold", textAlign: "center", color: 'black' }}>
+                        <Grid item xs={5} sm={5} sx={{ textAlign: "center", color: 'black' }}>
                             Nome
                         </Grid>
-                        <Grid item xs={4} sm={4} sx={{ fontWeight: "bold", textAlign: "center", color: 'black' }}>
+                        <Grid item xs={4} sm={4} sx={{ textAlign: "center", color: 'black' }}>
                             Data e Hora
                         </Grid>
                     </Grid>

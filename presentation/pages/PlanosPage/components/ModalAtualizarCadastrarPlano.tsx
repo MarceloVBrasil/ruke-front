@@ -7,6 +7,10 @@ import { handleSubmit } from '../../BpcPage/helpers/Swal';
 import { handleFormSubmit } from '../helpers/Swal';
 import { Plano } from '../helpers/interfaces';
 import { FieldErrors, FieldValues, SubmitErrorHandler, SubmitHandler } from 'react-hook-form';
+import GridTextField from '@/presentation/components/GridTextField';
+import GridCurrencyInput from '@/presentation/components/GridCurrencyInput';
+import GridSelectField from '@/presentation/components/GridSelectField';
+import { Btn } from '@/presentation/components/Button';
 
 interface IModalAtualizarCadastrarPlano {
     planoChoose: Plano | null
@@ -57,169 +61,133 @@ export default function ModalAtualizarCadastrarPlano(props: IModalAtualizarCadas
                 onSubmit={handleSubmit(() => handleFormSubmit(produtoId, formRef, planoChoose, planos, setOpen, setPlanos, setPlanoChoose, setLoading))}
                 sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
-                            Nome
-                        </Typography>
-                        <TextField
-                            id='nome'
-                            error={errors.nome ? true : false}
-                            helperText={errors.nome?.message?.toString()}
-                            defaultValue={planoChoose ? planoChoose.nome : ''}
-                            fullWidth
-                            placeholder='Digite o nome do plano'
-                            InputLabelProps={{ shrink: true }}
-                            style={{ borderRadius: 40 }}
-                            {...register('nome')}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
-                            Descrição
-                        </Typography>
-                        <TextField
-                            id='descricao'
-                            error={errors.descricao ? true : false}
-                            helperText={errors.descricao?.message?.toString()}
-                            defaultValue={planoChoose ? planoChoose.descricao : ''}
-                            fullWidth
-                            placeholder='Digite a Descrição'
-                            InputLabelProps={{ shrink: true }}
-                            style={{ borderRadius: 40 }}
-                            {...register('descricao')}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
-                            Limite Contratos
-                        </Typography>
-                        <TextField
-                            id='limite_contratos'
-                            type='number'
-                            error={errors.limite_contratos ? true : false}
-                            helperText={errors.limite_contratos?.message?.toString()}
-                            defaultValue={planoChoose ? planoChoose.limite_contratos : ''}
-                            fullWidth
-                            placeholder='Digite o limite de contratos'
-                            InputLabelProps={{ shrink: true }}
-                            style={{ borderRadius: 40 }}
-                            {...register('limite_contratos')}
+                    <GridTextField
+                        xs={12}
+                        sm={6}
+                        label='Nome'
+                        variant='filled'
+                        error={errors.nome ? true : false}
+                        helperText={errors.nome?.message?.toString()}
+                        defaultValue={planoChoose ? planoChoose.nome : ''}
+                        placeholder='Digite o nome do plano'
+                        InputLabelProps={{ shrink: true }}
+                        style={{ borderRadius: 40 }}
+                        {...register('nome')}
+                    />
 
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
-                            Limite  de Peticoes
-                        </Typography>
-                        <TextField
-                            id='limite_peticoes'
-                            type='number'
-                            error={errors.limite_peticoes ? true : false}
-                            helperText={errors.limite_peticoes?.message?.toString()}
-                            {...register('limite_peticoes')}
-                            defaultValue={planoChoose ? planoChoose.limite_peticoes : ''}
-                            fullWidth
-                            placeholder='Digite o limite de petições'
-                            InputLabelProps={{ shrink: true }}
-                            style={{ borderRadius: 40 }}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
-                            Limite  de Hipossuficiencia
-                        </Typography>
-                        <TextField
-                            id='limite_hipossuficiencia'
-                            type='number'
-                            error={errors.limite_hipossuficiencia ? true : false}
-                            helperText={errors.limite_hipossuficiencia?.message?.toString()}
-                            {...register('limite_hipossuficiencia')}
-                            defaultValue={planoChoose ? planoChoose.limite_hipossuficiencia : ''}
-                            fullWidth
-                            placeholder='Digite o limite de petições'
-                            InputLabelProps={{ shrink: true }}
-                            style={{ borderRadius: 40 }}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
-                            Limite  de Procurações
-                        </Typography>
-                        <TextField
-                            id='limite_procuracoes'
-                            error={errors.limite_procuracoes ? true : false}
-                            helperText={errors.limite_procuracoes?.message?.toString()}
-                            {...register('limite_procuracoes')}
-                            defaultValue={planoChoose ? planoChoose.limite_peticoes : ''}
-                            fullWidth
-                            placeholder='Digite o limite de procurações'
-                            InputLabelProps={{ shrink: true }}
-                            style={{ borderRadius: 40 }}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
-                            Preço
-                        </Typography>
-                        <TextField
-                            id='preco'
-                            error={errors.preco ? true : false}
-                            helperText={errors.preco?.message?.toString()}
-                            defaultValue={planoChoose ? planoChoose.preco.replace('.', ',') : ''}
-                            fullWidth
-                            placeholder='Digite o preço'
-                            InputProps={{
-                                inputComponent: ContractValueMemo,
-                            }}
-                            InputLabelProps={{ shrink: true }}
-                            {...register('preco')}
-                            style={{ borderRadius: 40 }}
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <FormControl fullWidth variant="filled" error={errors.tipo_cobranca ? true : false} >
-                            <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
-                                Tipo de cobrança
-                            </Typography>
-                            <Select
-                                variant='outlined'
-                                sx={{ ml: 1, mt: 1, borderRadius: '10px' }}
-                                id="tipo_cobranca"
-                                displayEmpty
-                                fullWidth
-                                error={errors.tipo_cobranca ? true : false}
-                                value={tipoCobranca}
-                                {...register('tipo_cobranca')}
-                                onChange={(event) => {
-                                    setTipoCobranca(event.target.value);
-                                    reset({ tipo_cobranca: event.target.value })
-                                }}
+                    <GridTextField
+                        xs={12}
+                        sm={6}
+                        label='Descrição'
+                        variant='filled'
+                        error={errors.descricao ? true : false}
+                        helperText={errors.descricao?.message?.toString()}
+                        defaultValue={planoChoose ? planoChoose.descricao : ''}
+                        placeholder='Digite a Descrição'
+                        InputLabelProps={{ shrink: true }}
+                        style={{ borderRadius: 40 }}
+                        {...register('descricao')}
+                    />
 
-                            >
-                                <MenuItem selected value="" disabled>
-                                    Selecione o Tipo de cobrança
-                                </MenuItem>
-                                <MenuItem value="MONTHLY">Mensal</MenuItem>
-                                <MenuItem value="BIMONTHLY">Bimestral</MenuItem>
-                                <MenuItem value="WEEKLY">Semanal</MenuItem>
-                                <MenuItem value="BIWEEKLY">Quinzenal</MenuItem>
-                                <MenuItem value="QUARTERLY">Trimestral</MenuItem>
-                                <MenuItem value="SEMIANNUALY">Semestral</MenuItem>
-                                <MenuItem value="YEARLY">Anual</MenuItem>
-                            </Select>
-                            {errors.tipo_cobranca ? <FormHelperText>{errors.tipo_cobranca?.message?.toString()}</FormHelperText> : null}
+                    <GridTextField
+                        xs={12}
+                        sm={6}
+                        label='Limite de Contratos'
+                        variant='filled'
+                        error={errors.limite_contratos ? true : false}
+                        helperText={errors.limite_contratos?.message?.toString()}
+                        defaultValue={planoChoose ? planoChoose.limite_contratos : ''}
+                        placeholder='Digite o limite de contratos'
+                        InputLabelProps={{ shrink: true }}
+                        style={{ borderRadius: 40 }}
+                        {...register('limite_contratos')}
+                    />
 
-                        </FormControl>
-                    </Grid>
+                    <GridTextField
+                        xs={12}
+                        sm={6}
+                        label='Limite de Petições'
+                        variant='filled'
+                        error={errors.limite_peticoes ? true : false}
+                        helperText={errors.limite_peticoes?.message?.toString()}
+                        defaultValue={planoChoose ? planoChoose.limite_peticoes : ''}
+                        placeholder='Digite o limite de petições'
+                        InputLabelProps={{ shrink: true }}
+                        style={{ borderRadius: 40 }}
+                        {...register('limite_peticoes')}
+                    />
+
+                    <GridTextField
+                        xs={12}
+                        sm={6}
+                        label='Limite de Hipossuficiência'
+                        variant='filled'
+                        error={errors.limite_hipossuficiencia ? true : false}
+                        helperText={errors.limite_hipossuficiencia?.message?.toString()}
+                        defaultValue={planoChoose ? planoChoose.limite_hipossuficiencia : ''}
+                        placeholder='Digite o limite de hipossuficiência'
+                        InputLabelProps={{ shrink: true }}
+                        style={{ borderRadius: 40 }}
+                        {...register('limite_hipossuficiencia')}
+                    />
+
+                    <GridTextField
+                        xs={12}
+                        sm={6}
+                        label='Limite de Procurações'
+                        variant='filled'
+                        error={errors.limite_procuracoes ? true : false}
+                        helperText={errors.limite_procuracoes?.message?.toString()}
+                        defaultValue={planoChoose ? planoChoose.limite_procuracoes : ''}
+                        placeholder='Digite o limite de procurações'
+                        InputLabelProps={{ shrink: true }}
+                        style={{ borderRadius: 40 }}
+                        {...register('limite_procuracoes')}
+                    />
+
+                    <GridCurrencyInput
+                        xs={12}
+                        sm={6}
+                        label='Preço'
+                        variant='filled'
+                        error={errors.preco ? true : false}
+                        helperText={errors.preco?.message?.toString()}
+                        defaultValue={planoChoose?.preco || ''}
+                        placeholder='Digite o preço'
+                        {...register('preco')}
+
+                    />
+
+                    <GridSelectField
+                        xs={12}
+                        sm={6}
+                        variant='filled'
+                        label='Tipo de cobrança'
+                        error={errors.tipo_cobranca ? true : false}
+                        value={tipoCobranca}
+                        {...register('tipo_cobranca')}
+                        onChange={(event) => {
+                            setTipoCobranca(event.target.value);
+                            reset({ tipo_cobranca: event.target.value })
+                        }}
+                        options={[
+                            { descricao: 'Mensal', value: 'mensal' },
+                            { descricao: 'Bimensal', value: 'bimensal' },
+                            { descricao: 'Semanal', value: 'semanal' },
+                            { descricao: 'Quinzenal', value: 'quinzenal' },
+                            { descricao: 'Trimestral', value: 'trimestral' },
+                            { descricao: 'Semestral', value: 'semestral' },
+                            { descricao: 'Anual', value: 'anual' },
+                        ]}
+                    />
+
                 </Grid>
-                <Button
+                <Btn
                     type="submit"
-                    fullWidth
+                    text={planoChoose ? 'Atualizar Plano' : 'Cadastrar Plano'}
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
-                >
-                    {planoChoose ? 'Atualizar Plano' : 'Cadastrar Plano'}
-                </Button>
+                />
             </Box>
         </ModalComponent>
     )

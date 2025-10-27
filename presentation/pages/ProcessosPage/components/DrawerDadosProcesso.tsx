@@ -9,6 +9,7 @@ import { StyledDatePickerWrapper } from '../helpers/styles';
 import { CustomInput } from '../ProcessosPage';
 import GridTextField from '@/presentation/components/GridTextField';
 import { formatNumeroProcesso } from '@/app/utils/Formater';
+import { Btn } from '@/presentation/components/Button';
 
 interface IDrawerDadosProcesso {
     open: boolean,
@@ -52,14 +53,13 @@ export default function DrawerDadosProcesso(props: IDrawerDadosProcesso) {
 
                 <Grid container spacing={2} style={{ marginTop: 20 }} justifyContent={'center'} alignItems={'center'}>
                     <Grid item xs={12} style={{ paddingTop: 17, paddingBottom: 17 }}>
-                        <Button
+                        <Btn
                             variant='outlined'
                             color='primary'
-                            fullWidth
+                            text='Pesquisar Processo'
                             style={{ height: "100%", marginTop: 5 }}
-                            startIcon={<Search style={{ fontSize: 25 }} />}
                             onClick={() => pesquisarProcesso()}
-                        >PESQUISAR PROCESSO</Button>
+                        />
                     </Grid>
 
                     <GridTextField
@@ -68,9 +68,8 @@ export default function DrawerDadosProcesso(props: IDrawerDadosProcesso) {
                         value={formatNumeroProcesso(dadosProcesso.numero_processo)}
                         onChange={(e) => setDadosProcesso({ ...dadosProcesso, numero_processo: e.target.value })}
                         label='Número do processo'
-                        variant='outlined'
+                        variant='filled'
                         name='numero_processo'
-                    // style={{ marginLeft: "-10px" }}
                     />
 
                     <GridTextField
@@ -80,8 +79,7 @@ export default function DrawerDadosProcesso(props: IDrawerDadosProcesso) {
                         fullWidth
                         value={dadosProcesso.orgao_julgador}
                         onChange={(e) => setDadosProcesso({ ...dadosProcesso, orgao_julgador: e.target.value })}
-                        variant="outlined"
-                        // style={{ marginLeft: "-10px" }}
+                        variant="filled"
                         InputLabelProps={{ style: { color: '#1976D2' }, shrink: true }}
                     />
 
@@ -110,7 +108,7 @@ export default function DrawerDadosProcesso(props: IDrawerDadosProcesso) {
                         fullWidth
                         value={dadosProcesso.classe}
                         onChange={(e) => setDadosProcesso({ ...dadosProcesso, classe: e.target.value })}
-                        variant="outlined"
+                        variant="filled"
                         // style={{ marginLeft: "-10px" }}
                         InputLabelProps={{ style: { color: '#1976D2' }, shrink: true }}
                     />
@@ -122,7 +120,7 @@ export default function DrawerDadosProcesso(props: IDrawerDadosProcesso) {
                         fullWidth
                         value={dadosProcesso.cliente_principal}
                         onChange={(e) => setDadosProcesso({ ...dadosProcesso, cliente_principal: e.target.value })}
-                        variant="outlined"
+                        variant="filled"
                         // style={{ marginLeft: "-10px" }}
                         InputLabelProps={{ style: { color: '#1976D2' }, shrink: true }}
                     />
@@ -134,20 +132,19 @@ export default function DrawerDadosProcesso(props: IDrawerDadosProcesso) {
                         fullWidth
                         value={dadosProcesso.contrario_principal}
                         onChange={(e) => setDadosProcesso({ ...dadosProcesso, contrario_principal: e.target.value })}
-                        variant="outlined"
+                        variant="filled"
                         // style={{ marginLeft: "-10px" }}
                         InputLabelProps={{ style: { color: '#1976D2' }, shrink: true }}
                     />
 
                     <Grid item xs={12} style={{ paddingTop: 17, paddingBottom: 17 }}>
-                        <Button
+                        <Btn
                             variant='contained'
                             color='primary'
-                            fullWidth
+                            text='Salvar'
                             style={{ height: "100%", marginTop: 5 }}
-                            startIcon={<Done style={{ fontSize: 25 }} />}
                             onClick={() => salvarProcesso()}
-                        >SALVAR</Button>
+                        />
                     </Grid>
 
 

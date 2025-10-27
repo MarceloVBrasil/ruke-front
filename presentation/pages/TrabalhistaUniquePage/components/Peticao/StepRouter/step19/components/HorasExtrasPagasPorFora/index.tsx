@@ -57,7 +57,7 @@ export default function HorasExtrasPagasPorFora(props: IHorasExtrasPagasPorFora)
             <GridCurrencyInput
                 xs={12}
                 ref={valorPagoPorForaRef}
-                variant='outlined'
+                variant='filled'
                 name={HORAS_EXTRAS_PAGAS_POR_FORA.VALOR_PAGO_POR_FORA}
                 defaultValue={horasExtrasPagasPorFora?.[HORAS_EXTRAS_PAGAS_POR_FORA.VALOR_PAGO_POR_FORA] ?? 0}
                 onBlur={handleValorPagoPorForaChange}

@@ -78,7 +78,7 @@ export default function Step18({ api_data, stepsError, setStepsError, pedidos }:
                     fullWidth
                     type='date'
                     label='Qual foi a data de dispensa sem justa causa?'
-                    variant='outlined'
+                    variant='filled'
                     name={PEDIDO_AVISO_PREVIO.DATA_DISPENSA_SEM_JUSTA_CAUSA}
                     value={state[FormField.PEDIDO_AVISO_PREVIO].value?.[PEDIDO_AVISO_PREVIO.DATA_DISPENSA_SEM_JUSTA_CAUSA] as string}
                     onChange={handleDataDispensaChange}
@@ -91,7 +91,7 @@ export default function Step18({ api_data, stepsError, setStepsError, pedidos }:
                     fullWidth
                     type='number'
                     label='Quantos dias de aviso prévio eram devidos ao reclamante, levando em consideração a proporcionalidade?'
-                    variant='outlined'
+                    variant='filled'
                     name={PEDIDO_AVISO_PREVIO.QUANTIDADE_DIAS_AVISO_PREVIO_DEVIDOS}
                     defaultValue={state[FormField.PEDIDO_AVISO_PREVIO].value?.[PEDIDO_AVISO_PREVIO.QUANTIDADE_DIAS_AVISO_PREVIO_DEVIDOS] as number}
                     onBlur={handleQauntidadeDiasAvisoPrevioDevidosChange}
@@ -223,7 +223,7 @@ export default function Step18({ api_data, stepsError, setStepsError, pedidos }:
             const response = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

@@ -27,7 +27,7 @@ export default function TrabalhadoPeriodoSuperior(props: ITrabalhadoPeriodoSuper
                 fullWidth
                 type='number'
                 label='Quantos dias de aviso prévio foram efetivamente pagos pelo reclamante?'
-                variant='outlined'
+                variant='filled'
                 name={TRABALHADO_PERIODO_SUPERIOR_30_DIAS.QUANTIDADE_DIAS_EFETIVAMENTE_PAGOS}
                 value={trabalhado_periodo_superior?.[TRABALHADO_PERIODO_SUPERIOR_30_DIAS.QUANTIDADE_DIAS_EFETIVAMENTE_PAGOS] as number}
                 onChange={handleQuantidadeDiasEfetivamentePagos}
@@ -41,7 +41,7 @@ export default function TrabalhadoPeriodoSuperior(props: ITrabalhadoPeriodoSuper
                 fullWidth
                 type='number'
                 label='Quantos dias de aviso prévio faltaram ser pagos?'
-                variant='outlined'
+                variant='filled'
                 name={TRABALHADO_PERIODO_SUPERIOR_30_DIAS.QUANTIDADE_DIAS_FALTARAM_SER_PAGOS}
                 value={trabalhado_periodo_superior?.[TRABALHADO_PERIODO_SUPERIOR_30_DIAS.QUANTIDADE_DIAS_FALTARAM_SER_PAGOS] as number}
                 onChange={handleQuantidadeDiasFaltaramSerPagos}
@@ -60,6 +60,7 @@ export default function TrabalhadoPeriodoSuperior(props: ITrabalhadoPeriodoSuper
                 sx={{ marginTop: 3, ml: 0 }}
                 error={error.valor_estimado}
                 helperText={error.valor_estimado ? 'Campo obrigatório' : ' '}
+                variant='filled'
             />
 
         </Grid>

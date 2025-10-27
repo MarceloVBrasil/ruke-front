@@ -27,7 +27,7 @@ export default function TrabalhadoSemReducaoJornadaOuDispensa(props: ITrabalhado
                 fullWidth
                 type='date'
                 label='Quando foi projetado o término do aviso prévio?'
-                variant='outlined'
+                variant='filled'
                 name={TRABALHADO_REDUCAO_JORNADA_ULTIMOS_7_DIAS.DATA_PROJECAO_TERMINO}
                 value={trabalhado_reducao_jornada_ultimos_7_dias?.[TRABALHADO_REDUCAO_JORNADA_ULTIMOS_7_DIAS.DATA_PROJECAO_TERMINO] as string}
                 onChange={handleDataTermino}
@@ -46,6 +46,7 @@ export default function TrabalhadoSemReducaoJornadaOuDispensa(props: ITrabalhado
                 sx={{ marginTop: 3, ml: 0 }}
                 error={error.valor_estimado}
                 helperText={error.valor_estimado ? 'Campo obriagtório' : ' '}
+                variant='filled'
             />
 
         </Grid>

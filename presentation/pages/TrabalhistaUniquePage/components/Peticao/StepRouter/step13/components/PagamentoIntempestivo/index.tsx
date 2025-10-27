@@ -31,7 +31,7 @@ export default function PagamentoIntempestivo(props: IPagamentoIntempestivo) {
                 fullWidth
                 name={PEDIDO_FERIAS_NAO_GOZADAS.PERIODOS_FERIAS}
                 value={situacao?.[PAGAMENTO_INTEMPESTIVO_FERIAS.DATA_INICIO] as string}
-                variant='outlined'
+                variant='filled'
                 onChange={handleDataInicioChange}
                 error={error.data_inicio}
                 helperText={error.data_inicio ? 'Campo obrigatório' : ' '}
@@ -44,7 +44,7 @@ export default function PagamentoIntempestivo(props: IPagamentoIntempestivo) {
                 fullWidth
                 name={PEDIDO_FERIAS_NAO_GOZADAS.PERIODOS_FERIAS}
                 value={situacao?.[PAGAMENTO_INTEMPESTIVO_FERIAS.DATA_PAGAMENTO_REALIZADO] as string}
-                variant='outlined'
+                variant='filled'
                 onChange={handledataPagamentoRealizadoChange}
                 error={error.data_pagamento_realizado}
                 helperText={error.data_pagamento_realizado ? 'Campo obrigatório' : ' '}
@@ -60,6 +60,7 @@ export default function PagamentoIntempestivo(props: IPagamentoIntempestivo) {
                 sx={{ marginTop: 3 }}
                 error={error.valor_estimado_pagamento_em_dobro}
                 helperText={error.valor_estimado_pagamento_em_dobro ? 'Campo obrigatório' : ' '}
+                variant='filled'
             />
         </Grid>
     )

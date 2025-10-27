@@ -95,6 +95,7 @@ export default function DiferencasSalariais(props: IDiferencasSalariais) {
                     error={error.valor_estimado}
                     helperText={error.valor_estimado ? 'Campo obrigatório' : ' '}
                     className='equiparacao_salarial'
+                    variant='filled'
                 />
                 <LabeledCustomBox
                     label='paradigmas'

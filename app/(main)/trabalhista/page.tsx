@@ -7,7 +7,7 @@ export default async function Page() {
     const ticketsResponse = await getTrabalhistaTickets()
     const tickets = ticketsResponse.reverse();
     const regras = JSON.parse(cookies().get("regras")?.value as string);
-    const regraDominio = regras.find((regra: any) => regra.dominio === "ticketRMC");
+    const regraDominio = regras.find((regra: any) => regra.dominio === "trabalhista");
     return (
         <TrabalhistaPage listTickets={tickets} regraDominio={regraDominio} />
     )

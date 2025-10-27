@@ -256,7 +256,7 @@ export function AddPFModal(props: IModal) {
             })
 
         } catch (error) {
-            console.log(error)
+
         }
     }
 

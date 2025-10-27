@@ -59,7 +59,7 @@ export default function FeriasInterrompidasInjustamente(props: IFeriasInterrompi
             <GridTextField
                 xs={12}
                 fullWidth
-                variant='outlined'
+                variant='filled'
                 type='date'
                 label='Quando ocorreu a interrupção das férias?'
                 name={PEDIDO_FERIAS.PERIODO_DATA_INICIO}
@@ -80,6 +80,7 @@ export default function FeriasInterrompidasInjustamente(props: IFeriasInterrompi
                 sx={{ marginTop: 3 }}
                 error={error.valor_estimado_pagamento_em_dobro}
                 helperText={error.valor_estimado_pagamento_em_dobro ? 'Campo obrigatório' : ' '}
+                variant='filled'
             />
         </Grid>
     )

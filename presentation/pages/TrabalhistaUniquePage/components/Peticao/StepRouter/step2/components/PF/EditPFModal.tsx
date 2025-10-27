@@ -377,7 +377,7 @@ export function EditPFModal(props: IModal) {
             })
 
         } catch (error) {
-            console.log(error)
+
         }
     }
 

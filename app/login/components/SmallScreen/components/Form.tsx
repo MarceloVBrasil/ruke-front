@@ -1,5 +1,5 @@
 import { Grid, Typography, Button } from '@mui/material';
-import { Box } from '@mui/system';
+import { Box, width } from '@mui/system';
 import React, { MutableRefObject, useState } from 'react'
 import { Btn } from '@/presentation/components/Button';
 import GridTextField from '@/presentation/components/GridTextField';
@@ -105,6 +105,7 @@ export default function Form(props: IForm) {
                         helperText={errors.email?.message?.toString() ?? ' '}
                         fullWidth
                         variant="filled"
+                        placeholder='jhon.doe@gmail.com'
                         register={() => register('email')}
                         label='Email'
                         name='email'
@@ -118,7 +119,7 @@ export default function Form(props: IForm) {
                         type="button"
                         variant='outlined'
                         onClick={() => router.push('/forgotpassword')}
-                        style={{ position: 'absolute', top: 80, right: 5, fontSize: 13, textTransform: 'none', border: 'none', fontWeight: 400 }}
+                        style={{ position: 'absolute', top: 80, right: 0, fontSize: 13, textTransform: 'none', border: 'none', fontWeight: 400, width: 'auto' }}
                         color={'primary'}
                         text={'Esqueci minha senha'}
                     />
@@ -126,6 +127,7 @@ export default function Form(props: IForm) {
                     <GridTextField
                         xs={12}
                         id="senha"
+                        placeholder='********'
                         error={errors.senha ? true : false}
                         helperText={errors.senha?.message?.toString() || ' '}
                         fullWidth
@@ -155,7 +157,7 @@ export default function Form(props: IForm) {
                     />
 
                     <Btn
-                        disabled
+                        disabled={!!errors.email}
                         loading={loadingSubmitButton}
                         onClick={goToEntrarSemSenhaPage}
                         text='Entrar sem senha'

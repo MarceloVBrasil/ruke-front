@@ -1,3 +1,4 @@
+import { Tenant } from "@/app/types/tenant";
 import { req } from "./client.axiosInstance";
 import { getCookie } from "cookies-next";
 
@@ -33,7 +34,7 @@ export const insertTenants = async (data: {
     }
 };
 
-export const updateTenant = async (tenantId: string, data: any) => {
+export const updateTenant = async (tenantId: string, data: Omit<Tenant, 'id'>) => {
     const token = getCookie("ruke_token");
     try {
         const json = await req.put(`/tenants/${tenantId}`, data, {

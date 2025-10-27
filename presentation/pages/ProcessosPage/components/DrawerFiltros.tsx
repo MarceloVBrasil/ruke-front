@@ -9,6 +9,7 @@ import { StyledDatePickerWrapper } from '../helpers/styles';
 import { CustomInput } from '../ProcessosPage';
 import GridTextField from '@/presentation/components/GridTextField';
 import { formatNumeroProcesso } from '@/app/utils/Formater';
+import { Btn } from '@/presentation/components/Button';
 
 interface IDrawerFiltros {
     open: boolean,
@@ -57,7 +58,7 @@ export default function DrawerFiltros(props: IDrawerFiltros) {
                         value={formatNumeroProcesso(filtros.numero_processo)}
                         onChange={(e) => setFiltros({ ...filtros, numero_processo: e.target.value })}
                         label='Número do processo'
-                        variant='outlined'
+                        variant='filled'
                         name='numero_processo'
                     />
 
@@ -67,7 +68,7 @@ export default function DrawerFiltros(props: IDrawerFiltros) {
                         fullWidth
                         value={filtros.orgao_julgador}
                         onChange={(e) => setFiltros({ ...filtros, orgao_julgador: e.target.value })}
-                        variant="outlined"
+                        variant="filled"
                         style={{ marginLeft: "-10px" }}
                         name=''
                         InputLabelProps={{ style: { color: '#1976D2' }, shrink: true }}
@@ -98,7 +99,7 @@ export default function DrawerFiltros(props: IDrawerFiltros) {
                         fullWidth
                         value={filtros.classe}
                         onChange={(e) => setFiltros({ ...filtros, classe: e.target.value })}
-                        variant="outlined"
+                        variant="filled"
                         style={{ marginLeft: "-10px" }}
                         InputLabelProps={{ style: { color: '#1976D2' }, shrink: true }}
                     />
@@ -110,7 +111,7 @@ export default function DrawerFiltros(props: IDrawerFiltros) {
                         fullWidth
                         value={filtros.cliente_principal}
                         onChange={(e) => setFiltros({ ...filtros, cliente_principal: e.target.value })}
-                        variant="outlined"
+                        variant="filled"
                         style={{ marginLeft: "-10px" }}
                         InputLabelProps={{ style: { color: '#1976D2' }, shrink: true }}
                     />
@@ -122,20 +123,19 @@ export default function DrawerFiltros(props: IDrawerFiltros) {
                         fullWidth
                         value={filtros.contrario_principal}
                         onChange={(e) => setFiltros({ ...filtros, contrario_principal: e.target.value })}
-                        variant="outlined"
+                        variant="filled"
                         style={{ marginLeft: "-10px" }}
                         InputLabelProps={{ style: { color: '#1976D2' }, shrink: true }}
                     />
 
-                    <Grid item xs={6} style={{ paddingTop: 17, paddingBottom: 17 }}>
-                        <Button
+                    <Grid item xs={12} style={{ paddingTop: 17, paddingBottom: 17 }}>
+                        <Btn
                             variant='contained'
                             color='primary'
-                            fullWidth
+                            text='Buscar'
                             style={{ height: "100%", marginTop: 5 }}
-                            startIcon={<Search style={{ fontSize: 25 }} />}
                             onClick={() => filtrar()}
-                        >BUSCAR</Button>
+                        />
                     </Grid>
 
 

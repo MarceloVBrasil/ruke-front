@@ -33,13 +33,13 @@ export default function NaoPagamentoVerbasRescisorias(props: INaoPagamentoVerbas
                 error={error.valor_estimado}
                 helperText={error.valor_estimado ? 'Campo obrigatório' : ' '}
                 className='danos_morais'
-                fixLabel
+                variant='filled'
             />
 
             <GridTextField
                 xs={12}
                 fullWidth
-                variant='outlined'
+                variant='filled'
                 type='date'
                 defaultValue={nao_pagamento?.[NAO_PAGAMENTO_VERBAS_RESCISORIAS.DATA_PROJECAO_TERMINO] as string}
                 onBlur={handleDataProjecaoTermino}
@@ -48,7 +48,6 @@ export default function NaoPagamentoVerbasRescisorias(props: INaoPagamentoVerbas
                 error={error.data_projecao_termino}
                 helperText={error.data_projecao_termino ? 'Campo obrigatório' : ' '}
                 className='danos_morais'
-                fixLabel
             />
 
         </Grid>

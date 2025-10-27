@@ -18,6 +18,7 @@ import SmallScreen from "./components/SmallScreen";
 import BigScreen, { BigScreenHeader } from "./components/BigScreen";
 import DocumentosModal from "./components/DocumentosModal";
 import Loading from "@/app/(main)/loading";
+import { Btn } from "@/presentation/components/Button";
 
 interface Trabalhista {
     id: string;
@@ -87,9 +88,8 @@ export default function TrabalhistaPage({
             >
                 <Typography
                     sx={{
-                        width: { xs: '100%', sm: 'auto' },
+                        width: { xs: '100%' },
                         fontSize: "30px",
-                        fontWeight: "600",
                         paddingBottom: "10px",
                         marginBottom: "30px",
                         color: "#00479D",
@@ -98,46 +98,27 @@ export default function TrabalhistaPage({
                 >
                     Ações Trabalhistas
                 </Typography>
-                <Box>
-                    {regraDominio?.permissoes?.includes("create") && (
-                        <Button
-                            sx={{
-                                backgroundColor: "#006BED",
-                                color: "white",
-                                height: "40px",
-                                width: { xs: '100%', md: "250px" },
-                                marginBottom: 1,
-                                marginRight: "10px",
-                                "&:hover": { backgroundColor: "#00479d" },
-                            }}
+                <Box display={'flex'} gap={1} ml={5} sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
+                    {regraDominio?.permissoes?.includes("add") && (
+                        <Btn
+                            text="Cadastrar com IA"
+                            sxWidth={{ xs: '100%', md: '250px' }}
                             onClick={() => {
                                 handleOpen();
                             }}
-                        >
-                            <EditNoteIcon sx={{ mr: "2px" }} />
-                            CADASTRAR COM IA
-                        </Button>
+                        />
                     )}
-                    <Button
-                        sx={{
-                            backgroundColor: "#006BED",
-                            color: "white",
-                            height: "40px",
-                            width: { xs: '100%', md: "250px" },
-                            marginBottom: 1,
-                            "&:hover": { backgroundColor: "#00479d" },
-                        }}
+                    <Btn
+                        text="Cadastrar"
+                        sxWidth={{ xs: '100%', md: '250px' }}
                         onClick={() => {
                             handleAddTicket(setIsUniquePageLoading, onAddTicket);
                         }}
-                    >
-                        <EditNoteIcon sx={{ mr: "2px" }} />
-                        CADASTRAR
-                    </Button>
+                    />
                 </Box>
             </Box>
 
-            {regraDominio?.permissoes?.includes("create") && (
+            {regraDominio?.permissoes?.includes("add") && (
                 <DocumentosModal
                     handleClose={handleClose}
                     handleOpen={handleOpen}
@@ -156,7 +137,7 @@ export default function TrabalhistaPage({
                         type="text"
                         value={nameClient}
                         onChange={(e) => setNameClient(e.target.value)} name={""}
-                        variant={"outlined"}
+                        variant={"filled"}
                         placeholder="Nome do Cliente"
                     />
                 </Grid>

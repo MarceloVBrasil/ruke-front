@@ -30,7 +30,7 @@ export default function DispensaDiscriminatoriaDoenca(props: IDispensaDiscrimina
                 defaultValue={dispensa_doenca?.[DISPENSA_DISCRIMINATORIA_DOENCA.DOENCA_DIAGNOSTICADA_RECLAMANTE] as string}
                 onBlur={handleDoencaDiagnosticadaChange}
                 label='Qual foi a doença diagonosticada no reclamante?'
-                variant='outlined'
+                variant='filled'
                 error={error.doenca_diagnosticada_reclamante}
                 helperText={error.doenca_diagnosticada_reclamante ? 'Campo obrigatório' : ' '}
                 className='danos_morais'
@@ -45,7 +45,7 @@ export default function DispensaDiscriminatoriaDoenca(props: IDispensaDiscrimina
                 defaultValue={dispensa_doenca?.[DISPENSA_DISCRIMINATORIA_DOENCA.DATA_DIAGNOSTICO] as string}
                 onBlur={handleDataDisgnostico}
                 label='Qual foi a data do diagnóstico?'
-                variant='outlined'
+                variant='filled'
                 type='date'
                 error={error.data_diagnostico}
                 helperText={error.data_diagnostico ? 'Campo obrigatório' : ' '}
@@ -64,7 +64,7 @@ export default function DispensaDiscriminatoriaDoenca(props: IDispensaDiscrimina
                 error={error.valor_estimado}
                 helperText={error.valor_estimado ? 'Campo obrigatório' : ' '}
                 className='danos_morais'
-                fixLabel
+                variant='filled'
             />
 
         </Grid>

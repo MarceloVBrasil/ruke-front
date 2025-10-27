@@ -153,7 +153,7 @@ const Register = ({ params }: RegisterProps) => {
                 alt=''
               />
             </Box>
-            <Typography variant="h5" component="h1" gutterBottom style={{ fontWeight: 'bold', textAlign: 'center' }}>
+            <Typography variant="h5" component="h1" gutterBottom style={{ textAlign: 'center' }}>
               FINALIZAR CADASTRO
             </Typography>
             <Box style={{ width: '100%' }} component='form' onSubmit={handleSubmit(handleRegisterSubmit)}>

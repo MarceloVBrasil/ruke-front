@@ -119,6 +119,7 @@ export default function Step14({ api_data, stepsError, setStepsError, pedidos }:
                     sx={{ marginTop: 3, ml: -2 }}
                     error={error.demais_campos.valor_estimado_pedido}
                     helperText={error.demais_campos.valor_estimado_pedido ? 'Campo obrigatório' : ' '}
+                    variant='filled'
                 />
 
             </Grid>
@@ -183,7 +184,7 @@ export default function Step14({ api_data, stepsError, setStepsError, pedidos }:
             const response = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

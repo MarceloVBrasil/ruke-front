@@ -1,5 +1,6 @@
 import { Checkbox, FormControlLabel, Grid, Tooltip, Typography } from '@mui/material';
 import React, { CSSProperties } from 'react';
+import { CheckBox } from './Checkbox';
 
 interface IGridCheckbox {
   xs?: number;
@@ -48,7 +49,7 @@ export default function GridCheckbox(props: IGridCheckbox) {
         onChange={onChange}
         name={name}
         value={value}
-        control={<Checkbox />}
+        control={<CheckBox />}
         label={label}
         sx={{
           boxShadow: {

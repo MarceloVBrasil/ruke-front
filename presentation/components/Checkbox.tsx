@@ -51,7 +51,13 @@ const BpCheckedIcon = styled(BpIcon)({
     },
 });
 
-export function CheckBox(props: CheckboxProps) {
+interface ICheckBox {
+    name?: string
+    register?: (v: any) => any
+}
+
+export function CheckBox(props: CheckboxProps & ICheckBox) {
+    const { register, name, ...others } = props
     return (
         <Checkbox
             sx={{ '&:hover': { bgcolor: 'transparent' } }}
@@ -59,7 +65,9 @@ export function CheckBox(props: CheckboxProps) {
             color="default"
             checkedIcon={<BpCheckedIcon />}
             icon={<BpIcon />}
-            {...props}
+            name={name}
+            {...(register ? register(name) : {})}
+            {...others}
         />
     );
 }

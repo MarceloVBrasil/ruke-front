@@ -209,7 +209,7 @@ export default function Step7({ api_data, stepsError, setStepsError, pedidos }: 
                     label='Qual o valor estimado do pedido?'
                     onBlur={handleValorEstimadoPedidoChange}
                     name={ADICIONAL_INSALUBRIDADE.VALOR_ESTIMADO_PEDIDO}
-                    variant={'outlined'}
+                    variant={'filled'}
                     xs={12}
                 />
 
@@ -359,7 +359,7 @@ export default function Step7({ api_data, stepsError, setStepsError, pedidos }: 
             const response = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

@@ -501,7 +501,7 @@ const Bpc = ({ ticketUnique, regraDominio, listDoencas }: TicketProps) => {
           setPessoas
         })}
         handleSubmitPeticao={handleSubmitPeticao}
-        saveAndCreatePetition={() => criarPeticao({
+        saveAndaddPetition={() => criarPeticao({
           ticket,
           nameClient,
           estadoCivil,

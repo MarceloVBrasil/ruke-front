@@ -477,10 +477,11 @@ export default function Step5({
         })
 
         try {
+            console.log(data)
             const response = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+            console.log(error)
         }
     }
 

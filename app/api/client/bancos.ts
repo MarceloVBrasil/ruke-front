@@ -9,7 +9,7 @@ export const getBancos = async () => {
                 Authorization: `Bearer ${token}`,
             },
         });
-        // console.log(json.data);
+
         return json.data;
     } catch (error: any) {
         throw error;

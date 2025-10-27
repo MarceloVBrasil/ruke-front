@@ -25,6 +25,7 @@ import ModalCadastrarEmpresa from "./components/ModalCadastrarEmpresa";
 import DrawerAlterarAssinaturaAgendaJuridica from "./components/DrawerAlterarAssinaturaAgendaJuridica";
 import DrawerContratarRukeLeads from "./components/DrawerContratarRukeLeads";
 import DrawerContratarAgendaJuridica from "./components/DrawerContratarAgendaJuridica";
+import { Btn } from "@/presentation/components/Button";
 
 type TenantsProps = {
   tenantsList: Tenant[];
@@ -39,17 +40,6 @@ export default function TenantsPage({
   menus,
   planosContratados
 }: TenantsProps) {
-  const indicesCorrecaoMonetaria = [
-    { value: "dolar", label: "Dólar" },
-    { value: "igpm", label: "IGPM" },
-    { value: "igp", label: "IGP" },
-    { value: "ipca", label: "IPCA" },
-    { value: "inpc", label: "INPC" },
-    { value: "poupanca", label: "POUPANCA" },
-    { value: "salariominimo", label: "SALARIOMINIMO" },
-    { value: "selic", label: "SELIC" },
-    { value: "euro", label: "euro" },
-  ];
 
   const {
     register,
@@ -248,7 +238,6 @@ export default function TenantsPage({
         <Typography
           sx={{
             fontSize: "30px",
-            fontWeight: "600",
             width: { xs: '100%', md: '300px' },
             paddingBottom: "10px",
             marginBottom: "30px",
@@ -260,58 +249,35 @@ export default function TenantsPage({
         </Typography>
 
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: 1, md: 4 }, mb: 2 }}>
-          <Button
-            sx={{
-              backgroundColor: "#006BED",
-              color: "white",
-              height: "40px",
-              width: { xs: '100%', md: '200px' },
-              "&:hover": { backgroundColor: "#00479d" },
-            }}
+          <Btn
+            text="Configurações"
+            sxWidth={{ xs: '100%', md: '200px' }}
             onClick={() => {
               window.location.href = `/tenants/${tenantsList[0].id}`;
             }}
-          >
-            <BuildCircle sx={{ mr: "2px" }} />
-            CONFIGURAÇÕES
-          </Button>
+          />
 
-          <Button
-            sx={{
-              backgroundColor: "#006BED",
-              color: "white",
-              height: "40px",
-              width: { xs: '100%', md: '200px' },
-              "&:hover": { backgroundColor: "#00479d" },
-            }}
+          <Btn
+            text="Usuários"
+            sxWidth={{ xs: '100%', md: '200px' }}
             onClick={() => {
               window.location.href = `/usuarios`;
             }}
-          >
-            <SupervisedUserCircleSharp style={{ color: '#FFF', marginRight: 2 }} />
-            USUÁRIOS
-          </Button>
+          />
+
         </Box>
-        {regraDominio?.permissoes?.includes("create") && (
-          <Button
-            sx={{
-              backgroundColor: "#006BED",
-              color: "white",
-              height: "40px",
-              width: "200px",
-              "&:hover": { backgroundColor: "#00479d" },
-            }}
+        {regraDominio?.permissoes?.includes("add") && (
+          <Btn
+            text="Cadastrar"
+            sxWidth={{ xs: '100%', md: '200px' }}
             onClick={() => {
               handleOpen();
               reset();
             }}
-          >
-            <SaveIcon sx={{ mr: "2px" }} />
-            Cadastrar
-          </Button>
+          />
         )}
       </Box>
-      {regraDominio?.permissoes?.includes("create") && (
+      {regraDominio?.permissoes?.includes("add") && (
         <ModalCadastrarEmpresa
           open={open}
           formRef={formRef}

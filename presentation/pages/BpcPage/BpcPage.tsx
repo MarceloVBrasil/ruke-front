@@ -23,6 +23,7 @@ import DocumentosModal from "./components/DocumentosModal";
 import SmallScreen from "./components/SmallScreen";
 import BigScreen, { BigScreenHeader } from "./components/BigScreen";
 import Loading from "@/app/(main)/loading";
+import { Btn } from "@/presentation/components/Button";
 
 type BpcProps = {
   listBpcTickets: any[];
@@ -83,7 +84,6 @@ export default function BpcPage({ listBpcTickets, regraDominio }: BpcProps) {
         <Typography
           sx={{
             fontSize: "30px",
-            fontWeight: "600",
             width: { xs: '100%', lg: '400px' },
             paddingBottom: "10px",
             marginBottom: "30px",
@@ -94,39 +94,21 @@ export default function BpcPage({ listBpcTickets, regraDominio }: BpcProps) {
           Documentos gerados | BPC
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row', gap: 10 } }}>
-          <Button
-            sx={{
-              backgroundColor: "#006BED",
-              color: "white",
-              height: "40px",
-              width: { xs: '100%', md: '250px' },
-              marginRight: "10px",
-              "&:hover": { backgroundColor: "#00479d" },
-            }}
+          <Btn
+            text="Criar Documentos com IA"
+            sxWidth={{ xs: '100%', md: '250px' }}
             onClick={() => {
               handleOpen();
             }}
-          >
-            <Face5Icon sx={{ mr: "2px" }} />
-            CRIAR DOCUMENTOS COM IA
-          </Button>
+          />
 
-          <Button
-            sx={{
-              backgroundColor: "#006BED",
-              color: "white",
-              height: "40px",
-              width: { xs: '100%', md: '250px' },
-              marginRight: "10px",
-              "&:hover": { backgroundColor: "#00479d" },
-            }}
+          <Btn
+            text="Criar Documentos sem IA"
+            sxWidth={{ xs: '100%', md: '250px' }}
             onClick={() => {
               handleAddTicket(setIsUniquePageLoading, onAddTicket);
             }}
-          >
-            <EditNoteIcon sx={{ mr: "2px" }} />
-            CRIAR DOCUMENTOS SEM IA
-          </Button>
+          />
         </Box>
       </Box>
       <DocumentosModal
@@ -147,7 +129,7 @@ export default function BpcPage({ listBpcTickets, regraDominio }: BpcProps) {
             type="text"
             value={nameClient}
             onChange={(e) => setNameClient(e.target.value)}
-            variant="outlined"
+            variant="filled"
             name={""}
             placeholder="Nome do Cliente"
             style={{ marginLeft: '10px' }}

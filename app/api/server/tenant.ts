@@ -33,13 +33,12 @@ export const cancelarTodasAssinaturas = async () => {
     const token = cookies().get("ruke_token");
 
     try {
-        console.log('cancelar assinaturas', token)
+
         const json = await req.post(`/tenants/cancelar-todas-assinaturas`, {}, {
             headers: { Authorization: `Bearer ${token?.value}` },
         });
         return json.data;
     } catch (error: any) {
-        console.log(error.response.data)
         throw error;
     }
 }

@@ -99,6 +99,8 @@ export default function Right(props: IRight) {
                             error={errors.email ? true : false}
                             helperText={errors.email?.message?.toString() ?? ' '}
                             fullWidth
+                            email
+                            placeholder='jhon.doe@gmail.com'
                             variant="filled"
                             register={() => register('email')}
                             label='Email'

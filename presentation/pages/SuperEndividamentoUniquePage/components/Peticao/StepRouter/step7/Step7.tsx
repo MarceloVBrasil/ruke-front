@@ -178,13 +178,11 @@ export default function Step7({ api_data, stepsError, setStepsError }: IStep) {
         const formChangedValues = getPositiveChangedValues(state)
         const data = { etapa, ...formChangedValues }
 
-        // console.log(data)
-
         try {
             const response = await updateSuperendividamentoTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

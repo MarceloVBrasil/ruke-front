@@ -112,7 +112,7 @@ export default function PedidoContinuaTrabalhando(props: IPedidoContinuaTrabalha
             <GridTextField
                 xs={12}
                 label='Qual foi a falta grave cometida pela parte reclamada que fundamenta a rescisão indireta?'
-                variant='outlined'
+                variant='filled'
                 name={CONTINUA_TRABALHANDO_PEDIDO.FALTA_GRAVE}
                 value={pedido?.[CONTINUA_TRABALHANDO_PEDIDO.FALTA_GRAVE] as string}
                 onChange={handleFaltaGraveChange}

@@ -31,6 +31,7 @@ export default function RendaSuperiorA40PorCento(props: IRendaSuperiorA40PorCent
                 defaultValue={state?.[PEDIDO_GRATUIDADE_JUSTICA.RENDA_ATUAL_RECLAMANTE] ?? 0}
                 label={'Qual é a renda atual da parte reclamante?'}
                 sx={{ marginTop: 3, ml: 0, pr: 2 }}
+                variant='filled'
             />
 
             <GridCurrencyInput
@@ -41,6 +42,7 @@ export default function RendaSuperiorA40PorCento(props: IRendaSuperiorA40PorCent
                 defaultValue={state?.[PEDIDO_GRATUIDADE_JUSTICA.GASTOS_MENSAIS_RECLAMANTE] ?? 0}
                 label={'Quais são os gastos mensais da parte reclamante?'}
                 sx={{ marginTop: 3, ml: 0, pr: 2 }}
+                variant='filled'
             />
 
             <GridRadioGroup

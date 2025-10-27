@@ -164,9 +164,10 @@ export default function Step10({ api_data, stepsError, setStepsError, pedidos }:
 
             <Grid container rowGap={2} sx={{ minHeight: 300, marginY: 2 }}>
                 {
-                    opcoes.map(o => {
+                    opcoes.map((o, i) => {
                         if (o == FormField.PEDIDO_DIFERENCAS_SALARIAIS) return (
                             <DiferencasSalariais
+                                key={i}
                                 paradigmas={state[FormField.PEDIDO_DIFERENCAS_SALARIAIS].value?.[PEDIDO_DIFERENCA_SALARIAL.PARADIGMAS] || []}
                                 isAddParadigmaModalOpened={isAddParadigmaModalOpened}
                                 isEditParadigmaModalOpened={isEditParadigmaModalOpened}
@@ -186,6 +187,7 @@ export default function Step10({ api_data, stepsError, setStepsError, pedidos }:
 
                         else if (o == FormField.PEDIDO_DESVIO_FUNCAO) return (
                             <DesvioFuncao
+                                key={i}
                                 intervalos={state[FormField.PEDIDO_DESVIO_FUNCAO].value?.[PEDIDO_DESVIO_FUNCAO.INTERVALOS] || []}
                                 isAddIntervaloModalOpened={isAddIntervaloModalOpened}
                                 isEditIntervaloModalOpened={isEditIntervaloModalOpened}
@@ -204,6 +206,7 @@ export default function Step10({ api_data, stepsError, setStepsError, pedidos }:
 
                         else if (o == FormField.PEDIDO_ACT_CCT) return (
                             <CCTACT
+                                key={i}
                                 valorEstimadoPedidoRef={act_cct_valorEstimadoPedidoInputRef}
                                 selectedFuncao={selectedFuncao}
                                 setSelectedFuncao={setSelectedFuncao}
@@ -222,6 +225,7 @@ export default function Step10({ api_data, stepsError, setStepsError, pedidos }:
 
                         else if (o == FormField.PEDIDO_ACUMULO_FUNCAO) return (
                             <AcumuloFuncao
+                                key={i}
                                 valorEstimadoPedidoRef={acumulo_funcao_valorEstimadoPedidoInputRef}
                                 setFormHasChanged={setFormHasChanged}
                                 state={state}
@@ -232,6 +236,7 @@ export default function Step10({ api_data, stepsError, setStepsError, pedidos }:
 
                         else if (o == FormField.PEDIDO_SALARIO_SUBSTITUICAO) return (
                             <SalarioSubstituicao
+                                key={i}
                                 valorSalarioEmpregadoRef={salario_substituicao_valorSalarioEmpregadoInputRef}
                                 valorEstimadoPedidoRef={salario_substituicao_valorEstimadoPedidoInputRef}
                                 setFormHasChanged={setFormHasChanged}
@@ -298,7 +303,7 @@ export default function Step10({ api_data, stepsError, setStepsError, pedidos }:
             const response = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

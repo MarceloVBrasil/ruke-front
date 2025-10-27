@@ -242,9 +242,10 @@ export default function Step20({ api_data, stepsError, setStepsError, pedidos }:
                 />
 
                 {
-                    hipoteses.map(h => {
+                    hipoteses.map((h, i) => {
                         if (h === HIPOTESES_VALUES.JUSTA_CAUSA_REVERTIDA_EM_JUIZO) return (
                             <JustaCausaConvertidaEmJuizo
+                                key={i}
                                 justa_causa={state[FormField.PEDIDO_DANOS_MORAIS].value?.[PEDIDO_DANOS_MORAIS.JUSTA_CAUSA_REVERTIDA_EM_JUIZO]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -254,6 +255,7 @@ export default function Step20({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (h === HIPOTESES_VALUES.PAGAMENTO_VERBAS_RESCISORIAS_FORA_DO_PRAZO) return (
                             <PagamentoVerbasRescisoriasForaPrazo
+                                key={i}
                                 pagamento_fora_prazo={state[FormField.PEDIDO_DANOS_MORAIS].value?.[PEDIDO_DANOS_MORAIS.PAGAMENTO_VERBAS_RESCISORIAS_FORA_DO_PRAZO]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -263,6 +265,7 @@ export default function Step20({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (h === HIPOTESES_VALUES.PAGAMENTO_PARCELADO_VERBAS_RESCISORIAS) return (
                             <PagamentoParceladoVerbasRescisorias
+                                key={i}
                                 pagamento_parcelado={state[FormField.PEDIDO_DANOS_MORAIS].value?.[PEDIDO_DANOS_MORAIS.PAGAMENTO_PARCELADO_VERBAS_RESCISORIAS]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -272,6 +275,7 @@ export default function Step20({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (h === HIPOTESES_VALUES.NAO_PAGAMENTO_VERBAS_RESCISORIAS) return (
                             <NaoPagamentoVerbasRescisorias
+                                key={i}
                                 nao_pagamento={state[FormField.PEDIDO_DANOS_MORAIS].value?.[PEDIDO_DANOS_MORAIS.NAO_PAGAMENTO_VERBAS_RESCISORIAS]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -281,6 +285,7 @@ export default function Step20({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (h === HIPOTESES_VALUES.ASSEDIO_MORAL_HORIZONTAL) return (
                             <AssedioMoralHorizontal
+                                key={i}
                                 assedio_horizontal={state[FormField.PEDIDO_DANOS_MORAIS].value?.[PEDIDO_DANOS_MORAIS.ASSEDIO_MORAL_HORIZONTAL]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -290,6 +295,7 @@ export default function Step20({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (h === HIPOTESES_VALUES.ASSEDIO_MORAL_VERTICAL) return (
                             <AssedioMoralVertical
+                                key={i}
                                 assedio_vertical={state[FormField.PEDIDO_DANOS_MORAIS].value?.[PEDIDO_DANOS_MORAIS.ASSEDIO_MORAL_VERTICAL]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -299,6 +305,7 @@ export default function Step20({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (h === HIPOTESES_VALUES.DISPENSA_DISCRIMINATORIA_DOENCA) return (
                             <DispensaDiscriminatoriaDoenca
+                                key={i}
                                 dispensa_doenca={state[FormField.PEDIDO_DANOS_MORAIS].value?.[PEDIDO_DANOS_MORAIS.DISPENSA_DISCRIMINATORIA_DOENCA]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -308,6 +315,7 @@ export default function Step20({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (h === HIPOTESES_VALUES.SONEGACAO_VERBAS_TRABALHISTAS) return (
                             <SonegacaoVerbasTrabalhistas
+                                key={i}
                                 sonegacao={state[FormField.PEDIDO_DANOS_MORAIS].value?.[PEDIDO_DANOS_MORAIS.SONEGACAO_VERBAS_TRABALHISTAS]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -317,6 +325,7 @@ export default function Step20({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (h === HIPOTESES_VALUES.DISPENSA_ARBITRATIA_ESTABILIDADE_PROVISORIA) return (
                             <DispensaArbitrariaComEstabilidadeProvisoria
+                                key={i}
                                 dispensa_arbitraria={state[FormField.PEDIDO_DANOS_MORAIS].value?.[PEDIDO_DANOS_MORAIS.DISPENSA_ARBITRATIA_ESTABILIDADE_PROVISORIA]}
                                 setFormHasChanged={setFormHasChanged}
                                 error={error.dispensa_arbitraria_estabilidade_provisoria}
@@ -326,6 +335,7 @@ export default function Step20({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (h === HIPOTESES_VALUES.ACIDENTE_TRABALHO) return (
                             <AcidenteTrabalho
+                                key={i}
                                 acidente_trabalho={state[FormField.PEDIDO_DANOS_MORAIS].value?.[PEDIDO_DANOS_MORAIS.ACIDENTE_TRABALHO]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -335,6 +345,7 @@ export default function Step20({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (h === HIPOTESES_VALUES.NAO_FORNECIMENTO_EPI_LABOR_INSALUBRE) return (
                             <NaoFornacimentoEpiLaborInsalubre
+                                key={i}
                                 labor_insalubre={state[FormField.PEDIDO_DANOS_MORAIS].value?.[PEDIDO_DANOS_MORAIS.NAO_FORNECIMENTO_EPI_LABOR_INSALUBRE]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -344,6 +355,7 @@ export default function Step20({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (h === HIPOTESES_VALUES.NAO_FORNECIMENTO_EPI_LABOR_PERIGOSO) return (
                             <NaoFornacimentoEpiLaborPerigoso
+                                key={i}
                                 labor_perigoso={state[FormField.PEDIDO_DANOS_MORAIS].value?.[PEDIDO_DANOS_MORAIS.NAO_FORNECIMENTO_EPI_LABOR_PERIGOSO]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -353,6 +365,7 @@ export default function Step20({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (h === HIPOTESES_VALUES.EXCESSO_HORAS_EXTRAS) return (
                             <ExcessoHorasExtras
+                                key={i}
                                 excesso_horas={state[FormField.PEDIDO_DANOS_MORAIS].value?.[PEDIDO_DANOS_MORAIS.EXCESSO_HORAS_EXTRAS]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -517,7 +530,7 @@ export default function Step20({ api_data, stepsError, setStepsError, pedidos }:
             const updateResponse = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

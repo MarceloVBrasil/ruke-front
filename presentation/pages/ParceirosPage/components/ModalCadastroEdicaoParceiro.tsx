@@ -90,7 +90,7 @@ export default function ModalCadastroEdicaoParceiro(props: IModalCadastroEdicaoP
                 />
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={12}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
+                        <Typography sx={{ color: '#00479d', marginLeft: '10px' }}>
                             Nome
                         </Typography>
                         <TextField
@@ -107,7 +107,7 @@ export default function ModalCadastroEdicaoParceiro(props: IModalCadastroEdicaoP
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
+                        <Typography sx={{ color: '#00479d', marginLeft: '10px' }}>
                             Email
                         </Typography>
                         <TextField
@@ -123,7 +123,7 @@ export default function ModalCadastroEdicaoParceiro(props: IModalCadastroEdicaoP
                     </Grid>
                     {personChoose === 'juridica' &&
                         <Grid item xs={12} sm={6}>
-                            <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
+                            <Typography sx={{ color: '#00479d', marginLeft: '10px' }}>
                                 CNPJ
                             </Typography>
                             <TextField
@@ -148,7 +148,7 @@ export default function ModalCadastroEdicaoParceiro(props: IModalCadastroEdicaoP
                     }
                     {personChoose === 'fisica' &&
                         <Grid item xs={12} sm={6}>
-                            <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
+                            <Typography sx={{ color: '#00479d', marginLeft: '10px' }}>
                                 CPF
                             </Typography>
                             <TextField
@@ -173,7 +173,7 @@ export default function ModalCadastroEdicaoParceiro(props: IModalCadastroEdicaoP
 
                     {personChoose === 'fisica' && (
                         <Grid item xs={12} sm={6}>
-                            <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
+                            <Typography sx={{ color: '#00479d', marginLeft: '10px' }}>
                                 Data de Aniversário
                             </Typography>
                             <TextField
@@ -189,7 +189,7 @@ export default function ModalCadastroEdicaoParceiro(props: IModalCadastroEdicaoP
                     )}
                     {personChoose === 'juridica' && (
                         <Grid item xs={12} sm={6}>
-                            <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
+                            <Typography sx={{ color: '#00479d', marginLeft: '10px' }}>
                                 Tipo de Empresa
                             </Typography>
                             <TextField
@@ -206,7 +206,7 @@ export default function ModalCadastroEdicaoParceiro(props: IModalCadastroEdicaoP
                     )}
 
                     <Grid item xs={12} sm={6}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
+                        <Typography sx={{ color: '#00479d', marginLeft: '10px' }}>
                             Celular
                         </Typography>
                         <TextField
@@ -228,7 +228,7 @@ export default function ModalCadastroEdicaoParceiro(props: IModalCadastroEdicaoP
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
+                        <Typography sx={{ color: '#00479d', marginLeft: '10px' }}>
                             CEP
                         </Typography>
                         <TextField
@@ -245,7 +245,7 @@ export default function ModalCadastroEdicaoParceiro(props: IModalCadastroEdicaoP
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
+                        <Typography sx={{ color: '#00479d', marginLeft: '10px' }}>
                             Endereço
                         </Typography>
                         <TextField
@@ -265,7 +265,7 @@ export default function ModalCadastroEdicaoParceiro(props: IModalCadastroEdicaoP
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
+                        <Typography sx={{ color: '#00479d', marginLeft: '10px' }}>
                             Número
                         </Typography>
                         <TextField
@@ -280,7 +280,7 @@ export default function ModalCadastroEdicaoParceiro(props: IModalCadastroEdicaoP
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
+                        <Typography sx={{ color: '#00479d', marginLeft: '10px' }}>
                             Bairro
                         </Typography>
                         <TextField
@@ -302,7 +302,7 @@ export default function ModalCadastroEdicaoParceiro(props: IModalCadastroEdicaoP
                         />
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
+                        <Typography sx={{ color: '#00479d', marginLeft: '10px' }}>
                             Complemento
                         </Typography>
                         <TextField

@@ -42,7 +42,7 @@ export default function PedidoPagamentoRetido(props: IPedidoPagamentoRetido) {
                 defaultValue={pedido?.[PAGAMENTO_RETIDO_PEDIDO.PERCENTUAL_GORJETAS] as number}
                 onBlur={handlePercentualGorjetaRetidaChange}
                 label='Qual era o percentual das gorjetas retido pelo empregador?'
-                variant='outlined'
+                variant='filled'
                 endAdornment='%'
 
             />
@@ -54,6 +54,7 @@ export default function PedidoPagamentoRetido(props: IPedidoPagamentoRetido) {
                 name={REFS.VALOR_MEDIO_MENSAL_GORJETAS}
                 defaultValue={pedido?.[PAGAMENTO_RETIDO_PEDIDO.VALOR_MEDIO_MENSAL] || 0}
                 label={'Qual o valor médio mensal das gorjetas recebidas antes da retenção?'}
+                variant='filled'
             />
 
             <GridCurrencyInput
@@ -65,6 +66,7 @@ export default function PedidoPagamentoRetido(props: IPedidoPagamentoRetido) {
                 label={'Qual o valor estimado da quantia retida pelo empregador?'}
                 error={error.valor_total_estimado_gorjetas}
                 helperText={error.valor_total_estimado_gorjetas ? 'Campo obriagtório' : ' '}
+                variant='filled'
             />
 
             <GridRadioGroup

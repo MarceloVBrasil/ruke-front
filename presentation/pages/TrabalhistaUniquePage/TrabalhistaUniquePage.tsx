@@ -26,7 +26,6 @@ const TrabalhistaUniquePage = ({ ticketUnique, regraDominio }: TrabalhistaProps)
                 <Typography
                     sx={{
                         fontSize: "30px",
-                        fontWeight: "600",
                         marginBottom: "30px",
                         color: "#00479D",
                         borderBottom: "3px solid #006BED",

@@ -129,7 +129,7 @@ export default function HorasExtrasNaoPagasSegundaSabados(props: IHorasExtrasNao
 
             <GridTextField
                 xs={12}
-                variant='outlined'
+                variant='filled'
                 type='number'
                 fullWidth
                 name={HORAS_EXTRAS_NAO_PAGAS_SEGUNDA_A_SABADO.QUANTIDADE_HORAS_EXTRAS_SEMANA}
@@ -144,7 +144,7 @@ export default function HorasExtrasNaoPagasSegundaSabados(props: IHorasExtrasNao
                 xs={12}
                 ref={valorEstimadoPedidoRef}
                 name={HORAS_EXTRAS_NAO_PAGAS_SEGUNDA_A_SABADO.VALOR_ESTIMADO_PEDIDO}
-                variant='outlined'
+                variant='filled'
                 defaultValue={horasExtrasNaoPagasSegundaSabados?.[HORAS_EXTRAS_NAO_PAGAS_SEGUNDA_A_SABADO.VALOR_ESTIMADO_PEDIDO] ?? 0}
                 onBlur={handleValorEstimadoPedidoChange}
                 label='Qual o valor estimado pedido de horas extras?'

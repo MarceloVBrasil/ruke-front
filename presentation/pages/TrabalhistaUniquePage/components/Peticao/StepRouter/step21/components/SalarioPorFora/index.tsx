@@ -37,11 +37,10 @@ export default function SalarioPorFora(props: ISalarioPorFora) {
                 defaultValue={salario_por_fora?.[SALARIO_POR_FORA.DATA_INICIO] as string}
                 onBlur={handleDataInicioChange}
                 label='Data Início'
-                variant='outlined'
+                variant='filled'
                 type='date'
                 error={error[SALARIO_POR_FORA.DATA_INICIO]}
                 helperText={error.data_inicio ? 'Campo obrigatório' : ' '}
-                fixLabel
 
             />
 
@@ -53,11 +52,10 @@ export default function SalarioPorFora(props: ISalarioPorFora) {
                 defaultValue={salario_por_fora?.[SALARIO_POR_FORA.DATA_FIM] as string}
                 onBlur={handleDataFimChange}
                 label='Data Fim'
-                variant='outlined'
+                variant='filled'
                 type='date'
                 error={error[SALARIO_POR_FORA.DATA_FIM]}
                 helperText={error.data_fim ? 'Campo obrigatório' : ' '}
-                fixLabel
 
             />
 
@@ -70,7 +68,7 @@ export default function SalarioPorFora(props: ISalarioPorFora) {
                 label='Qual foi o valor mensal médio pago "por fora"?'
                 error={error.valor_mensal_medio}
                 helperText={error.valor_mensal_medio ? 'Campo obrigatório' : ' '}
-                fixLabel
+                variant='filled'
             />
 
             <GridTextField
@@ -80,10 +78,9 @@ export default function SalarioPorFora(props: ISalarioPorFora) {
                 defaultValue={salario_por_fora?.[SALARIO_POR_FORA.RUBRICA_POR_FORA] as string}
                 onBlur={handleRubricaChange}
                 label='Qual era a rubrica ou justificativa utilizada para o pagamento "por fora"? Exemplos: comissão; bonificação; salário complementar'
-                variant='outlined'
+                variant='filled'
                 error={error[SALARIO_POR_FORA.RUBRICA_POR_FORA]}
                 helperText={error.rubrica_por_fora ? 'Campo obrigatório' : ' '}
-                fixLabel
 
             />
 
@@ -122,7 +119,7 @@ export default function SalarioPorFora(props: ISalarioPorFora) {
                 label='Valor estimado pedido'
                 error={error.valor_estimado_pedido}
                 helperText={error.valor_estimado_pedido ? 'Campo obrigatório' : ' '}
-                fixLabel
+                variant='filled'
             />
 
         </Grid>

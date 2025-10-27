@@ -39,6 +39,7 @@ export default function PedidoPagamentoPorFora(props: IPedidoPagamentoPorFora) {
                 name={REFS.VALOR_MEDIO_MENSAL_GORJETAS}
                 defaultValue={pedido?.[PAGAMENTO_POR_FORA_PEDIDO.VALOR_MEDIO] || 0}
                 label={'Qual era o valor médio mensal das gorjetas recebidas?'}
+                variant='filled'
             />
 
             <GridCurrencyInput
@@ -50,6 +51,7 @@ export default function PedidoPagamentoPorFora(props: IPedidoPagamentoPorFora) {
                 label={'Qual o valor total estimado das gorjetas não integradas ao salário?'}
                 error={error.valor_total_estimado_gorjetas}
                 helperText={error.valor_total_estimado_gorjetas ? 'Campo obrigatório' : ' '}
+                variant='filled'
             />
 
             <GridRadioGroup

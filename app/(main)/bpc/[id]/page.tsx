@@ -13,9 +13,9 @@ export default async function Page({ params }: PageProps) {
   const doencas = await getDoencaData();
 
   const regras = JSON.parse(cookies().get("regras")?.value as string);
-  const regraDominio = regras.find((regra: any) => regra.dominio === "ticketRMC");
+  const regraDominio = regras.find((regra: any) => regra.dominio === "BPC");
   return (
 
-    <BpcUniquePage ticketUnique={bpcticket} listDoencas={doencas} regraDominio={regraDominio} />
+    <BpcUniquePage ticketUnique={bpcticket} listDoencas={doencas || []} regraDominio={regraDominio} />
   )
 }

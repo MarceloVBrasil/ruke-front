@@ -110,6 +110,8 @@ export default function Right(props: IRight) {
                     <Grid container spacing={1} style={{ position: 'relative' }}>
                         <GridTextField
                             xs={12}
+                            email
+                            placeholder='jhon.doe@gmail.com'
                             error={errors.email ? true : false}
                             helperText={errors.email?.message?.toString() ?? ' '}
                             fullWidth
@@ -127,7 +129,7 @@ export default function Right(props: IRight) {
                             type="button"
                             variant='outlined'
                             onClick={() => router.push('/forgotpassword')}
-                            style={{ position: 'absolute', top: 80, right: 5, fontSize: 13, textTransform: 'none', border: 'none', fontWeight: 400 }}
+                            style={{ position: 'absolute', top: 80, right: 0, fontSize: 13, textTransform: 'none', border: 'none', fontWeight: 400, width: 'auto' }}
                             color={'primary'}
                             text={'Esqueci minha senha'}
                         />
@@ -135,6 +137,7 @@ export default function Right(props: IRight) {
                         <GridTextField
                             xs={12}
                             id="senha"
+                            placeholder='********'
                             error={errors.senha ? true : false}
                             helperText={errors.senha?.message?.toString() || ' '}
                             fullWidth
@@ -151,7 +154,7 @@ export default function Right(props: IRight) {
                         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <CheckBox disabled checked
                             />
-                            <Typography style={{ fontSize: 13.5, fontWeight: 300, color: '#6b7280' }}>Mantenha-me conectado</Typography>
+                            <Typography style={{ fontSize: 13.5, fontWeight: 300, color: '#6b7280' }}>Manter-me conectado</Typography>
                         </Box>
                     </Grid>
 
@@ -164,7 +167,7 @@ export default function Right(props: IRight) {
                         />
 
                         <Btn
-                            disabled
+                            disabled={!!errors.email}
                             loading={loadingSubmitButton}
                             onClick={goToEntrarSemSenhaPage}
                             text='Entrar sem senha'

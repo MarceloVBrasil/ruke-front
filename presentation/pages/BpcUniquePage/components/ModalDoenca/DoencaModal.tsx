@@ -1,3 +1,6 @@
+import { AutoComplete } from '@/presentation/components/AutoComplete';
+import { Btn } from '@/presentation/components/Button';
+import GridTextField from '@/presentation/components/GridTextField';
 import ModalComponent from '@/presentation/components/Modal';
 import { Grid, Autocomplete, TextField, Typography, Button } from '@mui/material';
 import { Box } from '@mui/system';
@@ -45,14 +48,12 @@ export default function DoencaModal(props: IDoencaModal) {
             open={doencaModal}
         >
             <Grid style={{ borderRadius: "30px" }} item xs={12} sm={6} >
-                <Autocomplete
-                    key={doencas.length}
-                    disablePortal
+                <AutoComplete
+                    label='Selecione uma Doença'
+                    placeholder='Doença'
+                    name={''}
                     options={listDoencas}
-                    getOptionLabel={(option: any) => `${option.codigo} - ${option.nome}`}
-                    renderInput={(params) => (
-                        <TextField {...params} label="Selecione uma doença" />
-                    )}
+                    value={[]}
                     onChange={(e, option: any) => {
                         setDoencaCod(option?.codigo || "");
                         setDoencaNome(option?.nome || "");
@@ -72,65 +73,37 @@ export default function DoencaModal(props: IDoencaModal) {
             >
                 <Grid container spacing={2}>
 
-                    <Grid style={{ borderRadius: "30px" }} item xs={12}>
-                        <Typography
-                            sx={{
-                                color: "#00479d",
-                                fontWeight: "bold",
-                                marginLeft: "10px",
-                            }}
-                        >
-                            Código
-                        </Typography>
-                        <TextField
-                            type="text"
-                            error={errorsDoenca.codigo ? true : false}
-                            helperText={errorsDoenca.codigo?.message?.toString()}
-                            {...registerDoenca("codigo")}
-                            placeholder="Digite o código da doença"
-                            fullWidth
-                            id="codigo"
-                            InputLabelProps={{ shrink: true }}
-                            style={{ borderRadius: 40 }}
-                            value={doencaCod}
-                            onChange={(e) => setDoencaCod(e.target.value)}
-                        />
-                    </Grid>
+                    <GridTextField
+                        xs={12}
+                        variant='filled'
+                        label='Código'
+                        error={errorsDoenca.codigo ? true : false}
+                        helperText={errorsDoenca.codigo?.message?.toString()}
+                        {...registerDoenca("codigo")}
+                        placeholder="Digite o código da doença"
+                        value={doencaCod}
+                        onChange={(e) => setDoencaCod(e.target.value)}
+                    />
 
-                    <Grid style={{ borderRadius: "30px" }} item xs={12} >
-                        <Typography
-                            sx={{
-                                color: "#00479d",
-                                fontWeight: "bold",
-                                marginLeft: "10px",
-                            }}
-                        >
-                            Nome
-                        </Typography>
-                        <TextField
-                            type="text"
-                            error={errorsDoenca.nome ? true : false}
-                            helperText={errorsDoenca.nome?.message?.toString()}
-                            {...registerDoenca("nome")}
-                            placeholder="Digite o nome da doença"
-                            fullWidth
-                            id="nome"
-                            InputLabelProps={{ shrink: true }}
-                            style={{ borderRadius: 40 }}
-                            value={doencaNome}
-                            onChange={(e) => setDoencaNome(e.target.value)}
-                        />
-                    </Grid>
+                    <GridTextField
+                        xs={12}
+                        variant='filled'
+                        label='Nome'
+                        error={errorsDoenca.nome ? true : false}
+                        helperText={errorsDoenca.nome?.message?.toString()}
+                        {...registerDoenca("nome")}
+                        placeholder="Digite o nome da doença"
+                        value={doencaNome}
+                        onChange={(e) => setDoencaNome(e.target.value)}
+                    />
 
                 </Grid>
-                <Button
+                <Btn
                     type="submit"
-                    fullWidth
+                    text='Adicionar'
                     variant="contained"
                     sx={{ mt: 3, mb: 2, padding: "10px" }}
-                >
-                    Adicionar
-                </Button>
+                />
             </Box>
         </ModalComponent>
     )

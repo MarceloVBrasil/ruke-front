@@ -33,7 +33,7 @@ export default function Sobreaviso(props: ISobreaviso) {
                 label='Quantas vezes por semana o reclamante ficou de sobreaviso'
                 name={PRONTIDAO.QUANTIDADE_VEZES_SEMANA}
                 defaultValue={sobreaviso?.[SOBREAVISO.QUANTIDADE_VEZES_SEMANA] as number}
-                variant='outlined'
+                variant='filled'
                 onBlur={handleQuantidadeVezesSemanaChange}
                 error={error.quantidade_vezes_semana}
                 helperText={error.quantidade_vezes_semana ? 'Campo obrigatório' : ' '}
@@ -43,7 +43,7 @@ export default function Sobreaviso(props: ISobreaviso) {
                 xs={12}
                 ref={valorEstimadoPedidoRef}
                 name={HORAS_EXTRAS_NAO_PAGAS.VALOR_ESTIMADO_PEDIDO}
-                variant='outlined'
+                variant='filled'
                 defaultValue={sobreaviso?.[SOBREAVISO.VALOR_ESTIMADO_PEDIDO] ?? 0}
                 onBlur={handleValorEstimadoPedidoChange}
                 label='Qual o valor pedido?'

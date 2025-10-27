@@ -8,6 +8,11 @@ import React from 'react'
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import ArticleIcon from "@mui/icons-material/Article";
+import GridTextField from '@/presentation/components/GridTextField';
+import GridSelectField from '@/presentation/components/GridSelectField';
+import { estado_civil } from '@/domain/data/estado_civil';
+import { estados_brasileiros } from '@/app/utils/EstadosBrasileiros';
+import { Btn } from '@/presentation/components/Button';
 
 interface IProcuracao {
     ticket: { procuracao_pdf: any, procuracao_word: any }
@@ -101,7 +106,6 @@ export default function Procuracao(props: IProcuracao) {
                             marginRight: 10,
                             width: "100%",
                             color: "#00479d",
-                            fontWeight: "bold",
                         }}
                     >
                         PROCURAÇÃO{" "}
@@ -167,7 +171,6 @@ export default function Procuracao(props: IProcuracao) {
                         sx={{
                             borderBottom: "2px solid #00479d",
                             color: "#00479d",
-                            fontWeight: "bold",
                             marginLeft: "10px",
                         }}
                     >
@@ -182,436 +185,249 @@ export default function Procuracao(props: IProcuracao) {
                         onSubmit={handleSubmitProcuracao(criarBpcProx)}
                         spacing={2}
                     >
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Nome
-                            </Typography>
-                            <TextField
-                                fullWidth
-                                id="outlined-basic"
-                                error={errorsProcuracao.nameClient ? true : false}
-                                helperText={errorsProcuracao.nameClient?.message?.toString()}
-                                value={nameClient}
-                                {...registerProcuracao("nameClient")}
-                                onChange={(e) => {
-                                    setNameClient(e.target.value);
-                                    resetProcuracao({
-                                        nomeCliente: e.target.value,
-                                    });
-                                }}
-                                placeholder="Nome"
-                                variant="outlined"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            label='Nome'
+                            placeholder='Nome'
+                            variant='filled'
+                            error={errorsProcuracao.nameClient ? true : false}
+                            helperText={errorsProcuracao.nameClient?.message?.toString()}
+                            value={nameClient}
+                            {...registerProcuracao("nameClient")}
+                            onChange={(e) => {
+                                setNameClient(e.target.value);
+                                resetProcuracao({
+                                    nomeCliente: e.target.value,
+                                });
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Estado Civil
-                            </Typography>
-                            <FormControl
-                                fullWidth
-                                variant="filled"
-                                error={errorsProcuracao.estadoCivil ? true : false}
-                            >
-                                <Select
-                                    variant="outlined"
-                                    displayEmpty
-                                    fullWidth
-                                    value={estadoCivil}
-                                    style={{
-                                        borderRadius: "10px",
-                                    }}
-                                    {...registerProcuracao("estadoCivil")}
-                                    onChange={(e) => {
-                                        setEstadoCivil(e.target.value);
-                                        resetProcuracao({
-                                            estadoCivil: e.target.value,
-                                        });
-                                    }}
-                                >
-                                    <MenuItem selected value="" disabled>
-                                        Selecione o estado civil
-                                    </MenuItem>
-                                    <MenuItem value={"Solteiro(a)"}>Solteiro(a)</MenuItem>
-                                    <MenuItem value={"Casado(a)"}>Casado(a)</MenuItem>
-                                    <MenuItem value={"Divorciado(a)"}>Divorciado(a)</MenuItem>
-                                    <MenuItem value={"Viuvo(a)"}>Viúvo(a)</MenuItem>
-                                    <MenuItem value={"Separado(a) Judicialmente"}>
-                                        Separado(a) Judicialmente
-                                    </MenuItem>
-                                    <MenuItem value={"em União Estável"}>
-                                        em União Estável
-                                    </MenuItem>
-                                </Select>
-                                {errorsProcuracao.estadoCivil ? (
-                                    <FormHelperText>
-                                        {errorsProcuracao.estadoCivil?.message?.toString()}
-                                    </FormHelperText>
-                                ) : null}
-                            </FormControl>
-                        </Grid>
+                        <GridSelectField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            label='Estado Civil'
+                            placeholder='Estado Civil'
+                            variant='filled'
+                            value={estadoCivil}
+                            options={estado_civil}
+                            error={!!errorsProcuracao.estadoCivil}
+                            helperText={errorsProcuracao.estadoCivil?.message?.toString()}
+                            {...registerProcuracao("estadoCivil")}
+                            onChange={(e) => {
+                                setEstadoCivil(e.target.value);
+                                resetProcuracao({
+                                    estadoCivil: e.target.value,
+                                });
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Profissão
-                            </Typography>
-                            <TextField
-                                fullWidth
-                                placeholder="Profissão"
-                                variant="outlined"
-                                error={errorsProcuracao.profissao ? true : false}
-                                helperText={errorsProcuracao.profissao?.message?.toString()}
-                                InputLabelProps={{ shrink: true }}
-                                value={profissao}
-                                {...registerProcuracao("profissao")}
-                                onChange={(e) => {
-                                    setProfissao(e.target.value);
-                                    resetProcuracao({
-                                        profissao: e.target.value,
-                                    });
-                                }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            variant='filled'
+                            label='Profissão'
+                            placeholder='Profissão'
+                            error={errorsProcuracao.profissao ? true : false}
+                            helperText={errorsProcuracao.profissao?.message?.toString()}
+                            value={profissao}
+                            {...registerProcuracao("profissao")}
+                            onChange={(e) => {
+                                setProfissao(e.target.value);
+                                resetProcuracao({
+                                    profissao: e.target.value,
+                                });
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                CPF do cliente
-                            </Typography>
-                            <TextField
-                                fullWidth
-                                placeholder="CPF do cliente"
-                                variant="outlined"
-                                error={errorsProcuracao.cpfClient ? true : false}
-                                helperText={errorsProcuracao.cpfClient?.message?.toString()}
-                                InputLabelProps={{ shrink: true }}
-                                value={cpfClient}
-                                {...registerProcuracao("cpfClient")}
-                                onChange={(e) => {
-                                    const value = onlyNumber(e.target.value);
-                                    setCPFClient(formatCpf(value));
-                                    resetProcuracao({
-                                        cpfClient: formatCpf(value),
-                                    });
-                                }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            label='CPF do Cliente'
+                            variant='filled'
+                            placeholder='CPF do cliente'
+                            error={errorsProcuracao.cpfClient ? true : false}
+                            helperText={errorsProcuracao.cpfClient?.message?.toString()}
+                            value={cpfClient}
+                            {...registerProcuracao("cpfClient")}
+                            onChange={(e) => {
+                                const value = onlyNumber(e.target.value);
+                                setCPFClient(formatCpf(value));
+                                resetProcuracao({
+                                    cpfClient: formatCpf(value),
+                                });
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                CEP
-                            </Typography>
-                            <TextField
-                                id="outlined-basic"
-                                fullWidth
-                                placeholder="CEP"
-                                variant="outlined"
-                                value={cep}
-                                error={errorsProcuracao.cep ? true : false}
-                                helperText={errorsProcuracao.cep?.message?.toString()}
-                                {...registerProcuracao("cep")}
-                                onChange={(e) => {
-                                    const value = onlyNumber(e.target.value);
-                                    setCep(formatCepInput(value));
-                                    resetProcuracao({
-                                        cep: formatCepInput(value),
-                                    });
-                                }}
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            label='CEP'
+                            variant='filled'
+                            placeholder='CEP'
+                            error={errorsProcuracao.cep ? true : false}
+                            helperText={errorsProcuracao.cep?.message?.toString()}
+                            value={cep}
+                            {...registerProcuracao("cep")}
+                            onChange={(e) => {
+                                const value = onlyNumber(e.target.value);
+                                setCep(formatCepInput(value));
+                                resetProcuracao({
+                                    cep: formatCepInput(value),
+                                });
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Endereço
-                            </Typography>
-                            <TextField
-                                id="outlined-basic"
-                                fullWidth
-                                placeholder="Endereço do cliente"
-                                variant="outlined"
-                                value={enderecoCompleto}
-                                error={errorsProcuracao.enderecoCompleto ? true : false}
-                                helperText={errorsProcuracao.enderecoCompleto?.message?.toString()}
-                                {...registerProcuracao("enderecoCompleto")}
-                                onChange={(e) => {
-                                    setEnderecoCompleto(e.target.value);
-                                    resetProcuracao({
-                                        enderecoCompleto: e.target.value,
-                                    });
-                                }}
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            label='Endereço'
+                            variant='filled'
+                            placeholder='Endereço'
+                            value={enderecoCompleto}
+                            error={errorsProcuracao.enderecoCompleto ? true : false}
+                            helperText={errorsProcuracao.enderecoCompleto?.message?.toString()}
+                            {...registerProcuracao("enderecoCompleto")}
+                            onChange={(e) => {
+                                setEnderecoCompleto(e.target.value);
+                                resetProcuracao({
+                                    enderecoCompleto: e.target.value,
+                                });
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Número
-                            </Typography>
-                            <TextField
-                                id="outlined-basic"
-                                fullWidth
-                                placeholder="Endereço do cliente"
-                                variant="outlined"
-                                value={numero}
-                                error={errorsProcuracao.numero ? true : false}
-                                helperText={errorsProcuracao.numero?.message?.toString()}
-                                {...registerProcuracao("numero")}
-                                onChange={(e) => {
-                                    setNumero(e.target.value);
-                                    resetProcuracao({
-                                        numero: e.target.value,
-                                    });
-                                }}
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            label='Número'
+                            placeholder='Digite o número'
+                            variant='filled'
+                            value={numero}
+                            error={errorsProcuracao.numero ? true : false}
+                            helperText={errorsProcuracao.numero?.message?.toString()}
+                            {...registerProcuracao("numero")}
+                            onChange={(e) => {
+                                setNumero(e.target.value);
+                                resetProcuracao({
+                                    numero: e.target.value,
+                                });
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Bairro
-                            </Typography>
-                            <TextField
-                                id="outlined-basic"
-                                fullWidth
-                                placeholder="Endereço do cliente"
-                                variant="outlined"
-                                value={bairro}
-                                error={errorsProcuracao.bairro ? true : false}
-                                helperText={errorsProcuracao.bairro?.message?.toString()}
-                                {...registerProcuracao("bairro")}
-                                onChange={(e) => {
-                                    setBairro(e.target.value);
-                                    resetProcuracao({
-                                        bairro: e.target.value,
-                                    });
-                                }}
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            label='Bairro'
+                            placeholder='Digite o bairro'
+                            variant='filled'
+                            value={bairro}
+                            error={errorsProcuracao.bairro ? true : false}
+                            helperText={errorsProcuracao.bairro?.message?.toString()}
+                            {...registerProcuracao("bairro")}
+                            onChange={(e) => {
+                                setBairro(e.target.value);
+                                resetProcuracao({
+                                    bairro: e.target.value,
+                                });
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Complemento
-                            </Typography>
-                            <TextField
-                                id="outlined-basic"
-                                fullWidth
-                                placeholder="Endereço do cliente"
-                                variant="outlined"
-                                value={complemento}
-                                error={errorsProcuracao.complemento ? true : false}
-                                helperText={errorsProcuracao.complemento?.message?.toString()}
-                                {...registerProcuracao("complemento")}
-                                onChange={(e) => {
-                                    setComplemento(e.target.value);
-                                    resetProcuracao({
-                                        complemento: e.target.value,
-                                    });
-                                }}
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            label='Complemento'
+                            placeholder='Digite o complemento'
+                            variant='filled'
+                            value={complemento}
+                            error={errorsProcuracao.complemento ? true : false}
+                            helperText={errorsProcuracao.complemento?.message?.toString()}
+                            {...registerProcuracao("complemento")}
+                            onChange={(e) => {
+                                setComplemento(e.target.value);
+                                resetProcuracao({
+                                    complemento: e.target.value,
+                                });
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Cidade
-                            </Typography>
-                            <TextField
-                                id="outlined-basic"
-                                fullWidth
-                                placeholder="Endereço do cliente"
-                                variant="outlined"
-                                value={cidade}
-                                error={errorsProcuracao.cidade ? true : false}
-                                helperText={errorsProcuracao.cidade?.message?.toString()}
-                                {...registerProcuracao("cidade")}
-                                onChange={(e) => {
-                                    setCidade(e.target.value);
-                                    resetProcuracao({
-                                        cidade: e.target.value,
-                                    });
-                                }}
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            label='Cidade'
+                            placeholder='Digite a cidade'
+                            variant='filled'
+                            value={cidade}
+                            error={errorsProcuracao.cidade ? true : false}
+                            helperText={errorsProcuracao.cidade?.message?.toString()}
+                            {...registerProcuracao("cidade")}
+                            onChange={(e) => {
+                                setCidade(e.target.value);
+                                resetProcuracao({
+                                    cidade: e.target.value,
+                                });
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <FormControl
-                                error={errorsProcuracao.estado ? true : false}
-                                fullWidth
-                                variant="filled"
-                            >
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Estado
-                                </Typography>
-                                <Select
-                                    variant="outlined"
-                                    sx={{ borderRadius: "10px" }}
-                                    id="estado"
-                                    value={estado}
-                                    {...registerProcuracao("estado")}
-                                    onChange={(e) => {
-                                        setEstado(e.target.value);
-                                    }}
-                                >
-                                    <MenuItem selected value="" disabled>
-                                        Estado
-                                    </MenuItem>
-                                    <MenuItem value="AC">AC</MenuItem>
-                                    <MenuItem value="AL">AL</MenuItem>
-                                    <MenuItem value="AP">AP</MenuItem>
-                                    <MenuItem value="AM">AM</MenuItem>
-                                    <MenuItem value="BA">BA</MenuItem>
-                                    <MenuItem value="CE">CE</MenuItem>
-                                    <MenuItem value="DF">DF</MenuItem>
-                                    <MenuItem value="ES">ES</MenuItem>
-                                    <MenuItem value="GO">GO</MenuItem>
-                                    <MenuItem value="MA">MA</MenuItem>
-                                    <MenuItem value="MT">MT</MenuItem>
-                                    <MenuItem value="MS">MS</MenuItem>
-                                    <MenuItem value="MG">MG</MenuItem>
-                                    <MenuItem value="PA">PA</MenuItem>
-                                    <MenuItem value="PB">PB</MenuItem>
-                                    <MenuItem value="PR">PR</MenuItem>
-                                    <MenuItem value="PE">PE</MenuItem>
-                                    <MenuItem value="PI">PI</MenuItem>
-                                    <MenuItem value="RJ">RJ</MenuItem>
-                                    <MenuItem value="RN">RN</MenuItem>
-                                    <MenuItem value="RS">RS</MenuItem>
-                                    <MenuItem value="RO">RO</MenuItem>
-                                    <MenuItem value="RR">RR</MenuItem>
-                                    <MenuItem value="SC">SC</MenuItem>
-                                    <MenuItem value="SP">SP</MenuItem>
-                                    <MenuItem value="SE">SE</MenuItem>
-                                    <MenuItem value="TO">TO</MenuItem>
-                                </Select>
-                                {errorsProcuracao.estado ? (
-                                    <FormHelperText>
-                                        {errorsProcuracao.estado?.message?.toString()}
-                                    </FormHelperText>
-                                ) : null}
-                            </FormControl>
-                        </Grid>
+                        <GridSelectField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            variant='filled'
+                            label='Estado'
+                            placeholder='Estado'
+                            value={estado}
+                            error={errorsProcuracao.estado ? true : false}
+                            helperText={errorsProcuracao.estado?.message?.toString()}
+                            options={estados_brasileiros}
+                            {...registerProcuracao("estado")}
+                            onChange={(e) => {
+                                setEstado(e.target.value);
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Data
-                            </Typography>
-                            <TextField
-                                id="date"
-                                fullWidth
-                                type="date"
-                                variant="outlined"
-                                value={date}
-                                error={errorsProcuracao.date ? true : false}
-                                helperText={errorsProcuracao.date?.message?.toString()}
-                                {...registerProcuracao("date")}
-                                onChange={(e) => {
-                                    setDate(e.target.value);
-                                    resetProcuracao({
-                                        date: e.target.value,
-                                    });
-                                }}
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
-
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            label='Data'
+                            placeholder='data'
+                            type='date'
+                            variant='filled'
+                            value={date}
+                            error={errorsProcuracao.date ? true : false}
+                            helperText={errorsProcuracao.date?.message?.toString()}
+                            {...registerProcuracao("date")}
+                            onChange={(e) => {
+                                setDate(e.target.value);
+                                resetProcuracao({
+                                    date: e.target.value,
+                                });
+                            }}
+                        />
                     </Grid>
                 </AccordionDetails>
             </Accordion>
             <AccordionDetails>
-                {(regraDominio?.permissoes?.includes("create") ||
+                {(regraDominio?.permissoes?.includes("add") ||
                     regraDominio?.permissoes?.includes("update")) && (
-                        <Button
+                        <Btn
                             type="submit"
-                            color="success"
+                            width={250}
                             variant="contained"
                             disabled={loadingProxy}
-                            form="form-procuracao"
-                        >
-                            {loadingProxy ? (
-                                <CircularProgress
-                                    size={20}
-                                    style={{ color: "white", marginRight: 10 }}
-                                />
-                            ) : (
-                                ""
-                            )}{" "}
-                            GERAR PROCURAÇÃO
-                        </Button>
+                            text='Gerar Procuração'
+                        />
+
                     )}
             </AccordionDetails>
         </Accordion>

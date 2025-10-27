@@ -321,7 +321,7 @@ export function AddPJModal(props: IModal) {
 
             getEnderecoByCep(data.cep)
         } catch (error) {
-            console.log(error)
+            (error)
         }
     }
 
@@ -362,7 +362,7 @@ export function AddPJModal(props: IModal) {
             })
 
         } catch (error) {
-            console.log(error)
+
         }
     }
 

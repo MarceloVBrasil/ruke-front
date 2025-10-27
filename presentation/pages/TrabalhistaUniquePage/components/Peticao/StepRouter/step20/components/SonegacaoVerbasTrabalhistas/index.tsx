@@ -30,11 +30,10 @@ export default function SonegacaoVerbasTrabalhistas(props: ISonegacaoVerbasTraba
                 defaultValue={sonegacao?.[SONEGACAO_VERBAS_TRABALHISTAS.VERBAS_SONEGADAS] as string}
                 onBlur={handleVerbasSonegadas}
                 label='Quais foram as verbas trabalhistas sonegadas?'
-                variant='outlined'
+                variant='filled'
                 error={error.verbas_sonegadas}
                 helperText={error.verbas_sonegadas ? 'Campo obrigatório' : ' '}
                 className='danos_morais'
-                fixLabel
 
             />
 
@@ -48,7 +47,7 @@ export default function SonegacaoVerbasTrabalhistas(props: ISonegacaoVerbasTraba
                 error={error.valor_estimado}
                 helperText={error.valor_estimado ? 'Campo obrigatório' : ' '}
                 className='danos_morais'
-                fixLabel
+                variant='filled'
             />
 
         </Grid>

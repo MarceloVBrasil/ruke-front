@@ -121,7 +121,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
                     defaultValue={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.CARGA_HORARIA_SEMANAL_HORAS] as number}
                     fullWidth
                     onBlur={handleCargaHorariaSemanalChange}
-                    variant='outlined'
+                    variant='filled'
                     label='Qual era a carga horária semanal contratada em horas?'
                     error={error.demais_campos.carga_horaria_semanal}
                     helperText={error.demais_campos.carga_horaria_semanal ? 'Campo obrigatório' : ' '}
@@ -329,9 +329,10 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
                 />
 
                 {
-                    hipoteses.map(hipotese => {
+                    hipoteses.map((hipotese, i) => {
                         if (hipotese == HIPOTESE_VALUES.HORAS_EXTRAS_NAO_PAGAS) return (
                             <HorasExtrasNaoPagas
+                                key={i}
                                 horasExtrasNaoPagas={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.HORAS_EXTRAS_NAO_PAGAS]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -341,6 +342,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (hipotese == HIPOTESE_VALUES.HORAS_EXTRAS_NAO_PAGAS_SEGUNDA_A_SABADO) return (
                             <HorasExtrasNaoPagasSegundaSabado
+                                key={i}
                                 horasExtrasNaoPagasSegundaSabados={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.HORAS_EXTRAS_NAO_PAGAS_SEGUNDA_A_SABADO]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -350,6 +352,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (hipotese == HIPOTESE_VALUES.HORAS_EXTRAS_NAO_PAGAS_SABADOS) return (
                             <HorasExtrasNaoPagasSabados
+                                key={i}
                                 horasExtrasNaoPagasSabados={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.HORAS_EXTRAS_NAO_PAGAS_SABADOS]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -359,6 +362,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (hipotese == HIPOTESE_VALUES.HORAS_EXTRAS_NAO_PAGAS_SEGUNDA_A_SEXTA) return (
                             <HorasExtrasNaoPagasSegundaSexta
+                                key={i}
                                 horasExtrasNaoPagasSegundaSexta={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.HORAS_EXTRAS_NAO_PAGAS_SEGUNDA_A_SEXTA]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -368,6 +372,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (hipotese == HIPOTESE_VALUES.HORAS_EXTRAS_PAGAS_PARCIALMENTE) return (
                             <HorasExtrasPagasParcialmente
+                                key={i}
                                 horasExtrasPagasParcialmente={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.HORAS_EXTRAS_PAGAS_PARCIALMENTE]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -377,6 +382,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (hipotese == HIPOTESE_VALUES.HORAS_EXTRAS_PAGAS_POR_FORA) return (
                             <HorasExtrasPagasPorFora
+                                key={i}
                                 horasExtrasPagasPorFora={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.HORAS_EXTRAS_PAGAS_POR_FORA]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -386,6 +392,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (hipotese == HIPOTESE_VALUES.LABOR_DOMINGOS_SEM_CONTRAPRESTACAO) return (
                             <LaborAosDomingos
+                                key={i}
                                 labor_domingos={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.LABOR_AOS_DOMINGOS_SEM_CONTRAPRESTACAO]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -395,6 +402,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (hipotese == HIPOTESE_VALUES.LABOR_EM_FERIADOS) return (
                             <LaborEmFeriados
+                                key={i}
                                 labor_feriados={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.LABOR_EM_FERIADOS]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -404,6 +412,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (hipotese == HIPOTESE_VALUES.JORNADA_TRABALHO_12_36) return (
                             <JornadaTrabalho_12_36
+                                key={i}
                                 jornada_trabalho_12_36={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.JORNADA_TRABALHO_12_36]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -413,6 +422,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (hipotese == HIPOTESE_VALUES.SUPRESSAO_INTERVALO_INTRAJORNADA) return (
                             <SupressaoIntervaloIntrajornada
+                                key={i}
                                 supressao_intrajornada={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.SUPRESSAO_INTERVALO_INTRAJORNADA]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -422,6 +432,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (hipotese == HIPOTESE_VALUES.SUPRESSAO_INTERVALO_INTERJORNADA) return (
                             <SupressaoIntervaloInterjornada
+                                key={i}
                                 supressao_interjornada={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.SUPRESSAO_INTERVALO_INTERJORNADA]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -431,6 +442,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (hipotese == HIPOTESE_VALUES.ADICIONAL_NOTURNO) return (
                             <AdicionalNoturno
+                                key={i}
                                 adicionalNoturno={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.ADICIONAL_NOTURNO]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -440,6 +452,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (hipotese == HIPOTESE_VALUES.SOBREAVISO) return (
                             <Sobreaviso
+                                key={i}
                                 sobreaviso={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.SOBREAVISO]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -449,6 +462,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (hipotese == HIPOTESE_VALUES.PRONTIDAO) return (
                             <Prontidao
+                                key={i}
                                 prontidao={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.PRONTIDAO]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -458,6 +472,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
 
                         if (hipotese == HIPOTESE_VALUES.DESCARACTERIZACAO_CARGO_CONFIANCA) return (
                             <DescaracterizacaoCargoConfianca
+                                key={i}
                                 descaracterizaoCargoConfianca={state[FormField.PEDIDO_JORNADA_TRABALHO].value?.[PEDIDO_JORNADA_TRABALHO.DESCARACTERIZACAO_CARGO_CONFIANCA]}
                                 setFormHasChanged={setFormHasChanged}
                                 dispatch={dispatch}
@@ -613,7 +628,7 @@ export default function Step19({ api_data, stepsError, setStepsError, pedidos }:
             const response = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

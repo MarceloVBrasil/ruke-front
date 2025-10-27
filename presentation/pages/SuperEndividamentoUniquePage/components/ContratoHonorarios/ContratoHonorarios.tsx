@@ -152,7 +152,6 @@ export default function ContratoHonorarios({ ticketUnique: api_data, regraDomini
                             marginRight: 10,
                             width: "100%",
                             color: "#00479d",
-                            fontWeight: "bold",
                         }}
                     >
                         CONTRATO DE HONORÁRIOS{" "}
@@ -344,7 +343,7 @@ export default function ContratoHonorarios({ ticketUnique: api_data, regraDomini
                 </AccordionDetails>
             </Accordion>
             <AccordionDetails>
-                {(regraDominio?.permissoes?.includes("create") ||
+                {(regraDominio?.permissoes?.includes("add") ||
                     regraDominio?.permissoes?.includes("update")) && (
                         <Button
                             onClick={() => criarContrato(api_data.id)}

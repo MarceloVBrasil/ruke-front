@@ -32,7 +32,7 @@ export default function PagamentoVerbasRescisoriasForaPrazo(props: IPagamentoVer
                 error={error.valor_estimado}
                 helperText={error.valor_estimado ? 'Campo obrigatório' : ' '}
                 className='danos_morais'
-                fixLabel
+                variant='filled'
             />
 
         </Grid>

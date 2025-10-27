@@ -25,7 +25,6 @@ const page = () => {
           color: '#212121',
           paddingBottom: '10px',
           fontFamily: 'Neue Kaine',
-          fontWeight: 700,
 
         }}>
           Seja bem-vindo à RUKE!

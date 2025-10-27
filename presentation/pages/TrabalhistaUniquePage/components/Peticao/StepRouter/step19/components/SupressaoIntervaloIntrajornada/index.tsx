@@ -27,7 +27,7 @@ export default function SupressaoIntervaloIntrajornada(props: ISupressaoInterval
 
             <GridTextField
                 xs={12}
-                variant='outlined'
+                variant='filled'
                 type='number'
                 fullWidth
                 name={SUPRESSAO_INTERVALO_INTRAJORNADA.DURACAO_INTERVALO}
@@ -40,7 +40,7 @@ export default function SupressaoIntervaloIntrajornada(props: ISupressaoInterval
 
             <GridTextField
                 xs={12}
-                variant='outlined'
+                variant='filled'
                 type='number'
                 fullWidth
                 name={SUPRESSAO_INTERVALO_INTRAJORNADA.QUANTIDADE_POR_SEMANA_INTERVALO_SUPRIMIDO}
@@ -51,24 +51,11 @@ export default function SupressaoIntervaloIntrajornada(props: ISupressaoInterval
                 helperText={error.quantidade_por_semana_intervalo_suprimido ? 'Campo obrigatório' : ' '}
             />
 
-            {/* <GridTextField
-                xs={12}
-                variant='outlined'
-                type='number'
-                fullWidth
-                name={SUPRESSAO_INTERVALO_INTRAJORNADA.QUANTIDADE_HORAS_TOTAIS}
-                defaultValue={supressao_intrajornada?.[SUPRESSAO_INTERVALO_INTRAJORNADA.QUANTIDADE_HORAS_TOTAIS] as number}
-                onBlur={handleQuantidadeHorasTotaisDevemSerPagasChange}
-                label='Qual a quantidade de horas totais deve ser paga?'
-                error={error.quantidade_horas_totais}
-                helperText={error.quantidade_horas_totais ? 'Campo obrigatório' : ' '}
-            /> */}
-
             <GridCurrencyInput
                 xs={12}
                 ref={valorEstimadoPedidoRef}
                 name={SUPRESSAO_INTERVALO_INTRAJORNADA.VALOR_ESTIMADO_PEDIDO}
-                variant='outlined'
+                variant='filled'
                 defaultValue={supressao_intrajornada?.[SUPRESSAO_INTERVALO_INTRAJORNADA.VALOR_ESTIMADO_PEDIDO] ?? 0}
                 onBlur={handleValorEstimadoHorasExtras}
                 label='Qual valor estimado do pedido de horas intrajornada?'

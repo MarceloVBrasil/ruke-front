@@ -46,7 +46,7 @@ export const handleSingIn = async (props: {
         setCookie('ruke_token', response.token)
         setCookie('regras', JSON.stringify(response.regras))
         setCookie('refreshToken', response.refreshToken)
-        setCookie('menusPermitidos', JSON.stringify(response.menus))
+        setCookie('menusPermitidos', JSON.stringify(response.menusPermitidos))
         setCookie('quantidade_usuarios_agenda', response.quantidade_usuarios_agenda)
         setCookie('from_signin', 'true')
         setCookie('ruke_drawer_open', 'true')

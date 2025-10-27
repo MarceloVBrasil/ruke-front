@@ -30,11 +30,10 @@ export default function DispensaArbitrariaComEstabilidadeProvisoria(props: IDisp
                 defaultValue={dispensa_arbitraria?.[DISPENSA_ARBITRATIA_ESTABILIDADE_PROVISORIA.MOTIVO_ESTABILIDADE] as string}
                 onBlur={handleMotivoEstabilidadeProvisoria}
                 label='Qual foi o motivo da estabilidade?'
-                variant='outlined'
+                variant='filled'
                 error={error.motivo_estabilidade}
                 helperText={error.motivo_estabilidade ? 'Campo obrigatório' : ' '}
                 className='danos_morais'
-                fixLabel
 
             />
 
@@ -48,14 +47,14 @@ export default function DispensaArbitrariaComEstabilidadeProvisoria(props: IDisp
                 error={error.valor_estimado}
                 helperText={error.valor_estimado ? 'Campo obrigatório' : ' '}
                 className='danos_morais'
-                fixLabel
+                variant='filled'
             />
 
             <GridTextField
                 xs={12}
                 fullWidth
                 type='date'
-                variant='outlined'
+                variant='filled'
                 defaultValue={dispensa_arbitraria?.[DISPENSA_ARBITRATIA_ESTABILIDADE_PROVISORIA.DATA_PROJECAO_TERMINO] as string}
                 onBlur={handleDataProjecaoTermino}
                 name={DISPENSA_ARBITRATIA_ESTABILIDADE_PROVISORIA.DATA_PROJECAO_TERMINO}
@@ -63,7 +62,6 @@ export default function DispensaArbitrariaComEstabilidadeProvisoria(props: IDisp
                 error={error.data_projecao_termino}
                 helperText={error.data_projecao_termino ? 'Campo obrigatório' : ' '}
                 className='danos_morais'
-                fixLabel
             />
 
         </Grid>

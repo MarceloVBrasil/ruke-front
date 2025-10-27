@@ -74,7 +74,7 @@ export default function Step17({ api_data, stepsError, setStepsError, pedidos }:
                     value={state[FormField.PEDIDO_GARANTIA_PROVISORIA_EMPREGO].value?.[PEDIDO_GARANTIA_PROVISORIA_EMPREGO.RAZAO_ESTABILIDADE] as string}
                     label='Qual a razão da estabilidade provisória (ex: gestação, acidente de trabalho, dirigente sindical)?'
                     onChange={handleRazaoEstabilidadeChange}
-                    variant='outlined'
+                    variant='filled'
                     error={error.demais_campos.razao_estabilidade}
                     helperText={error.demais_campos.razao_estabilidade ? 'Campo obrigatório' : ' '}
                 />
@@ -87,7 +87,7 @@ export default function Step17({ api_data, stepsError, setStepsError, pedidos }:
                     value={state[FormField.PEDIDO_GARANTIA_PROVISORIA_EMPREGO].value?.[PEDIDO_GARANTIA_PROVISORIA_EMPREGO.DATA_INICIO] as string}
                     label='Qual foi a data de início do período de estabilidade?'
                     onChange={handleDataInicioChange}
-                    variant='outlined'
+                    variant='filled'
                     error={error.demais_campos.data_inicio}
                     helperText={error.demais_campos.data_inicio ? 'Campo obrigatório' : ' '}
                 />
@@ -113,7 +113,7 @@ export default function Step17({ api_data, stepsError, setStepsError, pedidos }:
                     value={state[FormField.PEDIDO_GARANTIA_PROVISORIA_EMPREGO].value?.[PEDIDO_GARANTIA_PROVISORIA_EMPREGO.DATA_TERMINO] as string}
                     label='Quando terminará o período de estabilidade?'
                     onChange={handleDataTerminoChange}
-                    variant='outlined'
+                    variant='filled'
                     containerStyle={{ display: state[FormField.PEDIDO_GARANTIA_PROVISORIA_EMPREGO].value?.[PEDIDO_GARANTIA_PROVISORIA_EMPREGO.RECLAMANTE_ESTA_PERIODO_ESTABILIDADE] === true ? 'block' : 'none' }}
                     error={error.demais_campos.data_termino}
                     helperText={error.demais_campos.data_termino ? 'Campo obrigatório' : ' '}
@@ -127,7 +127,7 @@ export default function Step17({ api_data, stepsError, setStepsError, pedidos }:
                     value={state[FormField.PEDIDO_GARANTIA_PROVISORIA_EMPREGO].value?.[PEDIDO_GARANTIA_PROVISORIA_EMPREGO.DATA_TERMINO] as string}
                     label='Quando terminou o período de estabilidade?'
                     onChange={handleDataTerminoChange}
-                    variant='outlined'
+                    variant='filled'
                     containerStyle={{ display: state[FormField.PEDIDO_GARANTIA_PROVISORIA_EMPREGO].value?.[PEDIDO_GARANTIA_PROVISORIA_EMPREGO.RECLAMANTE_ESTA_PERIODO_ESTABILIDADE] === false ? 'block' : 'none' }}
                     error={error.demais_campos.data_termino}
                     helperText={error.demais_campos.data_termino ? 'Campo obrigatório' : ' '}
@@ -143,6 +143,7 @@ export default function Step17({ api_data, stepsError, setStepsError, pedidos }:
                     sx={{ marginTop: 3, ml: -0 }}
                     error={error.demais_campos.valor_estimado_pedido}
                     helperText={error.demais_campos.valor_estimado_pedido ? 'Campo obrigatório' : ' '}
+                    variant='filled'
                 />
             </Grid>
 
@@ -225,7 +226,7 @@ export default function Step17({ api_data, stepsError, setStepsError, pedidos }:
             const response = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

@@ -35,7 +35,6 @@ export default function ConfiguracoesBPC(props: IConfiguracoesBPC) {
                 <Typography
                     sx={{
                         color: "#00479d",
-                        fontWeight: "bold",
                         marginLeft: "10px",
                     }}
                 >
@@ -46,7 +45,7 @@ export default function ConfiguracoesBPC(props: IConfiguracoesBPC) {
                 <Grid container spacing={2}>
                     <GridTextField
                         xs={12} sm={6}
-                        variant='outlined'
+                        variant='filled'
                         label='Percentual de Êxito'
                         type='number'
                         placeholder='Digite o percentual de êxito bpc'
@@ -68,9 +67,10 @@ export default function ConfiguracoesBPC(props: IConfiguracoesBPC) {
 
                     <GridCurrencyInput
                         xs={12} sm={6}
+                        variant='filled'
                         label={`Parcela Fixa`}
                         placeholder='Digite a parcela fixa BPC'
-                        defaultValue={tenantChoose ? formatCurrency(tenantChoose.parcela_fixa_bpc || '') : 0}
+                        defaultValue={tenantChoose.parcela_fixa_bpc}
                         {...register("parcela_fixa_bpc")}
                         error={errors.parcela_fixa_bpc ? true : false}
                         helperText={errors.parcela_fixa_bpc?.message?.toString()}

@@ -7,7 +7,7 @@ export const getTicketById = async (id: string) => {
     const token = cookies().get("ruke_token");
 
     try {
-        const json = await req.get(`/tickets/${id}`, {
+        const json = await req.get(`/rmc/${id}`, {
             headers: {
                 Authorization: `Bearer ${token?.value}`,
             },
@@ -23,7 +23,7 @@ export const getTickets = async () => {
     const token = cookies().get("ruke_token");
 
     try {
-        const json = await req.get(`/tickets`, {
+        const json = await req.get(`/rmc`, {
             headers: {
                 Authorization: `Bearer ${token?.value}`,
             },

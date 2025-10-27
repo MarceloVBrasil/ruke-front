@@ -15,7 +15,7 @@ interface IGridSelectField {
     error?: boolean
     helperText?: string
     fullWidth?: boolean
-    variant: 'standard' | 'outlined' | "filled"
+    variant: 'standard' | "filled"
     options: { descricao: string, value: string }[]
     style?: CSSProperties
     placeholder?: string
@@ -70,51 +70,14 @@ export default function GridSelectField(props: IGridSelectField) {
         )
     }
 
-    else if (variant == 'outlined') {
-        return (
-            <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} style={style}>
-                <FormControl error={error} fullWidth>
-                    <Typography sx={{ color: "#00479d", fontWeight: "bold", marginLeft: "12px" }}>{label}</Typography>
-                    <Select
-                        displayEmpty
-                        renderValue={(value: string) => !value ? <Typography sx={{ color: '#ACACAC' }}>{placeholder}</Typography> : <Typography>{options.find(option => option.value == value)?.descricao || ''}</Typography>}
-                        error={error}
-                        fullWidth
-                        labelId='credor-select-input'
-                        name={name}
-                        value={value}
-                        onChange={onChange}
-                        id="credor"
-                        variant="outlined"
-                        {...(register ? register(name) : {})}
-                        style={{
-                            marginLeft: "0px",
-                            marginTop: "0px",
-                            height: "56px",
-                            backgroundColor: "white",
-                            borderRadius: "8px",
-                        }}
-
-                    >
-                        {
-                            options.map(option => <MenuItem key={option.value} value={option.value}>{option.descricao}</MenuItem>)
-                        }
-
-                    </Select>
-                    <FormHelperText>{helperText ? error ? helperText : ' ' : ''}</FormHelperText>
-                </FormControl>
-            </Grid>
-        )
-    }
-
     else if (variant === 'filled') {
         return (
             <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} style={style}>
-                <Typography sx={{ color: "#384150" }}>{label}</Typography>
+                <Typography sx={{ color: "#384150", marginLeft: '10px' }}>{label}</Typography>
                 <FormControl error={error} fullWidth>
                     <Select
                         displayEmpty
-                        renderValue={(value: string) => !value ? <Typography sx={{ color: '#ACACAC' }}>{placeholder}</Typography>
+                        renderValue={(value: string) => !value ? <Typography sx={{ color: '#ACACAC', position: 'relative', bottom: 5, fontSize: 13 }}>{placeholder}</Typography>
                             : <Typography style={{ position: 'relative', bottom: 5, fontSize: 13 }}>{options.find(option => option.value == value)?.descricao || ''}</Typography>
                         }
                         error={error}

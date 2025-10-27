@@ -29,6 +29,7 @@ import { isFieldEmpty } from '@/app/utils/validators';
 import FormButtons from '@/presentation/components/FormButtons';
 import { IStep } from '../StepRouter';
 import GridCheckbox from '@/presentation/components/GridCheckbox';
+import { CheckBox } from '@/presentation/components/Checkbox';
 
 export default function Step5({ api_data, stepsError, setStepsError }: IStep) {
     const [state, dispatch] = useReducer(formReducer, getStateFromApi(api_data));
@@ -293,7 +294,7 @@ export default function Step5({ api_data, stepsError, setStepsError }: IStep) {
                             onChange={handleCheckboxToggle}
                             name={FormField.RAZOES_ENDIVIDAMENTO}
                             value={outrasRazoesEndividamento}
-                            control={<Checkbox />}
+                            control={<CheckBox />}
                             label={'Outros'}
                         />
 
@@ -514,7 +515,7 @@ export default function Step5({ api_data, stepsError, setStepsError }: IStep) {
             const response = await updateSuperendividamentoTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

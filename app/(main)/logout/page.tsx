@@ -12,8 +12,9 @@ export default function Page() {
       deleteCookie("menusPermitidos");
       deleteCookie('from_signin');
       deleteCookie('ruke_drawer_open')
-      // deleteCookie('ruke_login_com_codigo_email')
+      deleteCookie('ruke_login_com_codigo_email')
       deleteCookie('ruke_token_pagamento')
+      deleteCookie('quantidade_usuarios_agenda')
 
       window.location.href = "/login";
     }

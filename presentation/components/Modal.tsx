@@ -54,7 +54,6 @@ export default function ModalComponent({
               fontSize: "25px",
               marginBottom: "50px",
               color: "#00479d",
-              fontWeight: "bold",
               borderBottom: "2px solid #006bed",
             }}
           >

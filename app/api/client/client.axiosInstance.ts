@@ -32,7 +32,7 @@ req.interceptors.response.use(
 
 export async function resetToken() {
     const refreshToken = getCookie("refreshToken");
-    const response = await req.post("/auth/refresh_token", { refreshToken });
+    const response = await req.post("/auth/refresh_token", { token: `Bearer ${refreshToken}` });
     const token = response.data.token;
     const regras = JSON.stringify(response.data.regras);
     window.location.replace(`/refreshToken?token=${token}&regras=${regras}`);

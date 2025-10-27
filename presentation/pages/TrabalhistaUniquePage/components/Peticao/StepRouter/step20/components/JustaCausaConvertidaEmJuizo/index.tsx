@@ -32,7 +32,7 @@ export default function JustaCausaConvertidaEmJuizo(props: IJustaCausaConvertida
                 error={error.valor_estimado}
                 helperText={error.valor_estimado ? 'Campo obrigatório' : ' '}
                 className='danos_morais'
-                fixLabel
+                variant='filled'
             />
 
         </Grid>

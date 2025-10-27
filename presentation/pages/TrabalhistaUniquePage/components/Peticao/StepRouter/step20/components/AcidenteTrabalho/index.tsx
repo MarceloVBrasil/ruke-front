@@ -30,27 +30,27 @@ export default function AcidenteTrabalho(props: IAcidenteTrabalho) {
         defaultValue={acidente_trabalho?.[ACIDENTE_TRABALHO.DATA_ACIDENTE] as string}
         onBlur={handleDataAcidenteChange}
         label='Qual foi a data do acidente?'
-        variant='outlined'
+        variant='filled'
         type='date'
         error={error.data_acidente}
         helperText={error.data_acidente ? 'Campo obrigatório' : ' '}
         className='danos_morais'
-        fixLabel
 
       />
 
       <GridTextField
         xs={12}
         fullWidth
+        multiline
         name={ACIDENTE_TRABALHO.DESCRICAO_ACIDENTE}
         defaultValue={acidente_trabalho?.[ACIDENTE_TRABALHO.DESCRICAO_ACIDENTE] as string}
         onBlur={handleAcidenteDescricao}
         label='Descreva o acidente'
-        variant='outlined'
+        placeholder='acidente...'
+        variant='filled'
         error={error.descricao_acidente}
         helperText={error.descricao_acidente ? 'Campo obrigatório' : ' '}
         className='danos_morais'
-        fixLabel
       />
 
       <GridCurrencyInput
@@ -63,7 +63,7 @@ export default function AcidenteTrabalho(props: IAcidenteTrabalho) {
         error={error.valor_estimado}
         helperText={error.valor_estimado ? 'Campo obrigatório' : ' '}
         className='danos_morais'
-        fixLabel
+        variant='filled'
       />
 
     </Grid>

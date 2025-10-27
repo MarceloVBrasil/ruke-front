@@ -30,7 +30,6 @@ export default function Peticao({ ticketUnique: api_data, regraDominio }: Trabal
                             marginRight: 10,
                             width: "100%",
                             color: "#00479d",
-                            fontWeight: "bold",
                         }}
                     >
                         PETIÇÃO{" "}

@@ -30,7 +30,7 @@ export default function FeriasNaoGozadas(props: IFeriasNaoGozadas) {
                 label='Quais foram os períodos de férias não gozadas?'
                 name={PEDIDO_FERIAS_NAO_GOZADAS.PERIODOS_FERIAS}
                 defaultValue={situacao?.[PEDIDO_FERIAS_NAO_GOZADAS.PERIODOS_FERIAS] as string}
-                variant='outlined'
+                variant='filled'
                 onBlur={handlePeriodosChange}
                 error={error.periodos_ferias}
                 helperText={error.periodos_ferias ? 'Campo obrigatório' : ' '}
@@ -46,6 +46,7 @@ export default function FeriasNaoGozadas(props: IFeriasNaoGozadas) {
                 sx={{ marginTop: 3 }}
                 error={error.valor_estimado_pagamento_em_dobro}
                 helperText={error.valor_estimado_pagamento_em_dobro ? 'Campo obrigatório' : ' '}
+                variant='filled'
             />
         </Grid>
     )

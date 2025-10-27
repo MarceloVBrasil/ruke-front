@@ -27,7 +27,7 @@ export default function DescaracterizacaoCargoConfianca(props: IIDescaracterizac
                 label='Qual era o cargo do reclamante?'
                 name={DESCARACTERIZACAO_CARGO_CONFIANCA.CARGO_RECLAMANTE}
                 defaultValue={descaracterizaoCargoConfianca?.[DESCARACTERIZACAO_CARGO_CONFIANCA.CARGO_RECLAMANTE] as string}
-                variant='outlined'
+                variant='filled'
                 onBlur={handleCargoReclamante}
                 error={error.cargo_reclamante}
                 helperText={error.atividades ? 'Campo obrigatório' : ' '}
@@ -40,7 +40,7 @@ export default function DescaracterizacaoCargoConfianca(props: IIDescaracterizac
                 label='Descreva as atividades que o reclamante exercia no cargo?'
                 name={DESCARACTERIZACAO_CARGO_CONFIANCA.ATIVIDADES}
                 defaultValue={descaracterizaoCargoConfianca?.[DESCARACTERIZACAO_CARGO_CONFIANCA.ATIVIDADES] as string}
-                variant='outlined'
+                variant='filled'
                 placeholder='atividades exercidas...'
                 onBlur={handleAtividadesChange}
                 error={error.atividades}
@@ -54,7 +54,7 @@ export default function DescaracterizacaoCargoConfianca(props: IIDescaracterizac
                 label='Quantas horas eram trabalhadas semanalmente?'
                 name={DESCARACTERIZACAO_CARGO_CONFIANCA.QUANTIDADE_HORAS_TRABALHADAS_SEMANALMENTE}
                 defaultValue={descaracterizaoCargoConfianca?.[DESCARACTERIZACAO_CARGO_CONFIANCA.QUANTIDADE_HORAS_TRABALHADAS_SEMANALMENTE] as number}
-                variant='outlined'
+                variant='filled'
                 onBlur={handleQuantasHorasTrabalhadas}
                 error={error.quantidade_horas_trabalhadas_semanalmente}
                 helperText={error.quantidade_horas_trabalhadas_semanalmente ? 'Campo obrigatório' : ' '}

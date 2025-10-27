@@ -8,6 +8,8 @@ import { Accordion, AccordionSummary, Typography, Chip, AccordionDetails, Grid, 
 import { Box, width } from '@mui/system';
 import Link from 'next/link';
 import { criarHipossuficiencia } from '../../helpers/Swal';
+import GridTextField from '@/presentation/components/GridTextField';
+import { Btn } from '@/presentation/components/Button';
 
 interface IHipossuficiencia {
     ticket: any
@@ -65,7 +67,6 @@ export default function Hipossuficiencia(props: IHipossuficiencia) {
                             marginRight: 10,
                             width: "100%",
                             color: "#00479d",
-                            fontWeight: "bold",
                         }}
                     >
                         DOCUMENTO DE HIPOSSUFICIENCIA{" "}
@@ -139,7 +140,6 @@ export default function Hipossuficiencia(props: IHipossuficiencia) {
                         sx={{
                             borderBottom: "2px solid #00479d",
                             color: "#00479d",
-                            fontWeight: "bold",
                             marginLeft: "10px",
                         }}
                     >
@@ -149,81 +149,48 @@ export default function Hipossuficiencia(props: IHipossuficiencia) {
                 <AccordionDetails>
                     <Grid container spacing={2}>
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Nome do Cliente
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                onChange={(e) => setNameClient(e.target.value)}
-                                id="outlined-basic"
-                                value={nameClient}
-                                placeholder="Nome do Cliente"
-                                variant="outlined"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            value={nameClient}
+                            placeholder="Nome do Cliente"
+                            label='Nome'
+                            variant='filled'
+                            onChange={(e) => setNameClient(e.target.value)}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                CPF do cliente
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                id="outlined-basic"
-                                value={cpfClient}
-                                onChange={(e) => {
-                                    const value = onlyNumber(e.target.value);
-                                    setCPFClient(formatCpf(value));
-                                }}
-                                placeholder="CPF do cliente"
-                                variant="outlined"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
-
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Endereço do cliente
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                id="outlined-basic"
-                                value={addressClient}
-                                onChange={(e) => setAddressClient(e.target.value)}
-                                placeholder="Endereço do cliente"
-                                variant="outlined"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            placeholder="CPF"
+                            label=' CPF'
+                            variant='filled'
+                            value={cpfClient}
+                            onChange={(e) => {
+                                const value = onlyNumber(e.target.value);
+                                setCPFClient(formatCpf(value));
+                            }}
+                        />
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            placeholder="Endereço"
+                            label=' Endereço'
+                            variant='filled'
+                            value={addressClient}
+                            onChange={(e) => setAddressClient(e.target.value)}
+                        />
                     </Grid>
                 </AccordionDetails>
             </Accordion>
             <AccordionDetails>
-                {(regraDominio?.permissoes?.includes("create") ||
+                {(regraDominio?.permissoes?.includes("add") ||
                     regraDominio?.permissoes?.includes("update")) && (
-                        <Button
+                        <Btn
+                            text='Gerar Documento'
                             onClick={() => criarHipossuficiencia({
                                 ticket,
                                 id_do_ticket: ticket.id,
@@ -234,20 +201,10 @@ export default function Hipossuficiencia(props: IHipossuficiencia) {
                                 setLoading,
                                 getTickets
                             })}
-                            color="success"
+                            width={250}
                             variant="contained"
                             disabled={loadingHipossuficiencia}
-                        >
-                            {loadingHipossuficiencia ? (
-                                <CircularProgress
-                                    size={20}
-                                    style={{ color: "white", marginRight: 10 }}
-                                />
-                            ) : (
-                                ""
-                            )}{" "}
-                            GERAR DOCUMENTO
-                        </Button>
+                        />
                     )}
             </AccordionDetails>
         </Accordion>

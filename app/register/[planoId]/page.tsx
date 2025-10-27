@@ -56,7 +56,7 @@ const Register = ({ params }: RegisterProps) => {
     (async () => {
       const response = await getPlanoById(params.planoId)
       if (!response.error) setPlanoData(response)
-      else return window.location.href = 'https://ruke.com.br/';
+      else return window.location.href = 'https://app.ruke.com.br/';
     })();
   }, [])
 

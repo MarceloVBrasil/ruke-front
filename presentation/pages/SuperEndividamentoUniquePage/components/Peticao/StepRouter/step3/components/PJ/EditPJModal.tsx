@@ -197,7 +197,7 @@ export function EditPJModal(props: IModal) {
 
             getEnderecoByCep(data.cep)
         } catch (error) {
-            console.log(error)
+
         }
     }
 
@@ -205,7 +205,7 @@ export function EditPJModal(props: IModal) {
 
         try {
             const data: cep = await getAddressByCep(cep)
-            console.log(data)
+
             const filteredData = {
                 [FormField.RUA]: data.logradouro,
                 [FormField.BAIRRO]: data.bairro,
@@ -238,7 +238,7 @@ export function EditPJModal(props: IModal) {
             })
 
         } catch (error) {
-            console.log(error)
+
         }
     }
 

@@ -13,7 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { adicionarEventoAgenda, buscarEventosAgenda, buscarTipos, buscarUsuariosAgenda, filtrarAgenda } from '@/app/api/client/agenda';
 import { getEndpointByProcessNumber, limparNumeroProcesso } from '../../components/Tribunais';
 import ProcessNumberField from '../../components/ProcessNumberField';
-import DatePicker from 'react-datepicker';
+import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
@@ -22,8 +22,13 @@ import '../../styles/App.css';
 import './css/Agenda.css';
 import { styled } from '@mui/system';
 import { procurarProcesso } from '@/app/api/client/processo';
+import GridSelectField from '@/presentation/components/GridSelectField';
+import GridTextField from '@/presentation/components/GridTextField';
+import { AutoComplete } from '@/presentation/components/AutoComplete';
+import { Btn } from '@/presentation/components/Button';
 
-const DnDCalendar = withDragAndDrop(Calendar);
+const DnDCalendar = withDragAndDrop(Calendar) as unknown as React.ComponentType<any>;
+const DatePicker = ReactDatePicker as unknown as React.ComponentType<any>;
 
 const StyledDatePickerWrapper = styled('div')({
   '& .react-datepicker__header': {
@@ -172,7 +177,6 @@ function MyCalendar() {
 
     try {
       const resultadoAdicionarEventoAgenda = await adicionarEventoAgenda({ id: event.id, categoria: event.categoria, title: event.title, usuarios_pertencentes: event.usuarios_pertencentes, start, end });
-      console.log(resultadoAdicionarEventoAgenda)
     } catch (err: any) {
       console.error(err)
     }
@@ -199,60 +203,25 @@ function MyCalendar() {
     };
 
     return (
-      <Box sx={{ width: '100%' }}>
-        <Autocomplete
-          multiple
+      <Grid item xs={12}>
+
+        <Typography
+          width={'100%'}
+          marginLeft={1.5}
+          marginTop={1}
+          fontSize={15}
+          color={'#384150'}>Usuários responsáveis
+        </Typography>
+
+        <AutoComplete
+          placeholder='Selecione usuários'
           options={usuarios}
-          getOptionLabel={(option: any) => option.nome}
           value={newEvent.usuarios_pertencentes}
           onChange={handleAddItem}
-
-          renderTags={(value, getTagProps) =>
-            value.map((option: any, index: any) => (
-              <Chip
-                {...getTagProps({ index })}
-                key={option.id}
-                variant="outlined"
-                label={option.nome}
-                onDelete={() => handleDeleteItem(option)}
-              />
-            ))
-          }
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant="outlined"
-              label="Usuários responsáveis"
-              placeholder="Adicionar"
-              fullWidth
-              sx={{
-                '& .MuiInputBase-root': {
-                  padding: 0,
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiOutlinedInput-input': {
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiInputLabel-root': {
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 0,
-                  '& fieldset': {
-                    borderRadius: 0,
-                  },
-                },
-                borderRadius: 0,
-                margin: 0, // Remove a margem padrão
-              }}
-              InputLabelProps={{ shrink: true }}
-            />
-          )}
+          name={'usuarios'}
         />
-      </Box>
+
+      </Grid>
     );
   };
 
@@ -316,7 +285,6 @@ function MyCalendar() {
       const usuariosAgenda = await buscarUsuariosAgenda();
       setUsuarios(usuariosAgenda);
     } catch (err: any) {
-      console.log(err)
     }
   }
 
@@ -344,7 +312,6 @@ function MyCalendar() {
   }
 
   const onEventResize = async ({ event, start, end }: any) => {
-    console.log(start, end)
     const idx = events.indexOf(event as never);
     const updatedEvent = { ...event, start, end };
 
@@ -352,7 +319,6 @@ function MyCalendar() {
 
     try {
       const resultadoAdicionarEventoAgenda = await adicionarEventoAgenda({ id: event.id, title: event.title, categoria: event.categoria, usuarios_pertencentes: event.usuarios_pertencentes, start, end });
-      console.log(resultadoAdicionarEventoAgenda)
     } catch (err: any) {
       console.error(err)
     }
@@ -364,7 +330,6 @@ function MyCalendar() {
   };
 
   const handleSelectEvent = (event: any) => {
-    console.log(event)
     setNewEvent({
       id: String(event.id),
       title: event.title,
@@ -410,7 +375,6 @@ function MyCalendar() {
         setNewEvent({ ...newEvent, orgao_julgador: dadosProcesso.hits.hits[0]._source.orgaoJulgador.nome, data_ajuizamento: parse(convertISOForBR(dadosProcesso.hits.hits[0]._source.dataAjuizamento), "dd/MM/yyyy HH:mm:ss", new Date(), { locale: ptBR }), classe: dadosProcesso.hits.hits[0]._source.classe.nome ? dadosProcesso.hits.hits[0]._source.classe.nome : "", movimentacoes: dadosProcesso.hits.hits[0]._source.movimentos ? dadosProcesso.hits.hits[0]._source.movimentos : [] } as any);
       }
     } catch (error: any) {
-      console.log(error)
     }
   }
 
@@ -454,7 +418,6 @@ function MyCalendar() {
 
   const handleSaveEvent = async () => {
     const evento = newEvent;
-    console.log(evento)
     if (evento.id === "0") {
       setEvents([...events, { ...evento, id: String(events.length + 1) }] as any);
     } else {
@@ -471,7 +434,6 @@ function MyCalendar() {
       evento.prazo = String(evento.prazo);
 
       const resultadoAdicionarEventoAgenda = await adicionarEventoAgenda(evento);
-      console.log(resultadoAdicionarEventoAgenda)
     } catch (err: any) {
       console.error(err)
     }
@@ -516,8 +478,7 @@ function MyCalendar() {
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
       >
-        <div style={{ width: 800, padding: 40, backgroundColor: 'white', color: '#000', height: '100%', position: 'relative' }}>
-          <br /><br /><br />
+        <div style={{ width: 800, padding: 40, backgroundColor: 'white', color: '#000', height: '100%', position: 'relative', paddingTop: 100 }}>
           <Box display="flex" justifyContent="space-between" alignItems="center" style={{ marginBottom: 20 }}>
             <Typography variant="h6" style={{ color: '#1976D2' }}>
               {newEvent.id ? 'Editar evento' : 'Novo evento'}
@@ -527,640 +488,234 @@ function MyCalendar() {
             </IconButton>
           </Box>
           <Grid container spacing={2}>
-            <Grid item xs={12} style={{ padding: '8px' }}>
-              <FormControl fullWidth variant="outlined" sx={{
-                '& .MuiInputBase-root': {
-                  padding: 0,
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiOutlinedInput-input': {
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiInputLabel-root': {
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 0,
-                  '& fieldset': {
-                    borderRadius: 0,
-                  },
-                },
-                borderRadius: 0,
-                margin: 0, // Remove a margem padrão
-              }}>
-                <InputLabel style={{ color: '#1976D2' }}>Categoria:</InputLabel>
-                <Select
-                  value={newEvent.categoria || 'audiencia'}
-                  onChange={(e) => setCategoria(e.target.value)}
-                  label="Notificação"
-                  style={{ color: '#000', borderColor: '#1976D2' }}
-                >
-                  <MenuItem value="audiencia">Audiência/Sessão</MenuItem>
-                  <MenuItem value="reuniao">Reunião</MenuItem>
-                  <MenuItem value="prazo">Prazo</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
 
-            <Grid item xs={6} style={{ padding: '8px' }}>
-              <TextField
-                label="Título *"
-                fullWidth
-                value={newEvent.title}
-                onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
-                variant="outlined"
-                sx={{
-                  '& .MuiInputBase-root': {
-                    padding: 0,
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiOutlinedInput-input': {
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiInputLabel-root': {
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: 0,
-                    '& fieldset': {
-                      borderRadius: 0,
-                    },
-                  },
-                  borderRadius: 0,
-                  margin: 0, // Remove a margem padrão
+            <GridSelectField
+              xs={12}
+              variant='filled'
+              name={'categoria'}
+              onChange={(e) => setCategoria(e.target.value)}
+              value={newEvent.categoria || 'audiencia'}
+              label={'Categoria'}
+              options={[
+                { descricao: 'Audiência/Sessão', value: 'audiencia' },
+                { descricao: 'Reunião', value: 'reuniao' },
+                { descricao: 'Prazo', value: 'prazo' }
+              ]}
+            />
+
+            <GridTextField
+              xs={6}
+              label='Título *'
+              value={newEvent.title}
+              onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
+              variant='filled'
+
+            />
+
+            <GridSelectField
+              xs={6}
+              variant='filled'
+              name={'notificacao'}
+              value={newEvent.notificacao || '30'}
+              onChange={(e) => setNewEvent({ ...newEvent, notificacao: e.target.value } as any)}
+              label="Notificação"
+              options={[
+                { descricao: 'Não notificar', value: 'false' },
+                { descricao: '10 minutos', value: '10' },
+                { descricao: '30 minutos', value: '30' },
+                { descricao: '1 hora', value: '60' },
+              ]}
+            />
+
+            <GridTextField
+              xs={12}
+              label="Adicionar descrição"
+              variant='filled'
+              multiline
+              name='descricao'
+              placeholder='descrição...'
+              value={newEvent.description}
+              onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
+            />
+
+            <GridTextField
+              xs={12}
+              variant='filled'
+              value={newEvent.color}
+              label="Escolha uma cor para o evento"
+              onClick={() => setIsOpen(!isOpen)}
+              startAdornment={
+                (
+                  <InputAdornment position="start">
+                    <div
+                      style={{
+                        width: 20,
+                        height: 20,
+                        backgroundColor: newEvent.color,
+                        border: '1px solid #ccc',
+                        borderRadius: 4,
+                      }}
+                    />
+                  </InputAdornment>
+                )
+              }
+            />
+
+            {isOpen && (
+              <div
+                style={{
+                  position: 'absolute',
+                  zIndex: 1000,
+                  backgroundColor: 'white',
+                  padding: '8px',
+                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                 }}
-                InputLabelProps={{ style: { color: '#1976D2' }, shrink: true }}
-                InputProps={{ style: { color: '#000', borderColor: '#1976D2' } }}
-              />
-            </Grid>
-
-            <Grid item xs={6} style={{ padding: '8px' }}>
-              <FormControl fullWidth variant="outlined" sx={{
-                '& .MuiInputBase-root': {
-                  padding: 0,
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiOutlinedInput-input': {
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiInputLabel-root': {
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 0,
-                  '& fieldset': {
-                    borderRadius: 0,
-                  },
-                },
-                borderRadius: 0,
-                margin: 0, // Remove a margem padrão
-              }}>
-                <InputLabel style={{ color: '#1976D2' }}>Notificação</InputLabel>
-                <Select
-                  value={newEvent.notificacao || 30}
-                  onChange={(e) => setNewEvent({ ...newEvent, notificacao: e.target.value } as any)}
-                  label="Notificação"
-                  style={{ color: '#000', borderColor: '#1976D2' }}
-                >
-                  <MenuItem value="false">Não notificar</MenuItem>
-                  <MenuItem value="10">10 minutos</MenuItem>
-                  <MenuItem value="30">30 minutos</MenuItem>
-                  <MenuItem value="60">1 hora</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12} style={{ padding: '8px' }}>
-              <TextField
-                label="Adicionar descrição"
-                fullWidth
-                multiline
-                rows={4}
-                value={newEvent.description}
-                onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
-                variant="outlined"
-                InputLabelProps={{ style: { color: '#1976D2' } }}
-                InputProps={{ style: { color: '#000', borderColor: '#1976D2' } }}
-              />
-            </Grid>
-
-            <Grid item xs={12} style={{ padding: '8px' }}>
-              <TextField
-                value={newEvent.color}
-                label="Escolha uma cor para o evento"
-                fullWidth
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <div
-                        style={{
-                          width: 20,
-                          height: 20,
-                          backgroundColor: newEvent.color,
-                          border: '1px solid #ccc',
-                          borderRadius: 4,
-                        }}
-                      />
-                    </InputAdornment>
-                  ),
-                }}
-                onClick={() => setIsOpen(true)}
-                sx={{
-                  '& .MuiInputBase-root': {
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiOutlinedInput-input': {
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiInputLabel-root': {
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: 0,
-                    '& fieldset': {
-                      borderRadius: 0,
-                    },
-                  },
-                  borderRadius: 0,
-                  margin: 0, // Remove a margem padrão
-                }}
-              />
-
-              {isOpen && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    zIndex: 1000,
-                    backgroundColor: 'white',
-                    padding: '8px',
-                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                  }}
-                >
-                  <SketchPicker
-                    color={newEvent.color}
-                    onChangeComplete={(e) => {
-                      setIsOpen(false);
-                      setNewEvent({ ...newEvent, color: e.hex });
-                    }}
-                  />
-                </div>
-              )}
-            </Grid>
-
-            <Grid item xs={6} style={{ padding: '8px' }}>
-              <FormControl fullWidth variant="outlined" sx={{
-                '& .MuiInputBase-root': {
-                  padding: 0,
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiOutlinedInput-input': {
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiInputLabel-root': {
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 0,
-                  '& fieldset': {
-                    borderRadius: 0,
-                  },
-                },
-                borderRadius: 0,
-                margin: 0, // Remove a margem padrão
-              }}>
-                <InputLabel style={{ color: '#1976D2' }}>Status</InputLabel>
-                <Select
-                  value={newEvent.status || "pendente"}
-                  onChange={(e) => setNewEvent({ ...newEvent, status: e.target.value })}
-                  label="Status"
-                  fullWidth
-                  style={{ color: '#000', borderColor: '#1976D2' }}
-                >
-                  <MenuItem value="pendente">Pendente</MenuItem>
-                  <MenuItem value="cumprido">Cumprido</MenuItem>
-                  <MenuItem value="nao_cumprido">Não cumprido</MenuItem>
-                  <MenuItem value="cancelado">Cancelado</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={6} style={{ padding: '8px' }}>
-              <FormControl fullWidth variant="outlined" sx={{
-                '& .MuiInputBase-root': {
-                  padding: 0,
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiOutlinedInput-input': {
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiInputLabel-root': {
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 0,
-                  '& fieldset': {
-                    borderRadius: 0,
-                  },
-                },
-                borderRadius: 0,
-                margin: 0, // Remove a margem padrão
-              }}>
-                <Autocomplete
-                  fullWidth={true}
-                  options={tipos}
-                  getOptionLabel={(option: any) => option.nome || ""}
-                  renderInput={(params) => <TextField {...params} label="Selecione uma opção" variant="outlined" />}
-                  value={newEvent.tipo}
-                  onChange={(e: any, value: any) => {
-                    calcularConclusaoPrevista({ ...newEvent, tipo: value, prazo: value.prazo } as any);
+              >
+                <SketchPicker
+                  color={newEvent.color}
+                  onChangeComplete={(e) => {
+                    setIsOpen(false);
+                    setNewEvent({ ...newEvent, color: e.hex });
                   }}
                 />
-              </FormControl>
-            </Grid>
+              </div>
+            )}
 
-            <Grid item xs={6} style={{ padding: '8px' }}>
-              <TextField
-                label="Prazo"
-                fullWidth
-                value={newEvent.prazo}
-                sx={{
-                  '& .MuiInputBase-root': {
-                    padding: 0,
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiOutlinedInput-input': {
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiInputLabel-root': {
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: 0,
-                    '& fieldset': {
-                      borderRadius: 0,
-                    },
-                  },
-                  borderRadius: 0,
-                  margin: 0, // Remove a margem padrão
-                }}
-                onChange={(e) => {
-                  calcularConclusaoPrevista({ ...newEvent, prazo: String(e.target.value) })
-                }}
-                variant="outlined"
-                type='number'
-                InputLabelProps={{ style: { color: '#1976D2' }, shrink: true }}
-                InputProps={{ style: { color: '#000', borderColor: '#1976D2' } }}
-              />
-            </Grid>
+            <GridSelectField
+              xs={12}
+              variant='filled'
+              value={newEvent.status || "pendente"}
+              onChange={(e) => setNewEvent({ ...newEvent, status: e.target.value })}
+              label="Status"
+              name='status'
+              options={[
+                { descricao: 'Pendente', value: 'pendente' },
+                { descricao: 'Cumprido', value: 'cumprido' },
+                { descricao: 'Não Cumprido', value: 'nao_cumprido' },
+                { descricao: 'Cancelado', value: 'cancelado' },
+              ]}
+            />
 
-            <Grid item xs={6} style={{ padding: '8px' }}>
-              <FormControl fullWidth variant="outlined" sx={{
-                '& .MuiInputBase-root': {
-                  padding: 0,
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiOutlinedInput-input': {
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiInputLabel-root': {
-                  margin: 0,
-                  borderRadius: 0
-                },
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 0,
-                  '& fieldset': {
-                    borderRadius: 0,
-                  },
-                },
-                borderRadius: 0,
-                margin: 0, // Remove a margem padrão
-              }}>
-                <InputLabel style={{ color: '#1976D2' }}>Tipo de contagem do prazo</InputLabel>
-                <Select
-                  value={newEvent.tipo_contagem_prazo || "dias_uteis"}
-                  onChange={(e) => {
-                    calcularConclusaoPrevista({ ...newEvent, tipo_contagem_prazo: e.target.value })
-                  }}
-                  label="Tipos"
-                  fullWidth
-                  style={{ color: '#000', borderColor: '#1976D2' }}
-                >
-                  <MenuItem value="selecione">-- Selecione --</MenuItem>
-                  <MenuItem value="dias_corridos">Dias corridos</MenuItem>
-                  <MenuItem value="dias_uteis">Dias úteis</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
+            <AutoComplete
+              options={tipos}
+              value={[]}
+              onChange={(e: any, value: any) => {
+                calcularConclusaoPrevista({ ...newEvent, tipo: value, prazo: value.prazo } as any);
+              }}
+              name={'tipo'}
+              label='Selecione uma opção'
+            />
 
-            <Grid item xs={6} style={{ padding: '8px' }}>
-              <StyledDatePickerWrapper style={{ marginLeft: 10, width: "100%" }}>
-                <DatePicker
-                  selected={newEvent.inicio_previsto as unknown as Date}
-                  onChange={(date) => setNewEvent({ ...newEvent, inicio_previsto: date } as any)}
-                  showTimeSelect
-                  timeFormat="HH:mm"
-                  timeIntervals={15}
-                  dateFormat="Pp"
-                  locale={ptBR}
+            <GridTextField
+              xs={6}
+              label='Prazo'
+              placeholder='prazo'
+              variant='filled'
+              value={newEvent.prazo}
+              onChange={(e) => {
+                calcularConclusaoPrevista({ ...newEvent, prazo: String(e.target.value) })
+              }}
+            />
 
-                  customInput={<CustomInput label="Início previsto/efetivo" sx={{
-                    '& .MuiInputBase-root': {
-                      padding: 0,
-                      margin: 0,
-                      borderRadius: 0
-                    },
-                    '& .MuiOutlinedInput-input': {
-                      margin: 0,
-                      borderRadius: 0
-                    },
-                    '& .MuiInputLabel-root': {
-                      margin: 0,
-                      borderRadius: 0
-                    },
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: 0,
-                      '& fieldset': {
-                        borderRadius: 0,
-                      },
-                    },
-                    borderRadius: 0,
-                    margin: 0, // Remove a margem padrão
-                  }} />}
-                  wrapperClassName='datepicker'
-                  popperPlacement="bottom-start"
-                />
-              </StyledDatePickerWrapper>
-            </Grid>
+            <GridSelectField
+              xs={6}
+              variant='filled'
+              label='Tipos'
+              value={newEvent.tipo_contagem_prazo || "dias_uteis"}
+              name='tipos'
+              onChange={(e) => {
+                calcularConclusaoPrevista({ ...newEvent, tipo_contagem_prazo: e.target.value })
+              }}
+              options={[
+                { descricao: 'Dias Corridos', value: 'dias_corridos' },
+                { descricao: 'Dias Úteis', value: 'dias_uteis' },
+              ]}
+            />
 
-            <Grid item xs={6} style={{ padding: '8px' }}>
-              <StyledDatePickerWrapper style={{ marginLeft: 10, width: "100%" }}>
-                <DatePicker
-                  selected={newEvent.conclusao_prevista as unknown as Date}
-                  onChange={(date) => setNewEvent({ ...newEvent, conclusao_prevista: date } as any)}
-                  showTimeSelect
-                  timeFormat="HH:mm"
-                  timeIntervals={15}
-                  dateFormat="Pp"
-                  locale={ptBR}
-                  customInput={<CustomInput label="Conclusão prevista"
-                    sx={{
-                      '& .MuiInputBase-root': {
-                        padding: 0,
-                        margin: 0,
-                        borderRadius: 0
-                      },
-                      '& .MuiOutlinedInput-input': {
-                        margin: 0,
-                        borderRadius: 0
-                      },
-                      '& .MuiInputLabel-root': {
-                        margin: 0,
-                        borderRadius: 0
-                      },
-                      '& .MuiOutlinedInput-root': {
-                        borderRadius: 0,
-                        '& fieldset': {
-                          borderRadius: 0,
-                        },
-                      },
-                      borderRadius: 0,
-                      margin: 0, // Remove a margem padrão
-                    }}
-                  />}
-                  wrapperClassName='datepicker'
-                  popperPlacement="bottom-start"
-                />
-              </StyledDatePickerWrapper>
-            </Grid>
+            <GridTextField
+              xs={6}
+              variant='filled'
+              label='Início previsto/efetivo'
+              type='date'
+              value={newEvent.inicio_previsto}
+              onChange={(e) => setNewEvent({ ...newEvent, inicio_previsto: e.target.value } as any)}
+            />
 
-            <Grid item xs={6} style={{ padding: '8px' }}>
+            <GridTextField
+              xs={6}
+              variant='filled'
+              label='Conclusão prevista'
+              type='date'
+              value={newEvent.conclusao_prevista}
+              onChange={(e) => setNewEvent({ ...newEvent, conclusao_prevista: e.target.value } as any)}
+            />
+
+            <Grid item xs={12} style={{ padding: '8px' }}>
               <ProcessNumberField
                 value={newEvent.numero_processo}
                 onChange={(e) => setNewEvent({ ...newEvent, numero_processo: e.target.value })}
               />
             </Grid>
 
-            <Grid item xs={6} style={{ padding: '8px' }}>
-              <Button
+            <Grid item xs={12} style={{ padding: '8px' }}>
+              <Btn
                 variant='outlined'
                 color='primary'
-                fullWidth
+                text='Pesquisar Processo'
                 style={{ height: "57px" }}
-                startIcon={<SearchIcon style={{ fontSize: 25 }} />}
+                backgroundTransparent
                 onClick={() => pesquisarProcesso()}
-              >PESQUISAR PROCESSO</Button>
-            </Grid>
-
-            <Grid item xs={4} style={{ padding: '8px' }}>
-              <TextField
-                label="Órgão julgador"
-                fullWidth
-                value={newEvent.orgao_julgador}
-                onChange={(e) => setNewEvent({ ...newEvent, orgao_julgador: e.target.value })}
-                variant="outlined"
-                sx={{
-                  '& .MuiInputBase-root': {
-                    padding: 0,
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiOutlinedInput-input': {
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiInputLabel-root': {
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: 0,
-                    '& fieldset': {
-                      borderRadius: 0,
-                    },
-                  },
-                  borderRadius: 0,
-                  margin: 0, // Remove a margem padrão
-                }}
-                InputLabelProps={{ style: { color: '#1976D2' }, shrink: true }}
-                InputProps={{ style: { color: '#000', borderColor: '#1976D2' } }}
               />
             </Grid>
 
-            <Grid item xs={4} style={{ padding: '8px' }}>
-              <StyledDatePickerWrapper
-                style={{ marginLeft: 10, width: "100%" }}
-              >
-                <DatePicker
-                  selected={newEvent.data_ajuizamento as unknown as Date}
-                  onChange={(date) => setNewEvent({ ...newEvent, data_ajuizamento: date } as any)}
-                  showTimeSelect
-                  timeFormat="HH:mm"
-                  timeIntervals={15}
-                  dateFormat="Pp"
-                  locale={ptBR}
-                  customInput={
-                    <CustomInput
-                      label="Data de ajuizamento"
-                      sx={{
-                        '& .MuiInputBase-root': {
-                          padding: 0,
-                          margin: 0,
-                          borderRadius: 0
-                        },
-                        '& .MuiOutlinedInput-input': {
-                          margin: 0,
-                          borderRadius: 0
-                        },
-                        '& .MuiInputLabel-root': {
-                          margin: 0,
-                          borderRadius: 0
-                        },
-                        '& .MuiOutlinedInput-root': {
-                          borderRadius: 0,
-                          '& fieldset': {
-                            borderRadius: 0,
-                          },
-                        },
-                        borderRadius: 0,
-                        margin: 0, // Remove a margem padrão
-                      }}
-                    />
-                  }
-                  wrapperClassName='datepicker'
-                  popperPlacement="bottom-start"
-                />
-              </StyledDatePickerWrapper>
-            </Grid>
 
-            <Grid item xs={4} style={{ padding: '8px' }}>
-              <TextField
-                label="Classe"
-                fullWidth
-                sx={{
-                  '& .MuiInputBase-root': {
-                    padding: 0,
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiOutlinedInput-input': {
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiInputLabel-root': {
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: 0,
-                    '& fieldset': {
-                      borderRadius: 0,
-                    },
-                  },
-                  borderRadius: 0,
-                  margin: 0, // Remove a margem padrão
-                }}
-                value={newEvent.classe}
-                onChange={(e) => setNewEvent({ ...newEvent, classe: e.target.value })}
-                variant="outlined"
-                InputLabelProps={{ style: { color: '#1976D2' }, shrink: true }}
-                InputProps={{ style: { color: '#000', borderColor: '#1976D2' } }}
-              />
-            </Grid>
+            <GridTextField
+              xs={4}
+              variant='filled'
+              label="Órgão julgador"
+              placeholder='órgão julgador'
+              onChange={(e) => setNewEvent({ ...newEvent, orgao_julgador: e.target.value })}
+              value={newEvent.orgao_julgador}
+            />
 
-            <Grid item xs={4} style={{ padding: '8px' }}>
-              <TextField
-                label="Cliente principal"
-                fullWidth
-                sx={{
-                  '& .MuiInputBase-root': {
-                    padding: 0,
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiOutlinedInput-input': {
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiInputLabel-root': {
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: 0,
-                    '& fieldset': {
-                      borderRadius: 0,
-                    },
-                  },
-                  borderRadius: 0,
-                  margin: 0, // Remove a margem padrão
-                }}
-                value={newEvent.cliente_principal}
-                onChange={(e) => setNewEvent({ ...newEvent, cliente_principal: e.target.value })}
-                variant="outlined"
-                InputLabelProps={{ style: { color: '#1976D2' }, shrink: true }}
-                InputProps={{ style: { color: '#000', borderColor: '#1976D2' } }}
-              />
-            </Grid>
+            <GridTextField
+              xs={4}
+              variant='filled'
+              label="Data Ajuizamento"
+              placeholder='data ajuizamento'
+              type='date'
+              onChange={(e) => setNewEvent({ ...newEvent, data_ajuizamento: e.target.value } as any)}
+              value={newEvent.data_ajuizamento}
+            />
 
-            <Grid item xs={4} style={{ padding: '8px' }}>
-              <TextField
-                label="Contrário principal"
-                fullWidth
-                sx={{
-                  '& .MuiInputBase-root': {
-                    padding: 0,
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiOutlinedInput-input': {
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiInputLabel-root': {
-                    margin: 0,
-                    borderRadius: 0
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: 0,
-                    '& fieldset': {
-                      borderRadius: 0,
-                    },
-                  },
-                  borderRadius: 0,
-                  margin: 0, // Remove a margem padrão
-                }}
-                value={newEvent.contrario_principal}
-                onChange={(e) => setNewEvent({ ...newEvent, contrario_principal: e.target.value })}
-                variant="outlined"
-                InputLabelProps={{ style: { color: '#1976D2' }, shrink: true }}
-                InputProps={{ style: { color: '#000', borderColor: '#1976D2' } }}
-              />
-            </Grid>
+            <GridTextField
+              xs={4}
+              variant='filled'
+              label="Classe"
+              placeholder='classe'
+              onChange={(e) => setNewEvent({ ...newEvent, classe: e.target.value })}
+              value={newEvent.classe}
+            />
 
-            <Grid item xs={4} style={{ padding: '8px' }}>
+            <GridTextField
+              xs={6}
+              variant='filled'
+              label="Cliente Principal"
+              placeholder='cliente principal'
+              onChange={(e) => setNewEvent({ ...newEvent, cliente_principal: e.target.value })}
+              value={newEvent.cliente_principal}
+            />
+
+            <GridTextField
+              xs={6}
+              variant='filled'
+              label="Contrário Principal"
+              placeholder='contrário principal'
+              onChange={(e) => setNewEvent({ ...newEvent, contrario_principal: e.target.value })}
+              value={newEvent.contrario_principal}
+            />
+
+            <Grid item xs={12} style={{ padding: '8px' }}>
               <SelectableChipInput />
             </Grid>
 
@@ -1207,14 +762,12 @@ function MyCalendar() {
             </Grid>
 
             <Grid item xs={12} style={{ padding: '8px' }}>
-              <Button
+              <Btn
                 variant="contained"
                 onClick={handleSaveEvent}
-                fullWidth
+                text='Salvar'
                 style={{ backgroundColor: '#1976D2', color: '#fff' }}
-              >
-                Salvar
-              </Button>
+              />
             </Grid>
           </Grid>
         </div>

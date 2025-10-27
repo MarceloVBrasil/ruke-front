@@ -30,7 +30,7 @@ export default function AssedioMoralVertical(props: IAssedioMoralVertical) {
                 defaultValue={assedio_vertical?.[ASSEDIO_MORAL_VERTICAL.NOME_SUPERIOR_REALIZOU_ASSEDIO] as string}
                 onBlur={handleNomeAssediadorChange}
                 label='Qual o nome do superior que realizou o assédio moral?'
-                variant='outlined'
+                variant='filled'
                 error={error.nome_superior_realizou_assedio}
                 helperText={error.nome_superior_realizou_assedio ? 'Campo obrigatório' : ' '}
                 className='danos_morais'
@@ -46,7 +46,8 @@ export default function AssedioMoralVertical(props: IAssedioMoralVertical) {
                 defaultValue={assedio_vertical?.[ASSEDIO_MORAL_VERTICAL.DESCRICAO_OFENSAS_VEXATORIAS] as string}
                 onBlur={handleDescricaoAssedio}
                 label='Descreva as ofensas ou ações vexatórias sofridas'
-                variant='outlined'
+                placeholder='ações vexatórias...'
+                variant='filled'
                 containerStyle={{ position: 'relative', left: 8 }}
                 error={error.descricao_ofensas_vexatorias}
                 helperText={error.descricao_ofensas_vexatorias ? 'Campo obrigatório' : ' '}
@@ -64,7 +65,7 @@ export default function AssedioMoralVertical(props: IAssedioMoralVertical) {
                 error={error.valor_estimado}
                 helperText={error.valor_estimado ? 'Campo obrigatório' : ' '}
                 className='danos_morais'
-                fixLabel
+                variant='filled'
             />
 
         </Grid>

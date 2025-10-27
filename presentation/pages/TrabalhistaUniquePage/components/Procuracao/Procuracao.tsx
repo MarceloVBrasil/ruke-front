@@ -155,7 +155,6 @@ export default function Procuracao({ ticketUnique: api_data, regraDominio }: Tra
                             marginRight: 10,
                             width: "100%",
                             color: "#00479d",
-                            fontWeight: "bold",
                         }}
                     >
                         PROCURAÇÃO{" "}
@@ -308,7 +307,7 @@ export default function Procuracao({ ticketUnique: api_data, regraDominio }: Tra
                 </AccordionDetails>
             </Accordion>
             <AccordionDetails>
-                {(regraDominio?.permissoes?.includes("create") ||
+                {(regraDominio?.permissoes?.includes("add") ||
                     regraDominio?.permissoes?.includes("update")) && (
                         <Button
                             onClick={() => criarProxy(api_data.id)}

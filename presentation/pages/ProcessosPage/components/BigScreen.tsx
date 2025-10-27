@@ -2,6 +2,7 @@ import { FormatListNumbered } from '@mui/icons-material'
 import { Button, Grid, Typography } from '@mui/material'
 import React from 'react'
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { Btn } from '@/presentation/components/Button';
 
 interface IBigScreen {
     processo: any
@@ -13,16 +14,16 @@ interface IBigScreen {
 export function BigScreenHeader() {
     return (
         <Grid item xs={12} container spacing={2} sx={{ padding: "10px", borderBottom: '1px solid #ddd' }}>
-            <Grid item xs={12} sm={3} sx={{ fontWeight: "bold", color: 'black' }}>
+            <Grid item xs={12} sm={3} sx={{ color: 'black' }}>
                 Número do processo
             </Grid>
-            <Grid item xs={12} sm={3} sx={{ fontWeight: "bold", color: 'black' }}>
+            <Grid item xs={12} sm={3} sx={{ color: 'black' }}>
                 Data de ajuizamento
             </Grid>
-            <Grid item xs={12} sm={3} sx={{ fontWeight: "bold", textAlign: "center", color: 'black' }}>
+            <Grid item xs={12} sm={3} sx={{ textAlign: "center", color: 'black' }}>
                 Cliente principal
             </Grid>
-            <Grid item xs={12} sm={3} sx={{ fontWeight: "bold", textAlign: "center", color: 'black' }}>
+            <Grid item xs={12} sm={3} sx={{ textAlign: "center", color: 'black' }}>
                 Ações
             </Grid>
         </Grid>
@@ -50,30 +51,23 @@ export default function BigScreen(props: IBigScreen) {
 
             <Grid item xs={12} sm={3} sx={{ display: "flex", alignItems: "center", justifyContent: 'center' }}>
                 {processo.cliente_principal}
-                MARCELO BRASIL
             </Grid>
 
             <Grid item xs={12} sm={3} style={{ display: "flex", alignItems: "center", flexDirection: 'column', gap: 5 }}>
 
-                <Button
+                <Btn
                     variant="outlined"
                     color="primary"
-                    startIcon={<VisibilityIcon />}
+                    text='Dados'
                     onClick={() => handleDadosProcesso(processo)}
-                    fullWidth
-                >
-                    Dados
-                </Button>
+                />
 
-                <Button
-                    fullWidth
+                <Btn
+                    text='Movimentações'
                     variant="outlined"
                     color="primary"
-                    startIcon={<FormatListNumbered />}
                     onClick={() => handleMovimentacoes(processo.id)}
-                >
-                    Movimentações
-                </Button>
+                />
 
             </Grid>
         </Grid>

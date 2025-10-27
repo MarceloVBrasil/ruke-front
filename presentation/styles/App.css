@@ -16,6 +16,10 @@
   color: #A4A4A4;
 }
 
+input:focus-within.input-icon {
+  color: red;
+}
+
 .hide-scrollbar {
   -ms-overflow-style: none;
   /* IE and Edge */

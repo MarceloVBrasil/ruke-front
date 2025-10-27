@@ -35,7 +35,6 @@ export default function ConfiguracoesFraudeBoletos(props: IConfiguracoesFraudeBo
                 <Typography
                     sx={{
                         color: "#00479d",
-                        fontWeight: "bold",
                         marginLeft: "10px",
                     }}
                 >
@@ -46,7 +45,7 @@ export default function ConfiguracoesFraudeBoletos(props: IConfiguracoesFraudeBo
                 <Grid container spacing={2}>
                     <GridTextField
                         xs={12} sm={6}
-                        variant='outlined'
+                        variant='filled'
                         label={'Percentual de Êxito'}
                         type='number'
                         error={errors.percentual_exito_fraude_em_boletos ? true : false}
@@ -69,7 +68,7 @@ export default function ConfiguracoesFraudeBoletos(props: IConfiguracoesFraudeBo
 
                     <GridCurrencyInput
                         xs={12} sm={6}
-                        variant={'outlined'}
+                        variant={'filled'}
                         label='Parcela Fixa'
                         error={errors.parcela_fixa_fraude_em_boletos ? true : false}
                         placeholder="Digite os dados de parcela fixa"

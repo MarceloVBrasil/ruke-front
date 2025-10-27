@@ -6,6 +6,7 @@ import { handleDelete } from '../helpers/Swal'
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { getPassoFromEtapa } from '../helpers/getPassosFromEtapa'
+import { Btn } from '@/presentation/components/Button'
 
 interface ISmallScreen {
     ticket: any
@@ -40,26 +41,22 @@ export default function SmallScreen(props: ISmallScreen) {
                         <Link
                             onClick={() => setLoading(true)}
                             href={`trabalhista/${ticket.id}?step=${getPassoFromEtapa(ticket.etapa)}`}>
-                            <Button
+                            <Btn
                                 variant="contained"
                                 color="primary"
-                                startIcon={<VisibilityIcon />}
+                                text='Ver'
                                 sx={{ width: '100%' }}
-                            >
-                                Ver
-                            </Button>
+                            />
                         </Link>
                     )}
                     {regraDominio?.permissoes?.includes("delete") && (
-                        <Button
+                        <Btn
+                            text='Excluir'
                             variant="contained"
                             color="primary"
-                            startIcon={<DeleteIcon />}
                             onClick={() => handleDelete(ticket.id, onTicketDelete)}
                             sx={{ width: '100%' }}
-                        >
-                            Excluir
-                        </Button>
+                        />
                     )}
                 </Box>
             </Paper>

@@ -4,8 +4,8 @@ const ProcessosPage = dynamic(() => import("@/presentation/pages/ProcessosPage/P
 
 type PageProps = {}
 export default async function Page() {
-  const planos = await getProcessos();
+  const processos = await getProcessos();
   return (
-    <ProcessosPage list={planos} />
+    <ProcessosPage list={processos} />
   )
 }

@@ -87,7 +87,7 @@ export const handleUserFormSubmit = async (props: {
         setUserChoose,
         setOpen
     } = props
-
+    console.log('user form submit')
     try {
         if (formRef.current) {
             setLoading(true);

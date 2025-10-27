@@ -91,6 +91,8 @@ export default function Form(props: IForm) {
                         error={errors.email ? true : false}
                         helperText={errors.email?.message?.toString() ?? ' '}
                         fullWidth
+                        email
+                        placeholder='jhon.doe@gmail.com'
                         variant="filled"
                         register={() => register('email')}
                         label='Email'

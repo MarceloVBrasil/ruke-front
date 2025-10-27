@@ -14,6 +14,12 @@ import { Accordion, AccordionSummary, Typography, Chip, AccordionDetails, Button
 import { Box } from '@mui/system';
 import Link from 'next/link';
 import React from 'react'
+import { Btn } from "@/presentation/components/Button";
+import GridTextField from "@/presentation/components/GridTextField";
+import GridSelectField from "@/presentation/components/GridSelectField";
+import { estado_civil } from "@/domain/data/estado_civil";
+import { estados_brasileiros } from "@/app/utils/EstadosBrasileiros";
+import GridCurrencyInput from "@/presentation/components/GridCurrencyInput";
 
 interface IPeticao {
     ticket: any
@@ -57,7 +63,7 @@ interface IPeticao {
     preencherInformacoesPeticao: (value: any) => any
     handleDeletePessoa: (index: number) => any
     handleSubmitPeticao: (value: any) => any
-    saveAndCreatePetition: (value?: any) => any
+    saveAndaddPetition: (value?: any) => any
     registerPeticao: (value: string) => any
     setNameClient: (value: string) => void
     resetPeticao: (value: any) => any
@@ -131,7 +137,7 @@ export default function Peticao(props: IPeticao) {
         preencherInformacoesPeticao,
         handleDeletePessoa,
         handleSubmitPeticao,
-        saveAndCreatePetition,
+        saveAndaddPetition,
         registerPeticao,
         setNameClient,
         resetPeticao,
@@ -183,7 +189,6 @@ export default function Peticao(props: IPeticao) {
                             marginRight: 10,
                             width: "100%",
                             color: "#00479d",
-                            fontWeight: "bold",
                         }}
                     >
                         PETIÇÃO{" "}
@@ -258,16 +263,15 @@ export default function Peticao(props: IPeticao) {
                                         marginRight: 10,
                                         width: "100%",
                                         color: "black",
-                                        fontWeight: "bold",
                                     }}
                                 >
                                     PARTE AUTORA E DEMAIS MEMBROS DA FAMÍLIA
                                 </Typography>
-                                <Button
+                                <Btn
+                                    text="Adicionar Pessoa"
                                     variant="contained"
-                                    sx={{ width: "250px" }}
-                                    style={{ fontWeight: "bold" }}
-                                    startIcon={<FamilyRestroomIcon />}
+                                    width={'250px'}
+                                    marginRight={1}
                                     onClick={() => {
                                         setPessoaModal(true), setPessoaId(""), setPessoaNome("");
                                         setCpfPessoa("");
@@ -280,9 +284,7 @@ export default function Peticao(props: IPeticao) {
                                         setEstadoCivilPessoa("");
                                         resetPessoa();
                                     }}
-                                >
-                                    Adicionar Pessoa
-                                </Button>
+                                />
                             </AccordionSummary>
                             <AccordionDetails>
                                 <TableContainer
@@ -302,7 +304,6 @@ export default function Peticao(props: IPeticao) {
                                                     style={{
                                                         backgroundColor: "white",
                                                         color: "black",
-                                                        fontWeight: "bold",
                                                         padding: "25px",
                                                     }}
                                                 >
@@ -312,7 +313,6 @@ export default function Peticao(props: IPeticao) {
                                                     style={{
                                                         backgroundColor: "white",
                                                         color: "black",
-                                                        fontWeight: "bold",
                                                         padding: "25px",
                                                     }}
                                                 >
@@ -323,7 +323,6 @@ export default function Peticao(props: IPeticao) {
                                                         width: "280px",
                                                         backgroundColor: "white",
                                                         color: "black",
-                                                        fontWeight: "bold",
                                                         padding: "25px",
                                                     }}
                                                 >
@@ -333,7 +332,6 @@ export default function Peticao(props: IPeticao) {
                                                     style={{
                                                         backgroundColor: "white",
                                                         color: "black",
-                                                        fontWeight: "bold",
                                                         padding: "25px",
                                                     }}
                                                 >
@@ -344,7 +342,6 @@ export default function Peticao(props: IPeticao) {
                                                         width: "280px",
                                                         backgroundColor: "white",
                                                         color: "black",
-                                                        fontWeight: "bold",
                                                         padding: "25px",
                                                     }}
                                                 >
@@ -378,10 +375,10 @@ export default function Peticao(props: IPeticao) {
                                                             )}
                                                         </StyledTableCell>
                                                         <StyledTableCell sx={{ gap: 2 }}>
-                                                            <Button
+                                                            <Btn
                                                                 variant="contained"
                                                                 color="primary"
-                                                                startIcon={<EditIcon />}
+                                                                text="Editar"
                                                                 onClick={() => {
                                                                     setPessoaModal(true);
                                                                     setPessoaId(pessoa.id);
@@ -411,19 +408,15 @@ export default function Peticao(props: IPeticao) {
                                                                         profissaoPessoa: pessoa.profissao,
                                                                     });
                                                                 }}
-                                                            >
-                                                                Editar
-                                                            </Button>
-                                                            <Button
+                                                            />
+                                                            <Btn
                                                                 disabled={pessoaSelecionada === pessoa.id}
                                                                 variant="contained"
                                                                 color="primary"
-                                                                startIcon={<DeleteIcon />}
+                                                                text="Excluir"
                                                                 sx={{ ml: 1 }}
                                                                 onClick={() => handleDeletePessoa(index)}
-                                                            >
-                                                                Excluir
-                                                            </Button>
+                                                            />
                                                         </StyledTableCell>
                                                     </StyledTableRow>
                                                 );
@@ -439,7 +432,6 @@ export default function Peticao(props: IPeticao) {
                             sx={{
                                 borderBottom: "2px solid #00479d",
                                 color: "#00479d",
-                                fontWeight: "bold",
                                 marginLeft: "10px",
                             }}
                         >
@@ -451,708 +443,464 @@ export default function Peticao(props: IPeticao) {
                             id="form-peticao"
                             container
                             component="form"
-                            onSubmit={handleSubmitPeticao(saveAndCreatePetition)}
+                            onSubmit={handleSubmitPeticao(saveAndaddPetition)}
                             spacing={2}
                         >
-                            <Grid item style={{ borderRadius: "30px" }} xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Nome do Cliente
-                                </Typography>
-                                <TextField
-                                    fullWidth
-                                    placeholder="Digite seu nome completo"
-                                    value={nameClient}
-                                    error={errorsPeticao.nameClient ? true : false}
-                                    helperText={errorsPeticao.nameClient?.message?.toString()}
-                                    {...registerPeticao("nameClient")}
-                                    onChange={(e: any) => {
-                                        setNameClient(e.target.value);
-                                        resetPeticao({
-                                            nameClient: e.target.value,
-                                        });
-                                        const index = pessoas.findIndex(
-                                            (pessoa) =>
-                                                pessoa.nome_cliente.toLowerCase() ===
-                                                e.target.value.toLowerCase()
-                                        );
-                                        if (index > -1) {
-                                            preencherInformacoesPeticao(pessoas[index]);
-                                        }
 
-                                        if (pessoaSelecionada) {
-                                            const index = pessoas.findIndex(
-                                                (pessoa) => pessoa.id === pessoaSelecionada
-                                            );
-                                            const clonePessoasArray = [...pessoas];
-                                            clonePessoasArray[index].nome_cliente = e.target.value;
-                                            setPessoas(clonePessoasArray);
-                                        }
-                                    }}
-                                    variant="outlined"
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Estado Civil
-                                </Typography>
-                                <FormControl
-                                    fullWidth
-                                    variant="filled"
-                                    error={errorsPeticao.estadoCivil ? true : false}
-                                >
-                                    <Select
-                                        id="estadoCivil"
-                                        variant="outlined"
-                                        displayEmpty
-                                        fullWidth
-                                        value={estadoCivil}
-                                        style={{
-                                            borderRadius: "10px",
-                                        }}
-                                        {...registerPeticao("estadoCivil")}
-                                        onChange={(e) => {
-                                            setEstadoCivil(e.target.value);
-                                            resetPeticao({
-                                                estadoCivil: e.target.value,
-                                            });
-                                            if (pessoaSelecionada) {
-                                                const index = pessoas.findIndex(
-                                                    (pessoa) => pessoa.id === pessoaSelecionada
-                                                );
-                                                const clonePessoasArray = [...pessoas];
-                                                clonePessoasArray[index].estado_civil =
-                                                    e.target.value;
-                                                setPessoas(clonePessoasArray);
-                                            }
-                                        }}
-                                    >
-                                        <MenuItem selected value="" disabled>
-                                            Selecione o estado civil
-                                        </MenuItem>
-                                        <MenuItem value={"Solteiro(a)"}>Solteiro(a)</MenuItem>
-                                        <MenuItem value={"Casado(a)"}>Casado(a)</MenuItem>
-                                        <MenuItem value={"Divorciado(a)"}>Divorciado(a)</MenuItem>
-                                        <MenuItem value={"Viuvo(a)"}>Viúvo(a)</MenuItem>
-                                        <MenuItem value={"Separado(a) Judicialmente"}>
-                                            Separado(a) Judicialmente
-                                        </MenuItem>
-                                        <MenuItem value={"em União Estável"}>
-                                            em União Estável
-                                        </MenuItem>
-                                    </Select>
-                                    {errorsPeticao.estadoCivil ? (
-                                        <FormHelperText>
-                                            {errorsPeticao.estadoCivil?.message?.toString()}
-                                        </FormHelperText>
-                                    ) : null}
-                                </FormControl>
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Profissão
-                                </Typography>
-                                <TextField
-                                    id="outlined-basic"
-                                    fullWidth
-                                    placeholder="Digite sua profissão"
-                                    variant="outlined"
-                                    value={profissao}
-                                    error={errorsPeticao.profissao ? true : false}
-                                    helperText={errorsPeticao.profissao?.message?.toString()}
-                                    {...registerPeticao("profissao")}
-                                    onChange={(e) => {
-                                        setProfissao(e.target.value);
-                                        resetPeticao({
-                                            profissao: e.target.value,
-                                        });
-                                        if (pessoaSelecionada) {
-                                            const index = pessoas.findIndex(
-                                                (pessoa) => pessoa.id === pessoaSelecionada
-                                            );
-                                            const clonePessoasArray = [...pessoas];
-                                            clonePessoasArray[index].profissao = e.target.value;
-                                            setPessoas(clonePessoasArray);
-                                        }
-                                    }}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    CPF do cliente
-                                </Typography>
-                                <TextField
-                                    fullWidth
-                                    value={cpfClient}
-                                    error={errorsPeticao.cpfClient ? true : false}
-                                    helperText={errorsPeticao.cpfClient?.message?.toString()}
-                                    {...registerPeticao("cpfClient")}
-                                    onChange={(e) => {
-                                        const value = onlyNumber(e.target.value);
-                                        setCPFClient(formatCpf(value));
-                                        resetProcuracao({
-                                            cpfClient: formatCpf(value),
-                                        });
-                                        const pessoa = pessoas.find(
-                                            (pessoa) =>
-                                                pessoa?.cpf_cliente?.toLowerCase() ===
-                                                formatCpf(value)
-                                        );
-                                        if (pessoa) {
-                                            preencherInformacoesPeticao(pessoa);
-                                        }
-                                        if (pessoaSelecionada) {
-                                            const index = pessoas.findIndex(
-                                                (pessoa) => pessoa.id === pessoaSelecionada
-                                            );
-                                            const clonePessoasArray = [...pessoas];
-                                            clonePessoasArray[index].cpf_cliente = formatCpf(value);
-                                            setPessoas(clonePessoasArray);
-                                        }
-                                    }}
-                                    placeholder="Digite seu CPF"
-                                    variant="outlined"
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    RG
-                                </Typography>
-                                <TextField
-                                    fullWidth
-                                    value={rgClient}
-                                    error={errorsPeticao.rg ? true : false}
-                                    helperText={errorsPeticao.rg?.message?.toString()}
-                                    {...registerPeticao("rg")}
-                                    onChange={(e) => {
-                                        setRGClient(e.target.value);
-                                        resetPeticao({
-                                            rgClient: e.target.value,
-                                        });
-                                        const index = pessoas.findIndex(
-                                            (pessoa) =>
-                                                pessoa.rg_cliente.toLowerCase() ===
-                                                e.target.value.toLowerCase()
-                                        );
-                                        if (index > -1) {
-                                            preencherInformacoesPeticao(pessoas[index]);
-                                        }
-
-                                        if (pessoaSelecionada) {
-                                            const index = pessoas.findIndex(
-                                                (pessoa) => pessoa.id === pessoaSelecionada
-                                            );
-                                            const clonePessoasArray = [...pessoas];
-                                            clonePessoasArray[index].rg_cliente = e.target.value;
-                                            setPessoas(clonePessoasArray);
-                                        }
-                                    }}
-                                    placeholder="Digite o RG da parte autora"
-                                    variant="outlined"
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    CEP
-                                </Typography>
-                                <TextField
-                                    id="outlined-basic"
-                                    fullWidth
-                                    placeholder="Digite seu CEP"
-                                    variant="outlined"
-                                    value={cep}
-                                    error={errorsPeticao.cep ? true : false}
-                                    helperText={errorsPeticao.cep?.message?.toString()}
-                                    {...registerPeticao("cep")}
-                                    onChange={(e) => {
-                                        const value = onlyNumber(e.target.value);
-                                        setCep(formatCepInput(value));
-                                        resetPeticao({
-                                            cep: formatCepInput(value),
-                                        });
-                                    }}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Endereço do cliente
-                                </Typography>
-                                <TextField
-                                    fullWidth
-                                    value={enderecoCompleto}
-                                    error={errorsPeticao.enderecoCompleto ? true : false}
-                                    helperText={errorsPeticao.enderecoCompleto?.message?.toString()}
-                                    {...registerPeticao("enderecoCompleto")}
-                                    onChange={(e) => {
-                                        setEnderecoCompleto(e.target.value);
-                                        resetPeticao({
-                                            enderecoCompleto: e.target.value,
-                                        });
-                                    }}
-                                    placeholder="Digite seu endereço"
-                                    variant="outlined"
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Número
-                                </Typography>
-                                <TextField
-                                    fullWidth
-                                    placeholder="Digite o número..."
-                                    variant="outlined"
-                                    value={numero}
-                                    error={errorsPeticao.numero ? true : false}
-                                    helperText={errorsPeticao.numero?.message?.toString()}
-                                    {...registerPeticao("numero")}
-                                    onChange={(e) => {
-                                        setNumero(e.target.value);
-                                        resetPeticao({
-                                            numero: e.target.value,
-                                        });
-                                    }}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Complemento
-                                </Typography>
-                                <TextField
-                                    id="outlined-basic"
-                                    fullWidth
-                                    placeholder="Digite o complemento"
-                                    variant="outlined"
-                                    value={complemento}
-                                    error={errorsPeticao.complemento ? true : false}
-                                    helperText={errorsPeticao.complemento?.message?.toString()}
-                                    {...registerPeticao("complemento")}
-                                    onChange={(e) => {
-                                        setComplemento(e.target.value);
-                                        resetPeticao({
-                                            complemento: e.target.value,
-                                        });
-                                    }}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Bairro
-                                </Typography>
-                                <TextField
-                                    id="outlined-basic"
-                                    fullWidth
-                                    placeholder="Digite  seu Bairro "
-                                    variant="outlined"
-                                    value={bairro}
-                                    error={errorsPeticao.bairro ? true : false}
-                                    helperText={errorsPeticao.bairro?.message?.toString()}
-                                    {...registerPeticao("bairro")}
-                                    onChange={(e) => {
-                                        setBairro(e.target.value);
-                                        resetPeticao({
-                                            bairro: e.target.value,
-                                        });
-                                    }}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Cidade
-                                </Typography>
-                                <TextField
-                                    fullWidth
-                                    value={cidade}
-                                    error={errorsPeticao.cidade ? true : false}
-                                    helperText={errorsPeticao.cidade?.message?.toString()}
-                                    {...registerPeticao("cidade")}
-                                    onChange={(e) => setCidade(e.target.value)}
-                                    placeholder="Digite a sua cidade"
-                                    variant="outlined"
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <FormControl
-                                    error={errorsPeticao.estado ? true : false}
-                                    fullWidth
-                                    variant="filled"
-                                >
-                                    <Typography
-                                        sx={{
-                                            color: "#00479d",
-                                            fontWeight: "bold",
-                                            marginLeft: "10px",
-                                        }}
-                                    >
-                                        Estado
-                                    </Typography>
-                                    <Select
-                                        variant="outlined"
-                                        sx={{ borderRadius: "10px", width: '100%' }}
-                                        id="estado"
-                                        value={estado}
-                                        {...registerPeticao("estado")}
-                                        onChange={(e) => {
-                                            setEstado(e.target.value);
-                                        }}
-                                    >
-                                        <MenuItem selected value="" disabled>
-                                            Estado
-                                        </MenuItem>
-                                        <MenuItem value="AC">AC</MenuItem>
-                                        <MenuItem value="AL">AL</MenuItem>
-                                        <MenuItem value="AP">AP</MenuItem>
-                                        <MenuItem value="AM">AM</MenuItem>
-                                        <MenuItem value="BA">BA</MenuItem>
-                                        <MenuItem value="CE">CE</MenuItem>
-                                        <MenuItem value="DF">DF</MenuItem>
-                                        <MenuItem value="ES">ES</MenuItem>
-                                        <MenuItem value="GO">GO</MenuItem>
-                                        <MenuItem value="MA">MA</MenuItem>
-                                        <MenuItem value="MT">MT</MenuItem>
-                                        <MenuItem value="MS">MS</MenuItem>
-                                        <MenuItem value="MG">MG</MenuItem>
-                                        <MenuItem value="PA">PA</MenuItem>
-                                        <MenuItem value="PB">PB</MenuItem>
-                                        <MenuItem value="PR">PR</MenuItem>
-                                        <MenuItem value="PE">PE</MenuItem>
-                                        <MenuItem value="PI">PI</MenuItem>
-                                        <MenuItem value="RJ">RJ</MenuItem>
-                                        <MenuItem value="RN">RN</MenuItem>
-                                        <MenuItem value="RS">RS</MenuItem>
-                                        <MenuItem value="RO">RO</MenuItem>
-                                        <MenuItem value="RR">RR</MenuItem>
-                                        <MenuItem value="SC">SC</MenuItem>
-                                        <MenuItem value="SP">SP</MenuItem>
-                                        <MenuItem value="SE">SE</MenuItem>
-                                        <MenuItem value="TO">TO</MenuItem>
-                                    </Select>
-                                    {errorsPeticao.estado ? (
-                                        <FormHelperText>
-                                            {errorsPeticao.estado?.message?.toString()}
-                                        </FormHelperText>
-                                    ) : null}
-                                </FormControl>
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Renda Parte Autora
-                                </Typography>
-                                <TextField
-                                    fullWidth
-                                    placeholder="Digite a renda da parte autora"
-                                    variant="outlined"
-                                    value={rendaParteAutora}
-                                    error={errorsPeticao.rendaParteAutora ? true : false}
-                                    helperText={errorsPeticao.rendaParteAutora?.message?.toString()}
-                                    {...registerPeticao("rendaParteAutora")}
-                                    onChange={(e) => {
-                                        setRendaParteAutora(e.target.value);
-                                        if (pessoaSelecionada) {
-                                            const index = pessoas.findIndex(
-                                                (pessoa) => pessoa.id === pessoaSelecionada
-                                            );
-                                            const clonePessoasArray = [...pessoas];
-                                            clonePessoasArray[index].renda = e.target.value;
-                                            setPessoas(clonePessoasArray);
-                                        }
-                                    }}
-                                    InputProps={{
-                                        inputComponent: ContractValueMemo,
-                                    }}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Fonte de Renda Parte Autora
-                                </Typography>
-                                <TextField
-                                    fullWidth
-                                    placeholder="Digite a Fonte de renda da parte autora"
-                                    variant="outlined"
-                                    value={fonteDeRendaParteAutora}
-                                    error={errorsPeticao.fonteDeRendaParteAutora ? true : false}
-                                    helperText={errorsPeticao.fonteDeRendaParteAutora?.message?.toString()}
-                                    {...registerPeticao("fonteDeRendaParteAutora")}
-                                    onChange={(e) => {
-                                        setFonteRendaParteAutora(e.target.value);
-                                        resetPeticao({
-                                            fonteDeRendaParteAutora: e.target.value,
-                                        });
-                                        if (pessoaSelecionada) {
-                                            const index = pessoas.findIndex(
-                                                (pessoa) => pessoa.id === pessoaSelecionada
-                                            );
-                                            const clonePessoasArray = [...pessoas];
-                                            clonePessoasArray[index].fonte_de_renda =
-                                                e.target.value;
-                                            setPessoas(clonePessoasArray);
-                                        }
-                                    }}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Data Requerimento
-                                </Typography>
-                                <TextField
-                                    id="date"
-                                    fullWidth
-                                    type="date"
-                                    placeholder="Digite a data Requerimento"
-                                    variant="outlined"
-                                    value={dataRequerimento}
-                                    error={errorsPeticao.dataRequerimento ? true : false}
-                                    helperText={errorsPeticao.dataRequerimento?.message?.toString()}
-                                    {...registerPeticao("dataRequerimento")}
-                                    onChange={(e) => {
-                                        setDataRequerimento(e.target.value);
-                                        resetPeticao({
-                                            dataRequerimento: e.target.value,
-                                        });
-                                    }}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Número Benefício
-                                </Typography>
-                                <TextField
-                                    id="outlined-basic"
-                                    fullWidth
-                                    placeholder="Digite o número Benefício"
-                                    variant="outlined"
-                                    value={numeroBeneficio}
-                                    error={errorsPeticao.numeroBeneficio ? true : false}
-                                    helperText={errorsPeticao.numeroBeneficio?.message?.toString()}
-                                    {...registerPeticao("numeroBeneficio")}
-                                    onChange={(e) => {
-                                        setNumeroBeneficio(e.target.value);
-                                        resetPeticao({
-                                            numeroBeneficio: e.target.value,
-                                        });
-                                    }}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Data de nascimento da parte autora
-                                </Typography>
-                                <TextField
-                                    id="outlined-basic"
-                                    fullWidth
-                                    placeholder="Insira a data de nascimento..."
-                                    variant="outlined"
-                                    type="date"
-                                    value={formatarDataParaFormatoAmericano(
-                                        dataNascimentoAutora
-                                    )}
-                                    error={
-                                        errorsPeticao.dataNascimentoParteAutora ? true : false
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                label="Nome"
+                                placeholder="Digite seu nome completo"
+                                value={nameClient}
+                                error={errorsPeticao.nameClient ? true : false}
+                                helperText={errorsPeticao.nameClient?.message?.toString()}
+                                {...registerPeticao("nameClient")}
+                                onChange={(e: any) => {
+                                    setNameClient(e.target.value);
+                                    resetPeticao({
+                                        nameClient: e.target.value,
+                                    });
+                                    const index = pessoas.findIndex(
+                                        (pessoa) =>
+                                            pessoa.nome_cliente.toLowerCase() ===
+                                            e.target.value.toLowerCase()
+                                    );
+                                    if (index > -1) {
+                                        preencherInformacoesPeticao(pessoas[index]);
                                     }
-                                    helperText={errorsPeticao.dataNascimentoParteAutora?.message?.toString()}
-                                    {...registerPeticao("dataNascimentoParteAutora")}
-                                    onChange={(e) => {
-                                        setDataNascimentoAutora(e.target.value);
-                                        calculateIdade(e.target.value);
-                                        resetPeticao({
-                                            dataNascimentoAutora: e.target.value,
-                                        });
-                                        if (pessoaSelecionada) {
-                                            const index = pessoas.findIndex(
-                                                (pessoa) => pessoa.id === pessoaSelecionada
-                                            );
-                                            const clonePessoasArray = [...pessoas];
-                                            clonePessoasArray[index].data_nascimento =
-                                                e.target.value;
-                                            setPessoas(clonePessoasArray);
-                                        }
-                                    }}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
 
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Idade parte autora
-                                </Typography>
-                                <TextField
-                                    fullWidth
-                                    placeholder="Digite a idade da parte autora"
-                                    variant="outlined"
-                                    disabled
-                                    value={idadeClienteAutora}
-                                    error={errorsPeticao.idadeParteAutora ? true : false}
-                                    helperText={errorsPeticao.idadeParteAutora?.message?.toString()}
-                                    {...registerPeticao("idadeParteAutora")}
-                                    onChange={(e) => {
-                                        setIdadeClienteAutora(e.target.value);
-                                        resetPeticao({
-                                            idadeClienteAutora: e.target.value,
-                                        });
-                                    }}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
+                                    if (pessoaSelecionada) {
+                                        const index = pessoas.findIndex(
+                                            (pessoa) => pessoa.id === pessoaSelecionada
+                                        );
+                                        const clonePessoasArray = [...pessoas];
+                                        clonePessoasArray[index].nome_cliente = e.target.value;
+                                        setPessoas(clonePessoasArray);
+                                    }
+                                }}
+                                variant="filled"
 
-                            <Grid item xs={12} sm={6} md={4}>
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "10px",
-                                    }}
-                                >
-                                    Seção Judiciária
-                                </Typography>
-                                <TextField
-                                    id="outlined-basic"
-                                    fullWidth
-                                    placeholder="Seção Judiciária"
-                                    variant="outlined"
-                                    value={secaoJudiciariaEstado}
-                                    error={errorsPeticao.secaoJudiciariaEstado ? true : false}
-                                    helperText={errorsPeticao.secaoJudiciariaEstado?.message?.toString()}
-                                    {...registerPeticao("secaoJudiciariaEstado")}
-                                    onChange={(e) => {
-                                        setSecaoJudiciariaEstado(e.target.value);
-                                        resetPeticao({
-                                            secaoJudiciariaEstado: e.target.value,
-                                        });
-                                    }}
-                                    InputLabelProps={{ shrink: true }}
-                                />
-                            </Grid>
+                            />
+
+                            <GridSelectField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                label="Estado Civil"
+                                variant="filled"
+                                placeholder="Estado Civil"
+                                value={estadoCivil}
+                                options={estado_civil}
+                                error={errorsPeticao.estadoCivil ? true : false}
+                                helperText={errorsPeticao.estadoCivil?.message?.toString()}
+                                onChange={(e) => {
+                                    setEstadoCivil(e.target.value);
+                                    resetPeticao({
+                                        estadoCivil: e.target.value,
+                                    });
+                                    if (pessoaSelecionada) {
+                                        const index = pessoas.findIndex(
+                                            (pessoa) => pessoa.id === pessoaSelecionada
+                                        );
+                                        const clonePessoasArray = [...pessoas];
+                                        clonePessoasArray[index].estado_civil =
+                                            e.target.value;
+                                        setPessoas(clonePessoasArray);
+                                    }
+                                }}
+                                name={"estado_civil"}
+                            />
+
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                label="Profissão"
+                                variant="filled"
+                                placeholder="Profissão"
+                                value={profissao}
+                                error={errorsPeticao.profissao ? true : false}
+                                helperText={errorsPeticao.profissao?.message?.toString()}
+                                {...registerPeticao("profissao")}
+                                onChange={(e) => {
+                                    setProfissao(e.target.value);
+                                    resetPeticao({
+                                        profissao: e.target.value,
+                                    });
+                                    if (pessoaSelecionada) {
+                                        const index = pessoas.findIndex(
+                                            (pessoa) => pessoa.id === pessoaSelecionada
+                                        );
+                                        const clonePessoasArray = [...pessoas];
+                                        clonePessoasArray[index].profissao = e.target.value;
+                                        setPessoas(clonePessoasArray);
+                                    }
+                                }}
+                            />
+
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                variant="filled"
+                                label="CPF"
+                                value={cpfClient}
+                                error={errorsPeticao.cpfClient ? true : false}
+                                helperText={errorsPeticao.cpfClient?.message?.toString()}
+                                {...registerPeticao("cpfClient")}
+                                onChange={(e) => {
+                                    const value = onlyNumber(e.target.value);
+                                    setCPFClient(formatCpf(value));
+                                    resetProcuracao({
+                                        cpfClient: formatCpf(value),
+                                    });
+                                    const pessoa = pessoas.find(
+                                        (pessoa) =>
+                                            pessoa?.cpf_cliente?.toLowerCase() ===
+                                            formatCpf(value)
+                                    );
+                                    if (pessoa) {
+                                        preencherInformacoesPeticao(pessoa);
+                                    }
+                                    if (pessoaSelecionada) {
+                                        const index = pessoas.findIndex(
+                                            (pessoa) => pessoa.id === pessoaSelecionada
+                                        );
+                                        const clonePessoasArray = [...pessoas];
+                                        clonePessoasArray[index].cpf_cliente = formatCpf(value);
+                                        setPessoas(clonePessoasArray);
+                                    }
+                                }}
+                                placeholder="Digite seu CPF"
+                            />
+
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                variant="filled"
+                                label="RG"
+                                value={rgClient}
+                                error={errorsPeticao.rg ? true : false}
+                                helperText={errorsPeticao.rg?.message?.toString()}
+                                {...registerPeticao("rg")}
+                                onChange={(e) => {
+                                    setRGClient(e.target.value);
+                                    resetPeticao({
+                                        rgClient: e.target.value,
+                                    });
+                                    const index = pessoas.findIndex(
+                                        (pessoa) =>
+                                            pessoa.rg_cliente.toLowerCase() ===
+                                            e.target.value.toLowerCase()
+                                    );
+                                    if (index > -1) {
+                                        preencherInformacoesPeticao(pessoas[index]);
+                                    }
+
+                                    if (pessoaSelecionada) {
+                                        const index = pessoas.findIndex(
+                                            (pessoa) => pessoa.id === pessoaSelecionada
+                                        );
+                                        const clonePessoasArray = [...pessoas];
+                                        clonePessoasArray[index].rg_cliente = e.target.value;
+                                        setPessoas(clonePessoasArray);
+                                    }
+                                }}
+                                placeholder="Digite o RG da parte autora"
+                            />
+
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                label="CEP"
+                                placeholder="CEP"
+                                variant="filled"
+                                value={cep}
+                                error={errorsPeticao.cep ? true : false}
+                                helperText={errorsPeticao.cep?.message?.toString()}
+                                {...registerPeticao("cep")}
+                                onChange={(e) => {
+                                    const value = onlyNumber(e.target.value);
+                                    setCep(formatCepInput(value));
+                                    resetPeticao({
+                                        cep: formatCepInput(value),
+                                    });
+                                }}
+                            />
+
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                label="Endereço"
+                                variant="filled"
+                                value={enderecoCompleto}
+                                error={errorsPeticao.enderecoCompleto ? true : false}
+                                helperText={errorsPeticao.enderecoCompleto?.message?.toString()}
+                                {...registerPeticao("enderecoCompleto")}
+                                onChange={(e) => {
+                                    setEnderecoCompleto(e.target.value);
+                                    resetPeticao({
+                                        enderecoCompleto: e.target.value,
+                                    });
+                                }}
+                                placeholder="Digite seu endereço"
+                            />
+
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                variant="filled"
+                                label="Número"
+                                placeholder="Digite o número"
+                                value={numero}
+                                error={errorsPeticao.numero ? true : false}
+                                helperText={errorsPeticao.numero?.message?.toString()}
+                                {...registerPeticao("numero")}
+                                onChange={(e) => {
+                                    setNumero(e.target.value);
+                                    resetPeticao({
+                                        numero: e.target.value,
+                                    });
+                                }}
+                            />
+
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                variant="filled"
+                                label="Complemento"
+                                placeholder="Digite o complemento"
+                                value={complemento}
+                                error={errorsPeticao.complemento ? true : false}
+                                helperText={errorsPeticao.complemento?.message?.toString()}
+                                {...registerPeticao("complemento")}
+                                onChange={(e) => {
+                                    setComplemento(e.target.value);
+                                    resetPeticao({
+                                        complemento: e.target.value,
+                                    });
+                                }}
+                            />
+
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                variant="filled"
+                                label="Bairro"
+                                placeholder="Bairro"
+                                value={bairro}
+                                error={errorsPeticao.bairro ? true : false}
+                                helperText={errorsPeticao.bairro?.message?.toString()}
+                                {...registerPeticao("bairro")}
+                                onChange={(e) => {
+                                    setBairro(e.target.value);
+                                    resetPeticao({
+                                        bairro: e.target.value,
+                                    });
+                                }}
+                            />
+
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                variant="filled"
+                                label="Cidade"
+                                value={cidade}
+                                error={errorsPeticao.cidade ? true : false}
+                                helperText={errorsPeticao.cidade?.message?.toString()}
+                                {...registerPeticao("cidade")}
+                                onChange={(e) => setCidade(e.target.value)}
+                                placeholder="Digite a sua cidade"
+                            />
+
+                            <GridSelectField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                variant="filled"
+                                label="Estado"
+                                placeholder="Estado"
+                                error={errorsPeticao.estado ? true : false}
+                                helperText={errorsPeticao.estado?.message?.toString()}
+                                options={estados_brasileiros}
+                                value={estado}
+                                {...registerPeticao("estado")}
+                                onChange={(e) => {
+                                    setEstado(e.target.value);
+                                }}
+                            />
+
+                            <GridCurrencyInput
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                label="Renda Parte Autora"
+                                placeholder="Digite a renda da parte autora"
+                                variant="filled"
+                                value={rendaParteAutora}
+                                error={errorsPeticao.rendaParteAutora ? true : false}
+                                helperText={errorsPeticao.rendaParteAutora?.message?.toString()}
+                                {...registerPeticao("rendaParteAutora")}
+                                onChange={(e: { target: { value: string; }; }) => {
+                                    setRendaParteAutora(e.target.value);
+                                    if (pessoaSelecionada) {
+                                        const index = pessoas.findIndex(
+                                            (pessoa) => pessoa.id === pessoaSelecionada
+                                        );
+                                        const clonePessoasArray = [...pessoas];
+                                        clonePessoasArray[index].renda = e.target.value;
+                                        setPessoas(clonePessoasArray);
+                                    }
+                                }}
+                            />
+
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                variant="filled"
+                                label="Fonte de Renda Parte Autora"
+                                placeholder="Digite a Fonte de renda da parte autora"
+                                value={fonteDeRendaParteAutora}
+                                error={errorsPeticao.fonteDeRendaParteAutora ? true : false}
+                                helperText={errorsPeticao.fonteDeRendaParteAutora?.message?.toString()}
+                                {...registerPeticao("fonteDeRendaParteAutora")}
+                                onChange={(e) => {
+                                    setFonteRendaParteAutora(e.target.value);
+                                    resetPeticao({
+                                        fonteDeRendaParteAutora: e.target.value,
+                                    });
+                                    if (pessoaSelecionada) {
+                                        const index = pessoas.findIndex(
+                                            (pessoa) => pessoa.id === pessoaSelecionada
+                                        );
+                                        const clonePessoasArray = [...pessoas];
+                                        clonePessoasArray[index].fonte_de_renda =
+                                            e.target.value;
+                                        setPessoas(clonePessoasArray);
+                                    }
+                                }}
+                            />
+
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                variant="filled"
+                                label="Data Requerimento"
+                                type="date"
+                                value={dataRequerimento}
+                                error={errorsPeticao.dataRequerimento ? true : false}
+                                helperText={errorsPeticao.dataRequerimento?.message?.toString()}
+                                {...registerPeticao("dataRequerimento")}
+                                onChange={(e) => {
+                                    setDataRequerimento(e.target.value);
+                                    resetPeticao({
+                                        dataRequerimento: e.target.value,
+                                    });
+                                }}
+                            />
+
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                variant="filled"
+                                label="Número do Benefício"
+                                placeholder="Número do Benefício"
+                                value={numeroBeneficio}
+                                error={errorsPeticao.numeroBeneficio ? true : false}
+                                helperText={errorsPeticao.numeroBeneficio?.message?.toString()}
+                                {...registerPeticao("numeroBeneficio")}
+                                onChange={(e) => {
+                                    setNumeroBeneficio(e.target.value);
+                                    resetPeticao({
+                                        numeroBeneficio: e.target.value,
+                                    });
+                                }}
+                            />
+
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                variant="filled"
+                                label="  Data de Nascimento"
+                                type="date"
+                                value={formatarDataParaFormatoAmericano(
+                                    dataNascimentoAutora
+                                )}
+                                error={
+                                    errorsPeticao.dataNascimentoParteAutora ? true : false
+                                }
+                                helperText={errorsPeticao.dataNascimentoParteAutora?.message?.toString()}
+                                {...registerPeticao("dataNascimentoParteAutora")}
+                                onChange={(e) => {
+                                    setDataNascimentoAutora(e.target.value);
+                                    calculateIdade(e.target.value);
+                                    resetPeticao({
+                                        dataNascimentoAutora: e.target.value,
+                                    });
+                                    if (pessoaSelecionada) {
+                                        const index = pessoas.findIndex(
+                                            (pessoa) => pessoa.id === pessoaSelecionada
+                                        );
+                                        const clonePessoasArray = [...pessoas];
+                                        clonePessoasArray[index].data_nascimento =
+                                            e.target.value;
+                                        setPessoas(clonePessoasArray);
+                                    }
+                                }}
+                            />
+
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                label="Idade"
+                                variant="filled"
+                                placeholder="Idade"
+                                disabled
+                                value={idadeClienteAutora}
+                                error={errorsPeticao.idadeParteAutora ? true : false}
+                                helperText={errorsPeticao.idadeParteAutora?.message?.toString()}
+                                {...registerPeticao("idadeParteAutora")}
+                                onChange={(e) => {
+                                    setIdadeClienteAutora(e.target.value);
+                                    resetPeticao({
+                                        idadeClienteAutora: e.target.value,
+                                    });
+                                }}
+
+                            />
+
+                            <GridTextField
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                variant="filled"
+                                label="Seção Judiciária"
+                                placeholder="Seção Judiciária"
+                                value={secaoJudiciariaEstado}
+                                error={errorsPeticao.secaoJudiciariaEstado ? true : false}
+                                helperText={errorsPeticao.secaoJudiciariaEstado?.message?.toString()}
+                                {...registerPeticao("secaoJudiciariaEstado")}
+                                onChange={(e) => {
+                                    setSecaoJudiciariaEstado(e.target.value);
+                                    resetPeticao({
+                                        secaoJudiciariaEstado: e.target.value,
+                                    });
+                                }}
+                            />
 
                         </Grid>
                     </AccordionDetails>
@@ -1170,22 +918,19 @@ export default function Peticao(props: IPeticao) {
                                     marginRight: 10,
                                     width: "100%",
                                     color: "black",
-                                    fontWeight: "bold",
                                 }}
                             >
                                 DOENÇAS ( CID ) ADICIONADAS
                             </Typography>
-                            <Button
+                            <Btn
                                 variant="contained"
-                                style={{ fontWeight: "bold", marginLeft: "" }}
-                                sx={{ width: "250px" }}
-                                startIcon={<MedicalServicesIcon />}
+                                width={'250px'}
+                                marginRight={1}
+                                text="Adicionar Doença"
                                 onClick={() => {
                                     setDoencaModal(true), resetDoenca();
                                 }}
-                            >
-                                Adicionar Doença
-                            </Button>
+                            />
                         </AccordionSummary>
                         <AccordionDetails>
                             <TableContainer
@@ -1202,7 +947,6 @@ export default function Peticao(props: IPeticao) {
                                                 style={{
                                                     backgroundColor: "white",
                                                     color: "black",
-                                                    fontWeight: "bold",
                                                     padding: "25px",
                                                 }}
                                             >
@@ -1212,7 +956,6 @@ export default function Peticao(props: IPeticao) {
                                                 style={{
                                                     backgroundColor: "white",
                                                     color: "black",
-                                                    fontWeight: "bold",
                                                     padding: "25px",
                                                 }}
                                             >
@@ -1222,7 +965,6 @@ export default function Peticao(props: IPeticao) {
                                                 style={{
                                                     backgroundColor: "white",
                                                     color: "black",
-                                                    fontWeight: "bold",
                                                     padding: "25px",
                                                 }}
                                             >
@@ -1255,25 +997,15 @@ export default function Peticao(props: IPeticao) {
                 </AccordionDetails>
             </Accordion>
             <AccordionDetails>
-                {(regraDominio?.permissoes?.includes("create") ||
+                {(regraDominio?.permissoes?.includes("add") ||
                     regraDominio?.permissoes?.includes("update")) && (
-                        <Button
+                        <Btn
                             type="submit"
-                            color="success"
+                            text="Gerar Petição"
                             variant="contained"
                             disabled={loading}
-                            form="form-peticao"
-                        >
-                            {loading ? (
-                                <CircularProgress
-                                    size={20}
-                                    style={{ color: "white", marginRight: 10 }}
-                                />
-                            ) : (
-                                ""
-                            )}{" "}
-                            SALVAR E GERAR PETIÇÃO
-                        </Button>
+                            width={250}
+                        />
                     )}
 
             </AccordionDetails>

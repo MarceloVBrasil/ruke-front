@@ -1,7 +1,7 @@
 
 "üse client"
 
-import { Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, Grid, SelectChangeEvent, TextField } from '@mui/material'
+import { FormControl, FormControlLabel, FormGroup, FormHelperText, Grid, SelectChangeEvent, TextField } from '@mui/material'
 import React, { useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation';
 import { PASSOS } from '../helper/passos';
@@ -19,6 +19,7 @@ import FormButtons from '@/presentation/components/FormButtons';
 import { getFormChangedValues } from '@/app/utils/getFormStateChangedValues';
 import { IStep } from '../StepRouter';
 import { getGridCurrencyInputValue } from '@/app/utils/getSetGridCurrencyInputValue';
+import { CheckBox } from '@/presentation/components/Checkbox';
 
 export default function Step4({ api_data, stepsError, setStepsError }: IStep) {
     const [state, dispatch] = useReducer(formReducer, getStateFromApi(api_data));
@@ -123,7 +124,7 @@ export default function Step4({ api_data, stepsError, setStepsError }: IStep) {
                     {/* APOSENTADORIA */}
                     <Grid container spacing={1} sx={{ pt: 0, pr: 2, boxShadow: 3, borderRadius: 1, alignItems: 'center', p: 2 }}>
                         <Grid item xs={12} sm={4}>
-                            <FormControlLabel checked={aposentadoria.checked} onChange={handleCheckboxToogle} name={FormField.FONTES_DE_RENDA_CLIENTE} value={FONTES_RENDA.APOSENTADORIA} control={<Checkbox />} label="Aposentadoria" />
+                            <FormControlLabel checked={aposentadoria.checked} onChange={handleCheckboxToogle} name={FormField.FONTES_DE_RENDA_CLIENTE} value={FONTES_RENDA.APOSENTADORIA} control={<CheckBox />} label="Aposentadoria" />
                         </Grid>
                         <GridCurrencyInput
                             xs={12} sm={4}
@@ -148,7 +149,7 @@ export default function Step4({ api_data, stepsError, setStepsError }: IStep) {
                     {/* SALARIO */}
                     <Grid container spacing={1} sx={{ mt: 2, pr: 2, boxShadow: 3, borderRadius: 1, alignItems: 'center', p: 2 }}>
                         <Grid item xs={12} sm={4}>
-                            <FormControlLabel checked={salario.checked} onChange={handleCheckboxToogle} name={FormField.FONTES_DE_RENDA_CLIENTE} value={FONTES_RENDA.SALARIO} control={<Checkbox />} label="Salário" />
+                            <FormControlLabel checked={salario.checked} onChange={handleCheckboxToogle} name={FormField.FONTES_DE_RENDA_CLIENTE} value={FONTES_RENDA.SALARIO} control={<CheckBox />} label="Salário" />
                         </Grid>
                         <GridCurrencyInput
                             xs={12} sm={4}
@@ -175,7 +176,7 @@ export default function Step4({ api_data, stepsError, setStepsError }: IStep) {
                     {/* ALUGUEIS */}
                     <Grid container spacing={1} sx={{ mt: 2, pr: 2, boxShadow: 3, borderRadius: 1, alignItems: 'center', p: 2 }}>
                         <Grid item xs={12} sm={4}>
-                            <FormControlLabel checked={alugueis.checked} onChange={handleCheckboxToogle} name={FormField.FONTES_DE_RENDA_CLIENTE} value={FONTES_RENDA.ALUGUEIS} control={<Checkbox />} label="Aluguéis" />
+                            <FormControlLabel checked={alugueis.checked} onChange={handleCheckboxToogle} name={FormField.FONTES_DE_RENDA_CLIENTE} value={FONTES_RENDA.ALUGUEIS} control={<CheckBox />} label="Aluguéis" />
                         </Grid>
                         <GridCurrencyInput
                             xs={12} sm={4}
@@ -201,7 +202,7 @@ export default function Step4({ api_data, stepsError, setStepsError }: IStep) {
                     {/* OUTROS */}
                     <Grid container spacing={1} sx={{ mt: 2, pr: 2, boxShadow: 3, borderRadius: 1, alignItems: 'center', p: 2 }}>
                         <Grid item xs={12} sm={4} sx={{ position: 'relative', top: 10 }}>
-                            <FormControlLabel onChange={handleCheckboxToogle} checked={outras_rendas.checked} name={FormField.FONTES_DE_RENDA_CLIENTE} value={FONTES_RENDA.OUTROS} control={<Checkbox />} label="Outros" />
+                            <FormControlLabel onChange={handleCheckboxToogle} checked={outras_rendas.checked} name={FormField.FONTES_DE_RENDA_CLIENTE} value={FONTES_RENDA.OUTROS} control={<CheckBox />} label="Outros" />
                             <TextField
                                 fullWidth
                                 multiline
@@ -245,7 +246,7 @@ export default function Step4({ api_data, stepsError, setStepsError }: IStep) {
                 {/* CÔNJUGE */}
                 <Grid container spacing={1} sx={{ mt: 2, pr: 2, boxShadow: 3, borderRadius: 1, alignItems: 'center', p: 2 }}>
                     <Grid item xs={12} sm={4}>
-                        <FormControlLabel checked={conjuge.checked} onChange={handleCheckboxToogle} name={FormField.FAMILIARES_CLIENTE} value={FONTES_RENDA.CONJUGE} control={<Checkbox />} label="Cônjuge" />
+                        <FormControlLabel checked={conjuge.checked} onChange={handleCheckboxToogle} name={FormField.FAMILIARES_CLIENTE} value={FONTES_RENDA.CONJUGE} control={<CheckBox />} label="Cônjuge" />
                     </Grid>
                     <GridCurrencyInput
                         xs={12} sm={4}
@@ -272,7 +273,7 @@ export default function Step4({ api_data, stepsError, setStepsError }: IStep) {
                 {/* OUTRO FAMILIAR */}
                 <Grid container spacing={1} sx={{ mt: 2, pr: 2, boxShadow: 3, borderRadius: 1, alignItems: 'center', p: 2 }}>
                     <Grid item xs={12} sm={4}>
-                        <FormControlLabel checked={outro_familiar.checked} onChange={handleCheckboxToogle} name={FormField.FAMILIARES_CLIENTE} value={FONTES_RENDA.OUTRO_FAMILIAR} control={<Checkbox />} label="Outro Familiar" />
+                        <FormControlLabel checked={outro_familiar.checked} onChange={handleCheckboxToogle} name={FormField.FAMILIARES_CLIENTE} value={FONTES_RENDA.OUTRO_FAMILIAR} control={<CheckBox />} label="Outro Familiar" />
                     </Grid>
                     <GridCurrencyInput
                         xs={12} sm={4}
@@ -298,7 +299,7 @@ export default function Step4({ api_data, stepsError, setStepsError }: IStep) {
 
                 {/* NÃO POSSUI FAMILIAR NESTA CONDIÇÃO */}
                 <Grid container spacing={1} sx={{ mt: 2, pr: 2, boxShadow: 3, borderRadius: 1, alignItems: 'center', p: 2 }}>
-                    <FormControlLabel checked={nao_possui_familiar_checkbox_checked} onChange={handleNaoPossuiFamiliarCheckboxToogle} name={FormField.FAMILIARES_CLIENTE} value={FONTES_RENDA.OUTRO_FAMILIAR} control={<Checkbox />} label="Não possui" />
+                    <FormControlLabel checked={nao_possui_familiar_checkbox_checked} onChange={handleNaoPossuiFamiliarCheckboxToogle} name={FormField.FAMILIARES_CLIENTE} value={FONTES_RENDA.OUTRO_FAMILIAR} control={<CheckBox />} label="Não possui" />
                 </Grid>
             </FormGroup>
 
@@ -406,13 +407,11 @@ export default function Step4({ api_data, stepsError, setStepsError }: IStep) {
         if (data[FormField.FONTES_DE_RENDA_CLIENTE]) data = { ...data, [FormField.FONTES_DE_RENDA_CLIENTE]: removeZerovalues(data[FormField.FONTES_DE_RENDA_CLIENTE]) }
         if (data[FormField.FAMILIARES_CLIENTE]) data = { ...data, [FormField.FAMILIARES_CLIENTE]: removeZerovalues(data[FormField.FAMILIARES_CLIENTE]) }
 
-        console.log(data)
-
         try {
             const response = await updateSuperendividamentoTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

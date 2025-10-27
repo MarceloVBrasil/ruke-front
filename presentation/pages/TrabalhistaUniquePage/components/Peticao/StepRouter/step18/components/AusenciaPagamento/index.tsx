@@ -27,7 +27,7 @@ export default function AusenciaPagamento(props: IAusenciaPagamento) {
                 fullWidth
                 type='number'
                 label='Quantos dias de aviso prévio deveriam ter sido pagos ao reclamante?'
-                variant='outlined'
+                variant='filled'
                 name={AUSENCIA_PAGAMENTO.QUANTIDADE_DIAS_DEVERIAM_SER_PAGOS}
                 value={ausenciaPagamento?.[AUSENCIA_PAGAMENTO.QUANTIDADE_DIAS_DEVERIAM_SER_PAGOS] as number}
                 onChange={handleQuantidadeDiasFaltaramSerPagosChange}
@@ -46,6 +46,7 @@ export default function AusenciaPagamento(props: IAusenciaPagamento) {
                 sx={{ marginTop: 3, ml: 0 }}
                 error={error.valor_estimado}
                 helperText={error.valor_estimado ? 'Campo obrigatório' : ' '}
+                variant='filled'
             />
 
         </Grid>

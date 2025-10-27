@@ -27,7 +27,7 @@ export default function PagamentoMenor(props: IPagamentoMenor) {
                 fullWidth
                 type='number'
                 label='Quantos dias de aviso prévio faltaram ser pagos?'
-                variant='outlined'
+                variant='filled'
                 name={PAGAMENTO_A_MENOR.QUANTIDADE_DIAS_FALTARAM_SER_PAGOS}
                 value={pagamantoMenor?.[PAGAMENTO_A_MENOR.QUANTIDADE_DIAS_FALTARAM_SER_PAGOS] as number}
                 onChange={handleQuantidadeDiasFaltaramSerPagosChange}
@@ -46,6 +46,7 @@ export default function PagamentoMenor(props: IPagamentoMenor) {
                 sx={{ marginTop: 3, ml: 0 }}
                 error={error.valor_estimado}
                 helperText={error.valor_estimado ? 'Campo obriagtório' : ' '}
+                variant='filled'
             />
 
         </Grid>

@@ -1,15 +1,14 @@
 "use server"
 
-import { getCookie } from "cookies-next";
 import { cookies } from "next/headers";
 import { req } from "./server.axiosInstance";
 
 export const getBpcTickets = async () => {
-    const token = getCookie("ruke_token", { cookies });
+    const token = cookies().get("ruke_token");
     try {
         const json = await req.get(`/bpc`, {
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${token?.value}`,
             },
         });
         return json.data;
@@ -21,7 +20,7 @@ export const getBpcTickets = async () => {
 export const getBpcTicketById = async (id: string) => {
     const token = cookies().get("ruke_token");
     try {
-        const json = await req.get(`/bpc/ticket/${id}`, {
+        const json = await req.get(`/bpc/${id}`, {
             headers: {
                 Authorization: `Bearer ${token?.value}`,
             },
@@ -33,10 +32,13 @@ export const getBpcTicketById = async (id: string) => {
 };
 
 export const getDoencaData = async (search?: string) => {
+    const token = cookies().get("ruke_token");
     try {
-        const response = await req.get(
-            `/bpc/doencas/cid${search ? `?search=${search}` : ""}`
-        );
+        const response = await req.get(`/doencas/cid${search ? `?search=${search}` : ""}`, {
+            headers: {
+                Authorization: `Bearer ${token?.value}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error("Erro ao buscar Doenca:", error);

@@ -21,6 +21,7 @@ import { useLoading } from '../../hook/useLoading';
 import { produtoFormSchema } from './helpers/Zod';
 import { handleDelete, handleFormSubmit } from './helpers/Swal';
 import ModalAtualizarCadastrarProduto from './components/ModalAtualizarCadastrarProduto';
+import { Btn } from '@/presentation/components/Button';
 
 type ProdutosPageProps = {
   produtosList: Produto[];
@@ -43,24 +44,19 @@ export default function ProdutosPage({ produtosList, regraDominio }: ProdutosPag
 
   return (
     <Box sx={{ maxWidth: '100vw', padding: '5px', margin: '10px', borderRadius: '10px', }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Typography sx={{ fontSize: '30px', fontWeight: '600', width: '200px', paddingBottom: '10px', marginBottom: '30px', color: '#00479D', borderBottom: '3px solid #006BED' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: { xs: 'column', sm: 'row' } }}>
+        <Typography sx={{ fontSize: '30px', width: { xs: '100%', sm: '200px' }, paddingBottom: '10px', marginBottom: '30px', color: '#00479D', borderBottom: '3px solid #006BED' }}>
           Produtos
         </Typography>
-        {regraDominio?.permissoes?.includes('create') && (
-          <Button sx={{
-            backgroundColor: '#006BED',
-            color: 'white',
-            height: '40px',
-            width: '200px',
-            '&:hover': { backgroundColor: '#00479d' }
-          }}
-            onClick={() => { setProdutoChoose(null); handleOpen(); reset() }}>
-            Cadastrar
-          </Button>
+        {regraDominio?.permissoes?.includes('add') && (
+          <Btn
+            sxWidth={{ xs: '100%', sm: '200px' }}
+            text='Cadastrar'
+            onClick={() => { setProdutoChoose(null); handleOpen(); reset() }} />
+
         )}
       </Box>
-      {(regraDominio?.permissoes?.includes('create') || regraDominio?.permissoes?.includes('update')) && (
+      {(regraDominio?.permissoes?.includes('add') || regraDominio?.permissoes?.includes('update')) && (
         <ModalAtualizarCadastrarProduto
           formRef={formRef}
           produtoChoose={produtoChoose}
@@ -83,14 +79,14 @@ export default function ProdutosPage({ produtosList, regraDominio }: ProdutosPag
         <Table sx={{ minWidth: 1000, }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell style={{ backgroundColor: 'white', color: 'black', fontWeight: 'bold', padding: '25px' }}>Nome</StyledTableCell>
-              <StyledTableCell style={{ width: '280px', backgroundColor: 'white', color: 'black', fontWeight: 'bold', padding: '25px' }} >Ações</StyledTableCell>
+              <StyledTableCell style={{ backgroundColor: 'white', color: 'black', padding: '25px' }}><Typography>Nome</Typography></StyledTableCell>
+              <StyledTableCell style={{ width: '280px', backgroundColor: 'white', color: 'black', padding: '25px' }} ><Typography>Ações</Typography></StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {produtos.map((produto) => (
               <StyledTableRow key={produto.id}>
-                <StyledTableCell>
+                <StyledTableCell style={{ textTransform: 'uppercase' }}>
                   {produto.nome}
                 </StyledTableCell >
                 <StyledTableCell sx={{ display: 'flex', justifyContent: 'center', backgroundColor: 'white', padding: '20px', gap: '10px' }}>
@@ -99,54 +95,42 @@ export default function ProdutosPage({ produtosList, regraDominio }: ProdutosPag
                     regraDominio?.permissoes?.includes('getAll') ||
                     regraDominio?.permissoes?.includes('getByIdProduto')) && (
                       <Link href={`/planos/${produto.id}`}>
-                        <Button
+                        <Btn
+                          width={'120px'}
                           variant="contained"
                           color="primary"
-                          startIcon={<LayersOutlined />}
-
-                        >
-                          Planos
-                        </Button>
+                          text='Planos'
+                        />
                       </Link>
                     )}
 
                   {regraDominio?.permissoes?.includes('getAll') && (
                     <Link href={`/parceiros/${produto.id}`}>
-                      <Button
+                      <Btn
+                        width={'120px'}
                         variant="contained"
                         color="primary"
-                        startIcon={<Group />}
-                      >
-                        Parceiros
-                      </Button>
+                        text='Parceiros'
+                      />
                     </Link>
                   )}
 
                   {regraDominio?.permissoes?.includes('update') && (
-                    <Button
+                    <Btn
+                      width={'120px'}
                       variant="contained"
                       color="primary"
-                      startIcon={<EditIcon />}
-                      onClick={() => {
-                        setProdutoChoose(produto);
-                        setMetodoPagamento(produto.metodo_pagamento);
-                        setOpen(true);
-                        reset()
-                      }}
-                    >
-                      Editar
-                    </Button>
+                      text='Editar'
+                    />
                   )}
 
                   {regraDominio?.permissoes?.includes('delete') && (
-                    <Button
+                    <Btn
+                      width={'120px'}
                       variant="contained"
                       color="primary"
-                      startIcon={<DeleteIcon />}
-                      onClick={() => handleDelete(produto.id, produtos, setProdutos, setLoading)}
-                    >
-                      Excluir
-                    </Button>
+                      text='Excluir'
+                    />
                   )}
                 </StyledTableCell>
               </StyledTableRow>

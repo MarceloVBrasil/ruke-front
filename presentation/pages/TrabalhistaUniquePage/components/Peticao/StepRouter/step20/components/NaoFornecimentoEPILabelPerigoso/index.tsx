@@ -32,7 +32,7 @@ export default function NaoFornacimentoEpiLaborPerigoso(props: INaoFornacimentoE
                 error={error.valor_estimado}
                 helperText={error.valor_estimado ? 'Campo obrigatório' : ' '}
                 className='danos_morais'
-                fixLabel
+                variant='filled'
             />
 
         </Grid>

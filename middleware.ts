@@ -22,7 +22,6 @@ export default function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
   } catch (e: any) {
-    console.log(e);
     throw new Error(e);
 
   }
@@ -45,38 +44,36 @@ export function middlewarePermission(request: NextRequest) {
 
     const permissoesRotas: any = {
       usuarios: {
-        "/users": ["getAll", "create", "update", "delete", "agenda"],
+        "/users": ["getAll", "add", "update", "delete", "agenda"],
       },
       tenants: {
-        "/tenants": ["getAll", "create", "update", "delete"],
+        "/tenants": ["getAll", "add", "update", "delete"],
       },
       produtos: {
-        "/produtos": ["getAll", "create", "update", "delete"],
+        "/produtos": ["getAll", "add", "update", "delete"],
       },
       planos: {
-        "/planos": ["getAll", "getByIdProduto", "create", "update", "delete"],
+        "/planos": ["getAll", "getAllByProdutoId", "add", "update", "delete"],
       },
       parceiros: {
-        "/parceiros": ["getAll", "create", "update", "delete"],
+        "/parceiros": ["getAll", "add", "update", "delete"],
       },
-      ticketRMC: {
-        "/tickets": ["getAll", "getById", "create", "update", "delete"],
+      superendividamento: {
+        "/superendividamento": ["getAll", "add", "update", "delete"],
+      },
+      trabalhista: {
+        "/trabalhista": ["getAll", "add", "update", "delete"],
+      },
+      RMC: {
+        "/tickets": ["getAll", "getById", "add", "update", "delete"],
         menuPermitido: ["RMC"],
       },
-      RukeFlex: {
-        "/rukeflex": ["getAll", "getById", "create", "update", "delete"],
-        menuPermitido: ["RukeFlex"],
-      },
       BPC: {
-        "/bpc": ["getAll", "getById", "create", "update", "delete"],
+        "/bpc": ["getAll", "getById", "add", "update", "delete"],
         menuPermitido: ["BPC"],
       },
-      fraudeBoletos: {
-        "/fraude-boleto": ["getAll", "getById", "create", "update", "delete"],
-        menuPermitido: ["fraudeBoletos"],
-      },
       agenda: {
-        "/agenda": ["getAll", "getById", "create", "update"],
+        "/agenda": ["getAll", "getById", "add", "update"],
         menuPermitido: ["agenda"]
       }
     };
@@ -127,7 +124,6 @@ export function middlewarePermission(request: NextRequest) {
     }
     return allowedPermission;
   } catch (err) {
-    console.log(err);
     return false;
   }
 }
@@ -138,10 +134,11 @@ export const config = {
     "/refreshToken",
     "/tickets/:path*",
     "/planos/:path*",
+    "/superendividamento/:path*",
+    "/trabalhista/:path*",
     "/produtos/:path*",
     "/parceiros/:path*",
     "/bpc/:path*",
-    "/fraude-boleto/:path*",
     "/agenda"
   ],
 };

@@ -30,6 +30,7 @@ import DrawerMovimentacoesProcesso from "./components/DrawerMovimentacoesProcess
 import DrawerDadosProcesso from "./components/DrawerDadosProcesso";
 import DrawerFiltros from "./components/DrawerFiltros";
 import { procurarProcesso } from "@/app/api/client/processo";
+import { Btn } from "@/presentation/components/Button";
 
 type ProcessosProps = {
   list: any[];
@@ -110,7 +111,7 @@ export default function FraudeBoletosPage({
         setDadosProcesso({ ...dadosProcesso, orgao_julgador: dadosProcessoAPI.hits.hits[0]._source.orgaoJulgador.nome, data_ajuizamento: parse(convertISOForBR(dadosProcessoAPI.hits.hits[0]._source.dataAjuizamento), "dd/MM/yyyy HH:mm:ss", new Date(), { locale: ptBR }), classe: dadosProcessoAPI.hits.hits[0]._source.classe.nome ? dadosProcessoAPI.hits.hits[0]._source.classe.nome : "" });
       }
     } catch (error: any) {
-      console.log(error)
+
     }
   }
 
@@ -130,7 +131,7 @@ export default function FraudeBoletosPage({
       Swal.fire({
         icon: "error",
         title: "Erro",
-        text: err.response.data.error,
+        text: err.message,
       });
     }
   }
@@ -155,7 +156,6 @@ export default function FraudeBoletosPage({
         <Typography
           sx={{
             fontSize: "30px",
-            fontWeight: "600",
             width: { xs: '100%', md: '200px' },
             paddingBottom: "10px",
             marginBottom: "30px",
@@ -163,26 +163,15 @@ export default function FraudeBoletosPage({
             borderBottom: "3px solid #006BED",
           }}
         >
-          PROCESSOS
+          Processos
         </Typography>
-        <Button
-          sx={{
-            backgroundColor: "#006BED",
-            color: "white",
-            height: "40px",
-            width: { xs: '100%', md: '250px' },
-            marginRight: "10px",
-            marginTop: "-15px",
-            "&:hover": { backgroundColor: "#00479d" },
-          }}
-          style={{ fontWeight: "bold" }}
+        <Btn
+          text="Adicionar Processo"
+          sxWidth={{ xs: '100%', md: '250px' }}
           onClick={() => {
             setDrawerDadosProcesso(true)
           }}
-        >
-          <Create sx={{ mr: "2px" }} />
-          Adicionar processo
-        </Button>
+        />
       </Box>
 
       {

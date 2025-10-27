@@ -7,6 +7,10 @@ import { handleSubmit } from '../../BpcPage/helpers/Swal';
 import { handleFormSubmit } from '../helpers/Swal';
 import { Produto } from '@/app/types/produto';
 import { FieldErrors, FieldValues, SubmitErrorHandler, SubmitHandler } from 'react-hook-form';
+import GridTextField from '@/presentation/components/GridTextField';
+import { Btn } from '@/presentation/components/Button';
+import GridSelectField from '@/presentation/components/GridSelectField';
+import { metodo_pagamento } from '../helpers/metodo_pagamento';
 
 interface IModalAtualizarCadastrarProduto {
     formRef: MutableRefObject<HTMLFormElement | undefined>,
@@ -49,61 +53,39 @@ export default function ModalAtualizarCadastrarProduto(props: IModalAtualizarCad
         <ModalComponent nomeModal={produtoChoose ? 'Atualizar Produto' : 'Cadastrar Produto'} handleClose={handleClose} handleOpen={handleOpen} open={open}>
             <Box ref={formRef} component="form" onSubmit={handleSubmit(() => handleFormSubmit(formRef, produtoChoose, produtos, setProdutos, setLoading, setOpen))} sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={12}>
-                        <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
-                            Produtos
-                        </Typography>
-                        <TextField
-                            autoComplete="produto"
-                            error={errors.produto ? true : false}
-                            helperText={errors.produto?.message?.toString()}
-                            fullWidth
-                            placeholder='Digite o nome do Produto'
-                            id="produto"
-                            {...register('produto')}
-                            defaultValue={produtoChoose ? produtoChoose.nome : ''}
-                            InputLabelProps={{ shrink: true }}
+                    <GridTextField
+                        xs={12}
+                        label='Produtos'
+                        error={errors.produto ? true : false}
+                        helperText={errors.produto?.message?.toString()}
+                        placeholder='Digite o nome do Produto'
+                        {...register('produto')}
+                        defaultValue={produtoChoose ? produtoChoose.nome : ''}
+                        variant='filled'
+                    />
 
-                        />
-                    </Grid>
+                    <GridSelectField
+                        xs={12}
+                        label='Método de Pagamento'
+                        placeholder='Método de Pagamento'
+                        variant='filled'
+                        value={metodoPagamento}
+                        {...register('metodo_pagamento')}
+                        options={metodo_pagamento}
+                        onChange={(event) => {
+                            setMetodoPagamento(event.target.value);
+                            reset({ metodo_pagamento: event.target.value })
+                        }}
+                    />
 
-                    <Grid item xs={12} sm={12}>
-                        <FormControl fullWidth variant="filled" error={errors.metodo_pagamento ? true : false} >
-                            <Typography sx={{ color: '#00479d', fontWeight: 'bold', marginLeft: '10px' }}>
-                                Metodo Pagamento
-                            </Typography>
-                            <Select
-                                id="metodo_pagamento"
-                                variant='outlined'
-                                sx={{ ml: 1, mt: 1, borderRadius: '10px' }}
-                                value={metodoPagamento}
-                                {...register('metodo_pagamento')}
-                                onChange={(event) => {
-                                    setMetodoPagamento(event.target.value);
-                                    reset({ metodo_pagamento: event.target.value })
-                                }}
-                            >
-                                <MenuItem selected value="" disabled>
-                                    Selecione o metodo de pagamento
-                                </MenuItem>
-                                <MenuItem value="CREDIT_CARD">
-                                    Cartão de Credito
-                                </MenuItem>
-                                <MenuItem value="PIX">PIX</MenuItem>
-                                <MenuItem value="BOLETO">Boleto</MenuItem>
-                            </Select>
-                            {errors.metodo_pagamento ? <FormHelperText>{errors.metodo_pagamento?.message?.toString()}</FormHelperText> : null}
-                        </FormControl>
-                    </Grid>
+
                 </Grid>
-                <Button
+                <Btn
                     type="submit"
-                    fullWidth
+                    text={produtoChoose ? 'Atualizar' : 'Cadastrar'}
                     variant="contained"
                     sx={{ mt: 3, mb: 2, padding: '15px', borderRadius: '15px' }}
-                >
-                    {produtoChoose ? 'Atualizar' : 'Cadastrar'}
-                </Button>
+                />
             </Box>
         </ModalComponent>
     )

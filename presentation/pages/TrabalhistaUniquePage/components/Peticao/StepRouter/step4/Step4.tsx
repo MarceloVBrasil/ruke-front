@@ -108,7 +108,7 @@ export default function Step4({
                     fullWidth
                     type="date"
                     placeholder="Digite a data de início do contrato"
-                    variant="outlined"
+                    variant="filled"
                     value={state[FormField.DATA_INICIO_CONTRATO].value}
                     onChange={handleChange}
                     InputLabelProps={{ shrink: true }}
@@ -125,7 +125,7 @@ export default function Step4({
                     fullWidth
                     type="date"
                     placeholder="Digite a data do fim do contrato"
-                    variant="outlined"
+                    variant="filled"
                     value={state[FormField.DATA_FIM_CONTRATO].value}
                     onChange={handleChange}
                     InputLabelProps={{ shrink: true }}
@@ -142,7 +142,7 @@ export default function Step4({
                     name={FormField.REMUNERACAO}
                     ref={remuneracaoInputRef}
                     onBlur={() => handleMoneyValueChange(FormField.REMUNERACAO)}
-                    variant='outlined'
+                    variant='filled'
                     defaultValue={state[FormField.REMUNERACAO].value}
                     className='remuneracao'
                     fixLabel
@@ -158,7 +158,7 @@ export default function Step4({
                     name={FormField.CARGO}
                     defaultValue={state[FormField.CARGO].value}
                     onBlur={handleChange}
-                    variant="outlined"
+                    variant="filled"
                     InputLabelProps={{ shrink: true }}
                     containerStyle={{ paddingLeft: 24 }}
                 />
@@ -471,11 +471,10 @@ export default function Step4({
         if (pedidos_changes.length > 0) await addPedidos(pedidos_changes)
 
         try {
-            console.log(data)
             const response = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

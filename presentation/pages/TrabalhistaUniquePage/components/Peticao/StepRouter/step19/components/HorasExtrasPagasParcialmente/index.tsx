@@ -132,7 +132,7 @@ export default function HorasExtrasPagasParcialmente(props: IHorasExtrasPagasPar
                 xs={12}
                 ref={valorEstimadoPedidoRef}
                 name={HORAS_EXTRAS_PAGAS_PARCIALMENTE.VALOR_ESTIMADO_PEDIDO}
-                variant='outlined'
+                variant='filled'
                 defaultValue={horasExtrasPagasParcialmente?.[HORAS_EXTRAS_PAGAS_PARCIALMENTE.VALOR_ESTIMADO_PEDIDO] ?? 0}
                 onBlur={handleValorEstimadoPedidoChange}
                 label='Qual o valor estimado pedido de horas extras?'

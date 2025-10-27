@@ -16,7 +16,7 @@ interface IGridCurrencyInput {
     ref: React.Ref<HTMLDivElement>; // Use `React.Ref` instead of `React.RefObject` for proper ref forwarding
     defaultValue?: number | string
     onBlur: any
-    variant?: 'standard' | 'outlined'
+    variant?: 'standard' | 'filled'
     containerStyles?: CSSProperties,
     disabled?: boolean
     placeholder?: string
@@ -39,7 +39,7 @@ const GridCurrencyInput = React.forwardRef<HTMLDivElement, IGridCurrencyInput>(f
         sx,
         defaultValue,
         onBlur,
-        variant = 'outlined',
+        variant = 'filled',
         containerStyles,
         disabled,
         placeholder,
@@ -67,13 +67,12 @@ const GridCurrencyInput = React.forwardRef<HTMLDivElement, IGridCurrencyInput>(f
                 </Grid>
             )
 
-        case 'outlined':
+        case 'filled':
             return (
                 <Grid item xs={xs} sm={sm} md={md} lg={lg} xl={xl} sx={sx} style={containerStyles}>
                     <Typography
                         sx={{
-                            color: "#00479d",
-                            fontWeight: "bold",
+                            color: disabled ? "#AAA" : '#384150',
                             marginLeft: fixLabel ? '20px' : "10px",
                             whiteSpace: sm ? 'nowrap' : 'wrap',
                         }}
@@ -90,7 +89,7 @@ const GridCurrencyInput = React.forwardRef<HTMLDivElement, IGridCurrencyInput>(f
                         ref={ref} // Pass the ref down to the CurrencyInput
                         defaultValue={defaultValue}
                         onBlur={onBlur}
-                        variant={'outlined'}
+                        variant={'filled'}
                         className={className}
                     />
                 </Grid>

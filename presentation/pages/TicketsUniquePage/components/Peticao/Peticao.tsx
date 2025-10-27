@@ -8,6 +8,11 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import ArticleIcon from "@mui/icons-material/Article";
 import ListAltIcon from "@mui/icons-material/ListAlt";
+import GridTextField from '@/presentation/components/GridTextField';
+import GridCurrencyInput from '@/presentation/components/GridCurrencyInput';
+import { AutoComplete } from '@/presentation/components/AutoComplete';
+import GridSelectField from '@/presentation/components/GridSelectField';
+import { Btn } from '@/presentation/components/Button';
 
 interface IPeticao {
     ticket: any
@@ -40,7 +45,7 @@ interface IPeticao {
     setAddressClient: (value: string) => void
     setCityClient: (value: string) => void
     setTypeProcess: (value: string) => void
-    saveAndCreatePetition: () => void
+    saveAndaddPetition: () => void
 }
 
 export default function Peticao(props: IPeticao) {
@@ -75,7 +80,7 @@ export default function Peticao(props: IPeticao) {
         setAddressClient,
         setCityClient,
         setTypeProcess,
-        saveAndCreatePetition
+        saveAndaddPetition
     } = props
 
     return (
@@ -99,7 +104,6 @@ export default function Peticao(props: IPeticao) {
                             marginRight: 10,
                             width: "100%",
                             color: "#00479d",
-                            fontWeight: "bold",
                         }}
                     >
                         PETIÇÃO{" "}
@@ -214,7 +218,6 @@ export default function Peticao(props: IPeticao) {
                         sx={{
                             borderBottom: "2px solid #00479d",
                             color: "#00479d",
-                            fontWeight: "bold",
                             marginLeft: "10px",
                         }}
                     >
@@ -223,162 +226,106 @@ export default function Peticao(props: IPeticao) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Nome do Cliente
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                onChange={(e) => setNameClient(e.target.value)}
-                                id="outlined-basic"
-                                value={nameClient}
-                                placeholder="Nome do Cliente"
-                                variant="outlined"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            value={nameClient}
+                            placeholder="Nome do Cliente"
+                            label='Nome'
+                            variant='filled'
+                            onChange={(e) => setNameClient(e.target.value)}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Base de Cálculo
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                id="outlined-basic"
-                                value={calculationBase}
-                                placeholder="Base de Cálculo"
-                                onChange={(e) => {
-                                    setCalculationBase(e.target.value);
-                                }}
-                                variant="outlined"
-                                InputProps={{
-                                    inputComponent: ContractValueMemo,
-                                }}
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridCurrencyInput
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            label='Base de Cálculo'
+                            variant='filled'
+                            name='base_de_calculo'
+                            placeholder="Base de Cálculo"
+                            defaultValue={calculationBase}
+                            onBlur={(e: any) => {
+                                setCalculationBase(e.target.value);
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Valor da parcela RMC
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                id="outlined-basic"
-                                value={installmentValue}
-                                placeholder="Valor da parcela RMC"
-                                onChange={(e) => {
-                                    setInstallmentValue(e.target.value);
-                                }}
-                                variant="outlined"
-                                InputProps={{
-                                    inputComponent: ContractValueMemo,
-                                }}
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridCurrencyInput
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            label='Valor da parcela RMC'
+                            variant='filled'
+                            name='parcela_rmc'
+                            placeholder="Valor da parcela RMC"
+                            defaultValue={installmentValue}
+                            onBlur={(e: any) => {
+                                setInstallmentValue(e.target.value);
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Valor comprometido
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                id="outlined-basic"
-                                value={committedValue}
-                                placeholder="Valor comprometido"
-                                onChange={(e) => {
-                                    setCommittedValue(e.target.value);
-                                }}
-                                variant="outlined"
-                                InputProps={{
-                                    inputComponent: ContractValueMemo,
-                                }}
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridCurrencyInput
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            label='Valor Comprometido'
+                            variant='filled'
+                            name='valor_comprometido'
+                            placeholder="Valor comprometido"
+                            defaultValue={committedValue}
+                            onBlur={(e: any) => {
+                                setCommittedValue(e.target.value);
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Limite do cartão
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                id="outlined-basic"
-                                value={contractValue}
-                                placeholder="Limite do cartão"
-                                onChange={(e) => {
-                                    setContractValue(e.target.value);
-                                }}
-                                variant="outlined"
-                                InputProps={{
-                                    inputComponent: ContractValueMemo,
-                                }}
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridCurrencyInput
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            label='Limite do cartão'
+                            variant='filled'
+                            name='limite_cartao'
+                            placeholder="Limite do cartão"
+                            defaultValue={contractValue}
+                            onBlur={(e: any) => {
+                                setContractValue(e.target.value);
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Data de inclusão do RMC
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                id="outlined-basic"
-                                value={inclusionDate}
-                                inputProps={{
-                                    pattern: "^\\d{2}/\\d{2}/\\d{2}$",
-                                }}
-                                onChange={(e) => setInclusionDate(e.target.value)}
-                                placeholder="Data de inclusão do RMC"
-                                variant="outlined"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            value={inclusionDate}
+                            type='date'
+                            placeholder="Data de inclusão do RMC"
+                            label='Data de inclusão do RMC'
+                            variant='filled'
+                            onChange={(e) => setInclusionDate(e.target.value)}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
+                        <AutoComplete
+                            name={''}
+                            label='Banco e Endereço'
+                            placeholder='Banco e Endereço'
+                            options={
+                                banks
+                                    ? banks.map(
+                                        (bank: any) =>
+                                            `${bank.NOME_INSTITUICAO}, ${bank.CEP}, ${bank.UF}, ${bank.BAIRRO}, ${bank.ENDERECO} - ${bank.COMPLEMENTO} `
+                                    )
+                                    : []
+                            }
+                            value={[]}
+                            onChange={(event, newValue) => {
+                                if (newValue) {
+                                    setBank(newValue as unknown as string);
+                                }
+                            }}
+                        />
+
+                        {/* <Grid item xs={12} sm={6} md={4}>
                             <Typography
                                 sx={{
                                     color: "#00479d",
@@ -418,158 +365,88 @@ export default function Peticao(props: IPeticao) {
                                     }
                                 }}
                             />
-                        </Grid>
+                        </Grid> */}
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Número do contrato
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                id="outlined-basic"
-                                value={contractNumber}
-                                onChange={(e) => setContractNumber(e.target.value)}
-                                placeholder="Número do contrato"
-                                variant="outlined"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            value={contractNumber}
+                            placeholder=" Número do contrato"
+                            label=' Número do contrato'
+                            variant='filled'
+                            onChange={(e) => setContractNumber(e.target.value)}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                CPF do cliente
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                id="outlined-basic"
-                                value={cpfClient}
-                                onChange={(e) => {
-                                    const value = onlyNumber(e.target.value);
-                                    setCPFClient(formatCpf(value));
-                                }}
-                                placeholder="CPF do cliente"
-                                variant="outlined"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            placeholder="CPF"
+                            label=' CPF'
+                            variant='filled'
+                            value={cpfClient}
+                            onChange={(e) => {
+                                const value = onlyNumber(e.target.value);
+                                setCPFClient(formatCpf(value));
+                            }}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Endereço do cliente
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                id="outlined-basic"
-                                value={addressClient}
-                                onChange={(e) => setAddressClient(e.target.value)}
-                                placeholder="Endereço do cliente"
-                                variant="outlined"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            placeholder="Endereço"
+                            label=' Endereço'
+                            variant='filled'
+                            value={addressClient}
+                            onChange={(e) => setAddressClient(e.target.value)}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <Typography
-                                sx={{
-                                    color: "#00479d",
-                                    fontWeight: "bold",
-                                    marginLeft: "10px",
-                                }}
-                            >
-                                Cidade do cliente
-                            </Typography>
-                            <TextField
-                                required
-                                fullWidth
-                                id="outlined-basic"
-                                value={cityClient}
-                                onChange={(e) => setCityClient(e.target.value)}
-                                placeholder="Cidade do cliente"
-                                variant="outlined"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </Grid>
+                        <GridTextField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            placeholder="Cidade"
+                            label=' Cidade'
+                            variant='filled'
+                            value={cityClient}
+                            onChange={(e) => setCityClient(e.target.value)}
+                        />
 
-                        <Grid item xs={12} sm={6} md={4}>
-                            <FormControl fullWidth variant="filled">
-                                <Typography
-                                    sx={{
-                                        color: "#00479d",
-                                        fontWeight: "bold",
-                                        marginLeft: "12px",
-                                    }}
-                                >
-                                    A parte autora é:
-                                </Typography>
-                                <Select
-                                    id="metodo_pagamento"
-                                    variant="outlined"
-                                    style={{
-                                        backgroundColor: "white",
-                                        borderRadius: "8px",
-                                        width: '100%',
-                                    }}
-                                    value={typeProcess ? typeProcess : "aposentada"}
-                                    onChange={(e: any) => {
-                                        setTypeProcess(e.target.value);
-                                    }}
-                                >
-                                    <MenuItem value="aposentada">Aposentada</MenuItem>
-                                    <MenuItem value="pensionista">Pensionista</MenuItem>
-                                    <MenuItem value="beneficiária do INSS">
-                                        Beneficiária do INSS
-                                    </MenuItem>
-                                    <MenuItem value="servidora pública">
-                                        Servidora Pública
-                                    </MenuItem>
-                                    <MenuItem value="militar">Militar</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Grid>
+                        <GridSelectField
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            label='A parte autora é'
+                            variant='filled'
+                            name='type_process'
+                            value={typeProcess ? typeProcess : "aposentada"}
+                            onChange={(e: any) => {
+                                setTypeProcess(e.target.value);
+                            }}
+                            options={[
+                                { descricao: "Aposentada", value: "aposentada" },
+                                { descricao: "Pensionista", value: "pensionista" },
+                                { descricao: "Beneficiária do INSS", value: "beneficiaria_do_inss" },
+                                { descricao: "Servidora Pública", value: "servidora_publica" },
+                                { descricao: "Militar", value: "militar" },
+                            ]}
+                        />
 
                     </Grid>
                 </AccordionDetails>
             </Accordion>
             <AccordionDetails>
-                {(regraDominio?.permissoes?.includes("create") ||
+                {(regraDominio?.permissoes?.includes("add") ||
                     regraDominio?.permissoes?.includes("update")) && (
-                        <Button
-                            onClick={() => saveAndCreatePetition()}
-                            color="success"
+                        <Btn
+                            onClick={() => saveAndaddPetition()}
                             variant="contained"
                             disabled={loading}
-                        >
-                            {loading ? (
-                                <CircularProgress
-                                    size={20}
-                                    style={{ color: "white", marginRight: 10 }}
-                                />
-                            ) : (
-                                ""
-                            )}{" "}
-                            SALVAR E GERAR PETIÇÃO
-                        </Button>
+                            text='Gerar Petição'
+                            width={250}
+                        />
                     )}
             </AccordionDetails>
         </Accordion>

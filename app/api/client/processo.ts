@@ -2,6 +2,7 @@ import { getCookie } from "cookies-next";
 import { req } from "./client.axiosInstance";
 
 export const procurarProcesso = async (link: string, numero_processo: string) => {
+    console.log('teste')
     const token = getCookie("ruke_token");
     try {
         const json = await req.post(`/buscar-processo`, { link, numero_processo }, {

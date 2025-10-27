@@ -208,7 +208,7 @@ export function EditImovelModal(props: IModal) {
             })
 
         } catch (error) {
-            console.log(error)
+
         }
     }
 

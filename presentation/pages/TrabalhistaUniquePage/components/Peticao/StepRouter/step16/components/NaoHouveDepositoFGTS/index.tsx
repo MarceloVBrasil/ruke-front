@@ -68,6 +68,7 @@ export default function NaoHouveDepositoFGTS(props: INaoHouveDepositoFGTS) {
                 sx={{ marginTop: 3, ml: -1 }}
                 error={error.valor_estimado_fgts_nao_depositado}
                 helperText={error.valor_estimado_fgts_nao_depositado ? 'Campo obrigatório' : ' '}
+                variant='filled'
             />
 
             <GridRadioGroup

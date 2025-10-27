@@ -146,7 +146,7 @@ export const addbpcTicket = async () => {
     const token = getCookie("ruke_token");
     try {
         const json = await req.post(
-            `/bpc/ticket/`,
+            `/bpc/`,
             {},
             {
                 headers: { Authorization: `Bearer ${token}` },
@@ -179,7 +179,7 @@ export const addDoenca = async (
     const token = getCookie("ruke_token");
     try {
         const response = await req.post(
-            `/bpc/doencas/${id_bpc}`,
+            `/doencas/${id_bpc}`,
             { nome, codigo },
             {
                 headers: {
@@ -196,7 +196,7 @@ export const addDoenca = async (
 export const deleteDoenca = async (id: string) => {
     const token = getCookie("ruke_token");
     try {
-        const response = await req.delete(`/bpc/doencas/${id}`, {
+        const response = await req.delete(`/doencas/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -223,7 +223,7 @@ export const addPessoa = async (
     const token = getCookie("ruke_token");
 
     try {
-        const json = await req.post(`/bpc/criar_pessoa/${idTicket}`, pessoa, {
+        const json = await req.post(`/pessoas/${idTicket}`, pessoa, {
             headers: { Authorization: `Bearer ${token}` },
         });
         return json.data;
@@ -247,7 +247,7 @@ export const updatePessoa = async (
 ) => {
     const token = getCookie("ruke_token");
     try {
-        const json = await req.put(`/bpc/atualizar_pessoa/${id_pessoa}`, pessoa, {
+        const json = await req.put(`/pessoas/${id_pessoa}`, pessoa, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -261,7 +261,7 @@ export const updatePessoa = async (
 export const deletePessoa = async (id_pessoa: string) => {
     const token = getCookie("ruke_token");
     try {
-        await req.delete(`/bpc/remover_pessoa/${id_pessoa}`, {
+        await req.delete(`/pessoas/${id_pessoa}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

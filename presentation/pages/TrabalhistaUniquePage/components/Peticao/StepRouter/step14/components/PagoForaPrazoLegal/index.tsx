@@ -54,7 +54,7 @@ export default function PagoForaPrazoLegal(props: IPagoForaPrazoLegal) {
                 type='date'
                 name={PAGAS_FORA_DO_PRAZO_LEGAL_PEDIDO.DATA_PAGAMENTO_VERBAS}
                 value={pagamento?.[PAGAS_FORA_DO_PRAZO_LEGAL_PEDIDO.DATA_PAGAMENTO_VERBAS] as string}
-                variant='outlined'
+                variant='filled'
                 onChange={handleDataPagamentoVerbaChange}
                 label='Qual foi a data de pagamento das verbas rescisórias?'
                 error={error.data_pagamento}

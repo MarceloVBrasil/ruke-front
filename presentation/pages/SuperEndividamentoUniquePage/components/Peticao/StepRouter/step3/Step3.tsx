@@ -28,6 +28,7 @@ import FormSectionTitle from '@/presentation/components/FormSectionTitle';
 import { isFieldEmpty } from '@/app/utils/validators';
 import FormButtons from '@/presentation/components/FormButtons';
 import { IStep } from '../StepRouter';
+import { AutoComplete } from '@/presentation/components/AutoComplete';
 
 
 
@@ -147,11 +148,11 @@ export default function Step3({ api_data, stepsError, setStepsError }: IStep) {
             <FormSectionTitle sectionTitle=' Adicione os bancos credores a serem indicados na ação*:' />
 
             <FormControl fullWidth error={error.bancos_credores}>
-                <Autocomplete
-                    clearText='limpar'
-                    sx={{ px: 2 }}
-                    multiple
-                    id="tags-standard"
+                <AutoComplete
+                    name={FormField.BANCOS_CREDORES}
+                    optionLabelFunction={(option: string) => option.split(',')[0]}
+                    label='Bancos Credores'
+                    placeholder='Selecione Bancos Credores'
                     options={
                         banks
                             ? banks.map(
@@ -174,30 +175,10 @@ export default function Step3({ api_data, stepsError, setStepsError }: IStep) {
                             )
                             : []
                     }
-                    getOptionLabel={(option) => option.split(',')[0]}
-                    disableCloseOnSelect
-                    onChange={handleBancoCredoresChange}
                     value={state[FormField.BANCOS_CREDORES].value}
-                    renderOption={(props, option, { selected }) => (
-                        <MenuItem
-                            value={option}
-                            sx={{ justifyContent: "space-between" }}
-                            {...props}
-                        >
-                            {selected ? <CheckIcon color="info" /> : null}
-                            {option}
-                        </MenuItem>
-                    )}
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            variant="outlined"
-                            fullWidth
-                            name={FormField.BANCOS_CREDORES}
-                            placeholder={isFieldEmpty(state[FormField.BANCOS_CREDORES].value) ? 'Bancos Credores' : ''}
-                        />
-                    )}
+                    onChange={handleBancoCredoresChange}
                 />
+
                 <FormHelperText>{error.bancos_credores ? 'Campo bancos credores é obrigatório' : ' '}</FormHelperText>
             </FormControl>
 
@@ -368,7 +349,7 @@ export default function Step3({ api_data, stepsError, setStepsError }: IStep) {
             const response = await updateSuperendividamentoTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

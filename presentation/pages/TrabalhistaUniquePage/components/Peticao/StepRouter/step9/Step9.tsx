@@ -263,7 +263,7 @@ export default function Step9({ api_data, stepsError, setStepsError, pedidos }: 
                         multiline
                         defaultValue={state[FormField.PEDIDO_REVERSAO_JUSTA_CAUSA].value && state[FormField.PEDIDO_REVERSAO_JUSTA_CAUSA].value[PEDIDO_REVERSAO_JUSTA_CAUSA.ALEGACAO_EMPRESA] ? state[FormField.PEDIDO_REVERSAO_JUSTA_CAUSA].value[PEDIDO_REVERSAO_JUSTA_CAUSA.ALEGACAO_EMPRESA] : ''}
                         name={PEDIDO_REVERSAO_JUSTA_CAUSA.ALEGACAO_EMPRESA}
-                        variant={'outlined'}
+                        variant={'filled'}
                         onBlur={handleAlegacaoEmpresaChange}
                         InputLabelProps={{ shrink: true }}
                         fixLabel
@@ -333,12 +333,11 @@ export default function Step9({ api_data, stepsError, setStepsError, pedidos }: 
                         placeholder='Motivo pelo qual a justa causa deve ser revertida'
                         containerStyle={{ visibility: state[FormField.PEDIDO_REVERSAO_JUSTA_CAUSA].value?.[PEDIDO_REVERSAO_JUSTA_CAUSA.RAZOES]?.includes(RAZOES.OUTRA) ? 'visible' : 'hidden', marginLeft: 10, marginRight: 10, marginTop: 10 }}
                         xs={12}
-                        fullWidth
                         label='Descreva em um parágrafo por que a justa causa deve ser revertida:'
                         multiline
                         defaultValue={state[FormField.PEDIDO_REVERSAO_JUSTA_CAUSA].value && state[FormField.PEDIDO_REVERSAO_JUSTA_CAUSA].value[PEDIDO_REVERSAO_JUSTA_CAUSA.TEXTO_OUTRA_RAZAO] ? state[FormField.PEDIDO_REVERSAO_JUSTA_CAUSA].value[PEDIDO_REVERSAO_JUSTA_CAUSA.TEXTO_OUTRA_RAZAO] : ''}
                         name={PEDIDO_REVERSAO_JUSTA_CAUSA.TEXTO_OUTRA_RAZAO}
-                        variant={'outlined'}
+                        variant={'filled'}
                         onBlur={handleTextoOutraRazaoChange}
                         InputLabelProps={{ shrink: true }}
                         fixLabel
@@ -362,7 +361,7 @@ export default function Step9({ api_data, stepsError, setStepsError, pedidos }: 
                         label='Valor da Indenização:'
                         onBlur={handleValorIndenizacaoChange}
                         name={PEDIDO_REVERSAO_JUSTA_CAUSA.VALOR_INDENIZACAO}
-                        variant={'outlined'}
+                        variant={'filled'}
                         xs={12}
                     />
                 </Grid>
@@ -374,7 +373,7 @@ export default function Step9({ api_data, stepsError, setStepsError, pedidos }: 
                     label='Qual o valor de rescisão contratual?'
                     onBlur={handleValorEstimadoPedidoChange}
                     name={PEDIDO_REVERSAO_JUSTA_CAUSA.VALOR_RESCISAO}
-                    variant={'outlined'}
+                    variant={'filled'}
                     xs={12}
                     error={error.demais_campos.valor_rescisao}
                     helperText={error.demais_campos.valor_rescisao ? 'Campo obrigatório' : ' '}
@@ -491,7 +490,7 @@ export default function Step9({ api_data, stepsError, setStepsError, pedidos }: 
             const response = await updateTrabalhistaTicket(ticketId, data)
 
         } catch (error) {
-            console.log('erro form submit', error)
+
         }
     }
 

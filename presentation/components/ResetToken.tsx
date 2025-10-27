@@ -9,5 +9,5 @@ export const resetToken = async () => {
 
   setCookie('ruke_token', resultadoRefreshToken.token);
   setCookie('regras', JSON.stringify(resultadoRefreshToken.regras));
-  setCookie('menusPermitidos', JSON.stringify(resultadoRefreshToken.menus));
+  setCookie('menusPermitidos', JSON.stringify(resultadoRefreshToken.menusPermitidos));
 }
