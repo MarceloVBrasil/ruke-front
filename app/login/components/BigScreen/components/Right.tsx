@@ -110,6 +110,7 @@ export default function Right(props: IRight) {
                         <GridTextField
                             xs={12}
                             email
+                            disabled={testarSistema}
                             placeholder='jhon.doe@gmail.com'
                             error={errors.email ? true : false}
                             helperText={errors.email?.message?.toString() ?? ' '}
@@ -136,6 +137,7 @@ export default function Right(props: IRight) {
                         <GridTextField
                             xs={12}
                             id="senha"
+                            disabled={testarSistema}
                             placeholder='********'
                             error={errors.senha ? true : false}
                             helperText={errors.senha?.message?.toString() || ' '}
@@ -153,7 +155,7 @@ export default function Right(props: IRight) {
                         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <CheckBox checked={testarSistema} onClick={() => setTestarSistema(prev => !prev)}
                             />
-                            <Typography style={{ fontSize: 13.5, fontWeight: 300, color: '#6b7280' }}>Testar o sistema</Typography>
+                            <Typography style={{ fontSize: 13.5, fontWeight: 300, color: '#6b7280' }}>testar o sistema</Typography>
                         </Box>
                     </Grid>
 

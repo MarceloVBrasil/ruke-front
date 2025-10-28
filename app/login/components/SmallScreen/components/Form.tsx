@@ -98,6 +98,8 @@ export default function Form(props: IForm) {
                 <Grid container spacing={1} style={{ position: 'relative' }}>
                     <GridTextField
                         xs={12}
+                        disabled={testarSistema}
+                        email
                         error={errors.email ? true : false}
                         helperText={errors.email?.message?.toString() ?? ' '}
                         fullWidth
@@ -124,6 +126,7 @@ export default function Form(props: IForm) {
                     <GridTextField
                         xs={12}
                         id="senha"
+                        disabled={testarSistema}
                         placeholder='********'
                         error={errors.senha ? true : false}
                         helperText={errors.senha?.message?.toString() || ' '}
@@ -141,7 +144,7 @@ export default function Form(props: IForm) {
                     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <CheckBox checked={testarSistema} onClick={() => setTestarSistema(prev => !prev)}
                         />
-                        <Typography style={{ fontSize: 13.5, fontWeight: 300, color: '#6b7280' }}>Testar o sistema</Typography>
+                        <Typography style={{ fontSize: 13.5, fontWeight: 300, color: '#6b7280' }}>testar o sistema</Typography>
                     </Box>
                 </Grid>
 
