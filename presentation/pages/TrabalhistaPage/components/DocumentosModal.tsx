@@ -70,6 +70,7 @@ export default function DocumentosModal(props: IDocumentosModal) {
                         sx={{ display: "flex", justifyContent: "end", padding: "10px" }}
                     >
                         <Btn
+                            loading={isLoading}
                             type="submit"
                             width={250}
                             text={isLoading ? 'Enviando Documentos' : 'Ler Documentos'}

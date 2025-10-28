@@ -14,7 +14,7 @@ export const handleSubmit = async (
         setLoading(true);
 
         const response = await insertBPCOcr(formData);
-        if (response.result === "success") {
+        if (!response.error) {
             Swal.fire({
                 icon: "success",
                 title: "Sucesso!",
@@ -41,7 +41,7 @@ export const handleSubmit = async (
         Swal.fire({
             icon: "error",
             title: "Erro",
-            text: error.response.data.error,
+            text: error.response.data.message,
         });
         setLoading(false);
     }
