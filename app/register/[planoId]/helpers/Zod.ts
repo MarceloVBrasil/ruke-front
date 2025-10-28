@@ -10,7 +10,7 @@ export const registerFormSchema = z.object({
     oab: z.string().min(1, { message: "O oab deve ser informado" }),
     oab_estado: z.string().min(1, { message: "O estado da oab deve ser informado" }),
     email: z.string().min(1, { message: "O e-mail deve ser informado" }).email("O e-mail deve ser válido"),
-    senha: z.string().min(8, { message: 'A senha deve ter no mínimo 6 caracteres' }),
+    senha: z.string().min(6, { message: 'A senha deve ter no mínimo 6 caracteres' }),
     confirmar_senha: z.string().min(1, { message: 'A confirmação deve ser informada' })
 }).superRefine((value, ctx) => {
     if (value.senha !== value.confirmar_senha) {

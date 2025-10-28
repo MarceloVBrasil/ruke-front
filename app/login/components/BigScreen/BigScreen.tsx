@@ -38,9 +38,7 @@ export default function BigScreen(props: IBigScreen) {
                     errors={errors}
                     handleSubmit={handleSubmit}
                     setValue={setValue}
-                    getValues={getValues}
                     register={register}
-                    setError={setError}
                 />
             </Grid>
 

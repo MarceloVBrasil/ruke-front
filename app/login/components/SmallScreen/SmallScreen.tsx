@@ -53,8 +53,6 @@ export default function SmallScreen(props: ISmallScreen) {
                 handleSubmit={handleSubmit}
                 setValue={setValue}
                 register={register}
-                setError={setError}
-                getValues={getValues}
             />
 
             <Grid item xs={10}>

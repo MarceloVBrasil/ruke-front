@@ -1,24 +1,18 @@
-import { Grid, Typography, Button } from '@mui/material';
-import { Box, width } from '@mui/system';
+import { Grid, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import React, { MutableRefObject, useState } from 'react'
 import { Btn } from '@/presentation/components/Button';
 import GridTextField from '@/presentation/components/GridTextField';
-import { FieldErrors, FieldValues, UseFormGetValues, UseFormRegister, UseFormSetError } from 'react-hook-form';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import { CheckBox } from '@/presentation/components/Checkbox';
 import { useRouter } from 'next/navigation';
 import { handleSingIn } from '@/app/login/helpers/Swal';
-import { isEmailValid } from '@/app/utils/validators';
-import { solicitarCodigo } from '@/app/api/client/auth';
-import { setCookie } from 'cookies-next';
-import { singInFormSchema } from '@/app/login/helpers/Zod';
 
 interface IForm {
     formRef: MutableRefObject<HTMLFormElement | undefined>
     errors: FieldErrors<FieldValues>
     handleSubmit: (v: any) => any
     setValue: (a: string, b: string, c: any) => void
-    getValues: UseFormGetValues<FieldValues>
-    setError: UseFormSetError<FieldValues>
     register: UseFormRegister<FieldValues>
 }
 
@@ -29,14 +23,12 @@ export default function Form(props: IForm) {
         errors,
         handleSubmit,
         setValue,
-        setError,
-        getValues,
         register
     } = props
 
     const router = useRouter()
-    const formData = new FormData(formRef.current)
     const [loadingSubmitButton, setLoadingSubmitButton] = useState(false)
+    const [testarSistema, setTestarSistema] = useState<boolean>(true)
 
     const goToTenantsUniquePage = (tenant_id: string) => {
         return router.push(`/tenants/${tenant_id}`);
@@ -78,6 +70,11 @@ export default function Form(props: IForm) {
                 }}
                 component='form'
                 onSubmit={(e) => {
+                    if (testarSistema) {
+                        setValue('email', 'rukeruke@gmail.com', { shouldValidate: true })
+                        setValue('senha', '123', { shouldValidate: true })
+                    }
+
                     e.preventDefault()
                     handleSubmit((data: any) => {
                         setLoadingSubmitButton(true)
@@ -142,9 +139,9 @@ export default function Form(props: IForm) {
                     />
 
                     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <CheckBox disabled checked
+                        <CheckBox checked={testarSistema} onClick={() => setTestarSistema(prev => !prev)}
                         />
-                        <Typography style={{ fontSize: 13.5, fontWeight: 300, color: '#6b7280' }}>Mantenha-me conectado</Typography>
+                        <Typography style={{ fontSize: 13.5, fontWeight: 300, color: '#6b7280' }}>Testar o sistema</Typography>
                     </Box>
                 </Grid>
 
@@ -169,7 +166,6 @@ export default function Form(props: IForm) {
                 <Box sx={{ borderTop: '1px solid #ccc', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: 150, paddingInline: '33px', width: '100%' }}>
                     <Typography style={{ color: "#6b7280", fontSize: 15 }}>Ainda não tem credenciais? Cadastra-se agora mesmo!</Typography>
                     <Btn
-                        disabled
                         onClick={() => window.open('https://www.ruke.com.br')}
                         text='Cadastrar'
                         variant='outlined'

@@ -46,7 +46,7 @@ export const handleRegisterSubmit = async ({
     } = campos_do_formulario;
     const response = await inscrever(idplano, nome, oab, oab_estado, cpfCnpj, email, telefone, senha, tipoFormulario, coupon ?? cupom, partner);
 
-    if (response.status === 'success') {
+    if (!response.error) {
         setCookie('ruke_token_pagamento', response.tokenSeguro)
         Swal.fire({
             icon: 'success',

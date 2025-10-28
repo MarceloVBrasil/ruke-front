@@ -3,22 +3,17 @@ import { Btn } from '@/presentation/components/Button';
 import { CheckBox } from '@/presentation/components/Checkbox';
 import GridTextField from '@/presentation/components/GridTextField';
 import { Typography, Grid } from '@mui/material';
-import { Box, width } from '@mui/system';
+import { Box } from '@mui/system';
 import React, { Fragment, MutableRefObject, useState } from 'react'
-import { FieldErrors, FieldValues, UseFormGetValues, UseFormRegister, UseFormSetError } from 'react-hook-form';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { handleSingIn } from '@/app/login/helpers/Swal';
-import { solicitarCodigo } from '@/app/api/client/auth';
-import { setCookie } from 'cookies-next';
-import { singInFormSchema } from '@/app/login/helpers/Zod';
 
 interface IRight {
     formRef: MutableRefObject<HTMLFormElement | undefined>
     errors: FieldErrors<FieldValues>
     handleSubmit: (v: any) => any
     setValue: (a: string, b: string, c: any) => void
-    getValues: UseFormGetValues<FieldValues>
-    setError: UseFormSetError<FieldValues>
     register: UseFormRegister<FieldValues>
 }
 
@@ -28,13 +23,11 @@ export default function Right(props: IRight) {
         errors,
         handleSubmit,
         setValue,
-        getValues,
-        setError,
         register
     } = props
 
     const router = useRouter()
-    const formData = new FormData(formRef.current)
+    const [testarSistema, setTestarSistema] = useState<boolean>(true)
     const [loadingSubmitButton, setLoadingSubmitButton] = useState(false)
 
     const goToTenantsUniquePage = (tenant_id: string) => {
@@ -88,11 +81,17 @@ export default function Right(props: IRight) {
                     }}
                     component='form'
                     onSubmit={(e) => {
+                        if (testarSistema) {
+                            setValue('email', 'rukeruke@gmail.com', { shouldValidate: true })
+                            setValue('senha', '123', { shouldValidate: true })
+                        }
+
                         e.preventDefault()
                         handleSubmit((data: any) => {
                             setLoadingSubmitButton(true)
                             handleSingIn({
                                 ...data,
+                                testar_sistema: testarSistema,
                                 goToTenantsUniquePage,
                                 goToHomePage,
                                 goToPagamentosPage,
@@ -152,9 +151,9 @@ export default function Right(props: IRight) {
                         />
 
                         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <CheckBox disabled checked
+                            <CheckBox checked={testarSistema} onClick={() => setTestarSistema(prev => !prev)}
                             />
-                            <Typography style={{ fontSize: 13.5, fontWeight: 300, color: '#6b7280' }}>Manter-me conectado</Typography>
+                            <Typography style={{ fontSize: 13.5, fontWeight: 300, color: '#6b7280' }}>Testar o sistema</Typography>
                         </Box>
                     </Grid>
 
@@ -179,7 +178,6 @@ export default function Right(props: IRight) {
                     <Box sx={{ borderTop: '1px solid #ccc', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: 150, paddingInline: '33px', width: '100%' }}>
                         <Typography style={{ color: "#6b7280", fontSize: 15 }}>Ainda não tem credenciais? Cadastra-se agora mesmo!</Typography>
                         <Btn
-                            disabled
                             onClick={() => window.open('https://www.ruke.com.br')}
                             text='Cadastrar'
                             variant='outlined'
