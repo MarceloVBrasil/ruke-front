@@ -13,7 +13,7 @@ export const handleForgotPassword = async (props: {
     } = props
     const response = await forgotPassword(email);
 
-    if (response.status === "send") {
+    if (!response.error) {
         Swal.fire({
             icon: 'success',
             html: `
@@ -31,7 +31,7 @@ export const handleForgotPassword = async (props: {
             icon: 'error',
             html: `
                     <h2 style="font-family: 'Gilroy Bold', sans-serif; margin-bottom:10px">Erro!</h2>
-                    <p style="font-family: 'Gilroy Bold', sans-serif;">${response.error}</p>
+                    <p style="font-family: 'Gilroy Bold', sans-serif;">${response.message}</p>
                     `,
         }).then(() => {
             onError()

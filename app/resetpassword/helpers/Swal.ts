@@ -16,7 +16,7 @@ export const handleResetSenha = async (props: {
     } = props
     const response = await resetPassword(codigo, senha);
 
-    if (response.status === "success") {
+    if (!response.error) {
         Swal.fire({
             icon: 'success',
             html: `
@@ -29,11 +29,11 @@ export const handleResetSenha = async (props: {
         });
     }
 
-    if (response.error) {
+    else {
         Swal.fire({
             icon: 'error',
             title: 'Erro!',
-            text: response.error
+            text: response.message
         }).then(() => {
             onError()
         });
