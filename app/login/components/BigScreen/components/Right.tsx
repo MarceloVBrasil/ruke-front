@@ -180,7 +180,7 @@ export default function Right(props: IRight) {
                     <Box sx={{ borderTop: '1px solid #ccc', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: 150, paddingInline: '33px', width: '100%' }}>
                         <Typography style={{ color: "#6b7280", fontSize: 15 }}>Ainda não tem credenciais? Cadastra-se agora mesmo!</Typography>
                         <Btn
-                            onClick={() => window.open('https://www.ruke.com.br')}
+                            onClick={() => window.open('https://ruke-front.vercel.app/register/489cf794-9aa4-474e-a51c-39f15de00d49')}
                             text='Cadastrar'
                             variant='outlined'
                             textColor='primary'

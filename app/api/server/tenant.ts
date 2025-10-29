@@ -12,7 +12,7 @@ export const getTenants = async () => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -25,7 +25,7 @@ export const getTenantById = async (id: string) => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -39,6 +39,6 @@ export const cancelarTodasAssinaturas = async () => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 }

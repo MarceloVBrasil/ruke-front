@@ -2,7 +2,6 @@
 
 import { cookies } from "next/headers";
 import { req } from "./server.axiosInstance";
-import { server_error } from "@/app/types/server_error";
 
 
 export const getPlanos = async (id_produto: string) => {
@@ -13,7 +12,7 @@ export const getPlanos = async (id_produto: string) => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -24,9 +23,8 @@ export const getPlanoById = async (plano_id: string) => {
             headers: { Authorization: `Bearer ${token?.value}` }
         });
         return json.data;
-    } catch (err: any) {
-        const error: server_error = { error: true, message: err.response.data.message }
-        return error;
+    } catch (error: any) {
+        return error.response.data;
     }
 }
 
@@ -38,7 +36,7 @@ export const getPlanosContratados = async () => {
             headers: { Authorization: `Bearer ${token?.value}` }
         });
         return json.data;
-    } catch (err: any) {
-        throw err;
+    } catch (error: any) {
+        return error.response.data;
     }
 }

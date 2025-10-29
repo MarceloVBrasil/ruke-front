@@ -13,7 +13,7 @@ export const getBpcTickets = async () => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -27,7 +27,7 @@ export const getBpcTicketById = async (id: string) => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -40,7 +40,7 @@ export const getDoencaData = async (search?: string) => {
             }
         });
         return response.data;
-    } catch (error) {
-        console.error("Erro ao buscar Doenca:", error);
+    } catch (error: any) {
+        return error.response.data;
     }
 };

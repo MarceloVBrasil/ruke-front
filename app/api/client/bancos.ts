@@ -12,6 +12,6 @@ export const getBancos = async () => {
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };

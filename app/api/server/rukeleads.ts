@@ -11,6 +11,6 @@ export const getRukeLeads = async (page: number, limit: number, categoria: strin
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 }

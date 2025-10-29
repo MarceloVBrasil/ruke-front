@@ -54,9 +54,11 @@ const Register = ({ params }: RegisterProps) => {
 
   useEffect(() => {
     (async () => {
+      console.log(params)
       const response = await getPlanoById(params.planoId)
+      console.log(response)
       if (!response.error) setPlanoData(response)
-      else return window.location.href = 'https://app.ruke.com.br/';
+      else return window.location.href = 'https://ruke-front.vercel.app/login';
     })();
   }, [])
 

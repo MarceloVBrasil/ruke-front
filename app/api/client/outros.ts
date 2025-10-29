@@ -4,8 +4,8 @@ export async function getAddressByCep(cep: string) {
     try {
         const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
         return response.data;
-    } catch (error) {
-        console.error("Error fetching data from ViaCEP:");
+    } catch (error: any) {
+        return error.response.data;
     }
 }
 
@@ -16,7 +16,7 @@ export const getCnpjData = async (cnpj: string) => {
         );
 
         return response.data;
-    } catch (error) {
-        console.error("Erro ao buscar CNPJ:", error);
+    } catch (error: any) {
+        return error.response.data;
     }
 };

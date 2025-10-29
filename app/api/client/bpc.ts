@@ -37,7 +37,7 @@ export const gerarBpcPeticao = async (
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -73,7 +73,7 @@ export const gerarBpcProcuracao = async (
 
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -108,7 +108,7 @@ export const gerarBpcHipossuficiencia = async (
 
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -138,7 +138,7 @@ export const gerarBpcContrato = async (
         });
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -154,7 +154,7 @@ export const addbpcTicket = async () => {
         );
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -167,7 +167,7 @@ export const deleteBpcTicket = async (id_ticket: string) => {
             },
         });
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -189,7 +189,7 @@ export const addDoenca = async (
         );
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -203,7 +203,7 @@ export const deleteDoenca = async (id: string) => {
         });
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -228,7 +228,7 @@ export const addPessoa = async (
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -254,7 +254,7 @@ export const updatePessoa = async (
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -267,6 +267,6 @@ export const deletePessoa = async (id_pessoa: string) => {
             },
         });
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };

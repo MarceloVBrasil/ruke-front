@@ -2,7 +2,6 @@
 
 import { cookies } from "next/headers";
 import { req } from "./server.axiosInstance";
-import { server_error } from "@/app/types/server_error";
 
 export const getTrabalhistaTickets = async () => {
     const token = cookies().get("ruke_token");
@@ -14,7 +13,7 @@ export const getTrabalhistaTickets = async () => {
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -28,7 +27,7 @@ export const getTrabalhistaTicketById = async (ticket_id: string) => {
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -42,7 +41,7 @@ export const updateTrabalhistaTicket = async (ticket_id: string, data: any) => {
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -56,7 +55,7 @@ export const addTrabalhistaTicket = async () => {
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -70,7 +69,7 @@ export const deleteTrabalhistaTicket = async (id: string) => {
             },
         });
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -83,10 +82,8 @@ export const gerarPeticaoTrabalhista = async (ticket_id: string, data: any) => {
         });
 
         return json.data;
-    } catch (err: any) {
-
-        const error: server_error = { error: true, message: err.response.data.error }
-        return error
+    } catch (error: any) {
+        return error.response.data;
     }
 };
 
@@ -100,7 +97,7 @@ export const calcularTotalCausaTrabalhista = async (ticket_id: string, data: any
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -114,6 +111,6 @@ export const calcularSalarioProporcionalFeriasTrabalhista = async ({ salarioBase
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };

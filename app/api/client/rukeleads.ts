@@ -9,7 +9,7 @@ export const contratarRukeLeadsAPI = async () => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -21,7 +21,7 @@ export const visualizarContatoRukeLeadsAPI = async (id_duvida: string) => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -32,7 +32,7 @@ export const removerAssinaturaRukeLeadsAPI = async () => {
             headers: { Authorization: `Bearer ${token}` }
         });
         return json.data;
-    } catch (err: any) {
-        throw err;
+    } catch (error: any) {
+        return error.response.data;
     }
 }

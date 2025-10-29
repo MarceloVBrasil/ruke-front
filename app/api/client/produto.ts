@@ -18,7 +18,7 @@ export const addProduto = async (nome: string, metodo_pagamento: string) => {
         );
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -36,7 +36,7 @@ export const updateProduto = async (id: string, nome: string) => {
         );
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -49,6 +49,6 @@ export const deleteProduto = async (id: string) => {
             },
         });
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };

@@ -11,8 +11,8 @@ export const getProcessos = async () => {
             headers: { Authorization: `Bearer ${token?.value}` },
         });
         return json.data;
-    } catch (err: any) {
-        throw err;
+    } catch (error: any) {
+        return error.response.data;
     }
 }
 
@@ -24,8 +24,8 @@ export const getMovimentacoes = async (id_processo: string) => {
             headers: { Authorization: `Bearer ${token?.value}` },
         });
         return json.data;
-    } catch (err: any) {
-        throw err;
+    } catch (error: any) {
+        return error.response.data;
     }
 }
 
@@ -37,8 +37,8 @@ export const salvarProcessoAPI = async (dados: any) => {
             headers: { Authorization: `Bearer ${token?.value}` },
         });
         return json.data;
-    } catch (err: any) {
-        throw err;
+    } catch (error: any) {
+        return error.response.data;
     }
 }
 
@@ -50,7 +50,7 @@ export const filtrarProcessosAPI = async (dados: any) => {
             headers: { Authorization: `Bearer ${token?.value}` },
         });
         return json.data;
-    } catch (err: any) {
-        throw err;
+    } catch (error: any) {
+        return error.response.data;
     }
 }

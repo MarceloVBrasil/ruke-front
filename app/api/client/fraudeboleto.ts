@@ -20,7 +20,7 @@ export const criarPeticaoFraudeBoletos = async (
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -40,7 +40,7 @@ export const criarTicketVazioFraudeBoletos = async (tipoPessoa: string) => {
 
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -59,7 +59,7 @@ export const deleteFraudeBoletos = async (tipoPessoa: string) => {
 
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -82,7 +82,7 @@ export const criarProcuracaoFraudeBoleto = async (
 
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -105,7 +105,7 @@ export const criarContratoFraudeBoletos = async (
 
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -128,6 +128,6 @@ export const createHipossuficienciaFraudeBoletos = async (
 
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };

@@ -13,7 +13,7 @@ export const addRukeFlexTicket = async (tipo_cliente?: string) => {
         );
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 export const deleteRukeFlexTicket = async (id: string) => {
@@ -25,7 +25,7 @@ export const deleteRukeFlexTicket = async (id: string) => {
             },
         });
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -81,7 +81,7 @@ export const rukeFlexcreateProxy = async (
         );
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -116,7 +116,7 @@ export const rukeFlexcreateHipossuficiencia = async (
         );
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -176,6 +176,6 @@ export const rukeFlexcreateContract = async (
         );
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };

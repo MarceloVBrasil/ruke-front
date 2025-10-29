@@ -13,7 +13,7 @@ export const getSuperendividamentoTickets = async () => {
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -27,7 +27,7 @@ export const getSuperendividamentoTicketById = async (ticket_id: string) => {
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -40,7 +40,7 @@ export const updateSuperendividamentoTicket = async (ticket_id: string, data: an
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -54,7 +54,7 @@ export const gerarPeticaoSuperendividamento = async (ticket_id: string, data: an
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -68,7 +68,7 @@ export const addSuperendividamentoTicket = async () => {
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -82,6 +82,6 @@ export const deleteSuperendividamentoTicket = async (id: string) => {
             },
         });
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };

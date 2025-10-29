@@ -14,7 +14,7 @@ export const getFraudeBoletoById = async (id: string) => {
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -29,6 +29,6 @@ export const getTicketsFraudeBoleto = async () => {
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };

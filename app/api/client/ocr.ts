@@ -14,7 +14,7 @@ export const insertRmcOcr = async (userData: FormData): Promise<any> => {
 
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -37,7 +37,7 @@ export const insertRukeFlexOcr = async (
 
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -60,7 +60,7 @@ export const insertFraudeEmBoletosOCR = async (
 
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -76,7 +76,7 @@ export const insertBPCOcr = async (userData: FormData): Promise<any> => {
 
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -92,7 +92,7 @@ export const insertSuperEndividamentoOcr = async (userData: FormData): Promise<a
 
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -108,6 +108,6 @@ export const insertTrabalhistaOcr = async (userData: FormData): Promise<any> => 
 
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };

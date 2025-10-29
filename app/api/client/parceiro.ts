@@ -28,7 +28,7 @@ export const addParceiro = async (parceiro: {
         );
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -62,7 +62,7 @@ export const updateParceiro = async (
         );
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -75,7 +75,7 @@ export const deleteParceiro = async (id: string) => {
             },
         });
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -95,6 +95,6 @@ export const updatePorcentagem = async (id: string, porcentagem: number) => {
         );
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };

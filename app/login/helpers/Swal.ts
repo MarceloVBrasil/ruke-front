@@ -24,7 +24,7 @@ export const handleSingIn = async (props: {
     const response = await api.login(email, senha);
 
     if (response.error) {
-        const paymentData: payment_data = response.data.paymentData
+        const paymentData: payment_data = response.data?.paymentData
 
         Swal.fire({
             icon: 'error',

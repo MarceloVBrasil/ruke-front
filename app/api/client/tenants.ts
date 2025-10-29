@@ -30,7 +30,7 @@ export const insertTenants = async (data: {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -42,7 +42,7 @@ export const updateTenant = async (tenantId: string, data: Omit<Tenant, 'id'>) =
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -53,6 +53,6 @@ export const deleteTenant = async (id: string) => {
             headers: { Authorization: `Bearer ${token}` },
         });
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };

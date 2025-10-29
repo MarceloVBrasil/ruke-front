@@ -15,7 +15,7 @@ export const getTicketById = async (id: string) => {
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -30,6 +30,6 @@ export const getTickets = async () => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };

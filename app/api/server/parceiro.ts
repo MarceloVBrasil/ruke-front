@@ -11,6 +11,6 @@ export const getParceiros = async (id_produto: string) => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };

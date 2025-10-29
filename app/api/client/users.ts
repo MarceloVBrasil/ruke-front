@@ -9,7 +9,7 @@ export const getUser = async (id: string) => {
         });
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -21,7 +21,7 @@ export const insertUser = async (userData: any) => {
         });
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -46,7 +46,7 @@ export const updateUser = async (
         });
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -57,7 +57,7 @@ export const deleteUser = async (id: string) => {
             headers: { Authorization: `Bearer ${token}` },
         });
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -79,8 +79,6 @@ export const assinaturaUsuario = async (
         );
         return response.data;
     } catch (error: any) {
-        return {
-            error: error.response.data.error,
-        };
+        return error.response.data;
     }
 };

@@ -8,8 +8,8 @@ export const contratarAgendaAPI = async (dadosContratacao: any) => {
             headers: { Authorization: `Bearer ${token}` },
         });
         return json.data;
-    } catch (err: any) {
-        throw err;
+    } catch (error: any) {
+        return error.response.data;
     }
 };
 
@@ -21,7 +21,7 @@ export const adicionarEventoAgenda = async (dadosEvento: any) => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -33,7 +33,7 @@ export const buscarEventosAgenda = async () => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -45,7 +45,7 @@ export const buscarTipos = async () => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -57,7 +57,7 @@ export const buscarUsuariosAgenda = async () => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -73,8 +73,8 @@ export const updateUserAgenda = async (id_usuario: string, agenda: string) => {
             },
         });
         return response.data;
-    } catch (err: any) {
-        throw err;
+    } catch (error: any) {
+        return error.response.data;
     }
 }
 
@@ -85,8 +85,8 @@ export const atualizarAssinaturaAgendaAPI = async (dadosAlteracao: any) => {
             headers: { Authorization: `Bearer ${token}` }
         });
         return json.data;
-    } catch (err: any) {
-        throw err;
+    } catch (error: any) {
+        return error.response.data;
     }
 }
 
@@ -97,8 +97,8 @@ export const removerAssinaturaAgendaAPI = async () => {
             headers: { Authorization: `Bearer ${token}` }
         });
         return json.data;
-    } catch (err: any) {
-        throw err;
+    } catch (error: any) {
+        return error.response.data;
     }
 }
 
@@ -108,8 +108,6 @@ export const filtrarAgenda = async (filtros: any) => {
         const json = await req.post('/agenda/filtros', filtros, { headers: { Authorization: `Bearer ${token}` } },);
         return json.data;
     } catch (error: any) {
-        return {
-            error: error.response.data.error
-        }
+        return error.response.data
     }
 }

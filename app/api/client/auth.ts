@@ -1,4 +1,3 @@
-import { server_error } from "@/app/types/server_error";
 import { req } from "./client.axiosInstance";
 
 export const login = async (email: string, senha: string) => {
@@ -6,8 +5,7 @@ export const login = async (email: string, senha: string) => {
         const json = await req.post("/auth/login", { email, senha });
         return json.data;
     } catch (error: any) {
-        const err: server_error = { error: true, message: error.response.data.error, data: error.response.data }
-        return err
+        return error.response.data
     }
 };
 
@@ -16,8 +14,7 @@ export const loginComCodigo = async (email: string, codigo: string) => {
         const json = await req.post("/auth/login-com-codigo", { email, codigo });
         return json.data;
     } catch (error: any) {
-        const err: server_error = { error: true, message: error.response.data.error, data: error.response.data }
-        return err
+        return error.response.data
     }
 };
 
@@ -26,7 +23,7 @@ export const refreshTokenAPI = async (refreshToken: string) => {
         const response = await req.post("/auth/refresh_token", { token: `Bearer ${refreshToken}` });
         return response.data;
     } catch (error: any) {
-        return { error: error.response?.data?.error };
+        return error.response.data
     }
 };
 
@@ -36,7 +33,7 @@ export const forgotPassword = async (email: string) => {
         const response = await req.post("/auth/esqueci-minha-senha", { email });
         return response.data;
     } catch (error: any) {
-        return { error: error.response?.data?.error };
+        return error.response.data
     }
 };
 
@@ -45,7 +42,7 @@ export const resetPassword = async (codigo: string, senha: string) => {
         const response = await req.post("/auth/trocar-minha-senha", { codigo, senha });
         return response.data;
     } catch (error: any) {
-        return { error: error.response?.data?.error };
+        return error.response.data
     }
 };
 
@@ -61,7 +58,7 @@ export const completarAssinaturaAgenda = async (
         });
         return json.data;
     } catch (error: any) {
-        return { error: error.response?.data?.error };
+        return error.response.data
     }
 };
 
@@ -85,7 +82,7 @@ export const inscrever = async (
         );
         return json.data;
     } catch (error: any) {
-        return { error: error.response?.data?.error };
+        return error.response.data
     }
 };
 
@@ -94,7 +91,7 @@ export const solicitarCodigo = async (email: string) => {
         const json = await req.post("/auth/solicitar-codigo", { email });
         return json.data.token;
     } catch (error: any) {
-        return false;
+        return error.response.data
     }
 };
 
@@ -103,8 +100,7 @@ export const processarPagamento = async (token_seguro: string, metodo_pagamento:
         const json = await req.post("/auth/processar-pagamento", { tokenSeguro: token_seguro, metodo_pagamento });
         return json.data;
     } catch (error: any) {
-        const err: server_error = { error: true, message: error.response.data.error, data: error.response.data }
-        return err
+        return error.response.data
 
     }
 };

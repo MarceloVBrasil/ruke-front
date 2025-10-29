@@ -11,7 +11,7 @@ export const getProdutos = async () => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -25,6 +25,6 @@ export const cancelarAssinaturaProduto = async (produto_id: string) => {
         });
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 }

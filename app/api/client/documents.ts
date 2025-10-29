@@ -28,7 +28,7 @@ export const criarPeticao = async (
 
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -52,7 +52,7 @@ export const createProxy = async (
         });
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -79,7 +79,7 @@ export const createContract = async (
         });
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -108,6 +108,6 @@ export const createHipossuficiencia = async (
         );
         return response.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };

@@ -13,7 +13,7 @@ export const addTicket = async () => {
         );
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -26,6 +26,6 @@ export const deleteTicket = async (id: string) => {
             },
         });
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };

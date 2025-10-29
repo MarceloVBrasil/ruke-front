@@ -33,7 +33,7 @@ export const addPlano = async (
         );
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -72,7 +72,7 @@ export const updatePlano = async (
         );
         return json.data;
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
 
@@ -85,6 +85,6 @@ export const deletePlano = async (id: string) => {
             },
         });
     } catch (error: any) {
-        throw error;
+        return error.response.data;
     }
 };
